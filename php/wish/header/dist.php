@@ -1,4 +1,5 @@
 <?php
+$surname = null;
 try {
     $user_id=$_SESSION['user_id'];
     $queryString="SELECT users.surname FROM users WHERE users.id = :thisUser ";
@@ -8,15 +9,6 @@ try {
     $ligne = $query->fetch();
     extract($ligne); ?>
 
-    <header>
-        <?php echo "* Make a Wish";
-        if(!empty($surname))
-        {
-            echo ", <span>".$surname."</span>";
-        }
-        echo " *"; ?>
-    </header>
-
     <?php }
     catch (PDOException $e)
     {
@@ -24,11 +16,32 @@ try {
     }
 ?>
 
+<header>
+    <?php echo "* Make a Wish";
+    if(!empty($surname))
+    {
+        echo ", <span>".$surname."</span>";
+    }
+    echo " *"; ?>
+</header>
+
+<?php
+$menu = array(
+    "wishlist" => "Ma Wishlist",
+    "gift" => "Faire un cadeau",
+    "giftlist" => "Ma Giftlist",
+    "logout" => "Déconnexion",
+); 
+
+$active = null;
+if(isset($_GET['page'])) {
+    $active = $_GET['page'];
+}
+?>
 <nav>
 	<ul>
-		<li><a class="active" href="?page=wishlist">Ma Wishlist</a></li>
-		<li><a href="?page=gift">Faire un cadeau</a></li>
-		<li><a href="?page=giftlist">Ma Giftlist</a></li>
-		<li><a href="?page=logout">Déconnexion</a></li>
+		<?php foreach ($menu as $key => $value) { ?>
+            <li><a <?php if($active==$key){ echo 'class="active"'; }?> href="?page=<?php echo $key ?>"><?php echo $value ?></a></li>
+        <?php } ?>
 	</ul>
 </nav>
