@@ -1,0 +1,25 @@
+.icon-pencil,.icon-gift,.icon-remove,.icon-close,.icon-checkmark,.icon-plus {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	background-image: url(sprites.png);
+	background-repeat: no-repeat;
+}
+.icon-pencil {
+	background-position: 0 0;
+}
+.icon-gift {
+	background-position: -64px 0;
+}
+.icon-remove {
+	background-position: -128px 0;
+}
+.icon-close {
+	background-position: -192px 0;
+}
+.icon-checkmark {
+	background-position: -256px 0;
+}
+.icon-plus {
+	background-position: -320px 0;
+}

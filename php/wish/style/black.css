@@ -1,0 +1,83 @@
+body {
+	color: black;
+	}
+
+/* Le titre */
+header {
+	color: black;
+}
+
+/* Le menu de navigation */
+nav {
+	background-color: silver;
+	border: solid 1px grey;
+	background: -webkit-gradient(linear, left top, left bottom, from(silver), to(#aaaaaa));
+	background: -moz-linear-gradient(top, silver, #aaaaaa);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='silver', endColorstr='#aaaaaa');
+	}
+
+/* Les liens du menu de navigation */
+nav a {
+	background-color: #aaaaaa;
+	color: black;
+	border-color: grey;
+	background: -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(silver));
+	background: -moz-linear-gradient(top, #aaaaaa, silver);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#aaaaaa', endColorstr='silver');
+	text-shadow: 2px 1px 2px grey;
+	}
+	
+nav a:hover {
+	color: white;
+	box-shadow: 1px 1px 10px  #717171 inset;
+	}
+	
+nav a.active {
+	color: white;
+	}
+	
+
+/* Les images de sprite pour les boutons submit etc */
+input.edit {
+	background: url(../images/sprite.png) no-repeat -0 0;
+}
+
+input.delete {
+	background: url(../images/sprite.png) no-repeat -128px 0;
+}
+
+a.cancel {
+	background: url(../images/sprite.png) no-repeat -192px 0;
+}
+
+input.validate {
+	background: url(../images/sprite.png) no-repeat -256px 0;
+}
+
+input.add {
+	background: url(../images/sprite.png) no-repeat -320px 0;
+}
+
+/* Les images pour les boutons radio de cadeau */
+.gift .icon, .bought .icon {
+	background: url(../images/sprite.png) no-repeat -64px 0;
+} 
+
+.gift:hover, .gift.selected {
+	border-color: #d0d0d0;
+	background-color: #ebebeb;
+	color: black;
+	background: -webkit-gradient(linear, left top, left bottom, from(#e3e3e3), to(##ebebeb));
+	background: -moz-linear-gradient(top, #e3e3e3, ##ebebeb);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e3e3e3', endColorstr='#ebebeb');
+	box-shadow: 1px 1px 10px  #CDCDCD inset;
+	}
+
+.gift_title a {
+	color: black;
+}
+
+.bought, .bought a {
+	color: grey;
+	background-color: #EBEBEB;
+}
