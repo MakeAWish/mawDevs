@@ -14,7 +14,7 @@ try {
 	<?php while ($ligne = $query->fetch()) {
 		extract($ligne);
 	?>
-		<a href="<?php echo $surname ?>">
+		<a href="/?page=wishlist&user=<?php echo $id ?>">
 			<div class="gift">
 				<div class="gift_img <?php echo $color ?>">&nbsp;</div>
 				<div class="gift_people"><?php echo $surname ?></div>

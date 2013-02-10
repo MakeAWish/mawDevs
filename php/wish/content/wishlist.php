@@ -23,23 +23,17 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
         	e.preventDefault();
         	modal.open({url:"/?page=add"});
     	});
-	});
-</script>
-
-<script type="text/javascript">
-	$(window).load(function(){
+	
 		$(document).on("click", "input.edit", function (e) {
         	e.preventDefault();
-        	modal.open({url:"/?page=edit"});
+        	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
+        	modal.open({post:"/?page=edit", data : checkedElement});
     	});
-	});
-</script>
-
-<script type="text/javascript">
-	$(window).load(function(){
+	
 		$(document).on("click", "input.delete", function (e) {
         	e.preventDefault();
-        	modal.open({url:"/?page=delete"});
+        	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
+        	modal.open({post:"/?page=delete", data : checkedElement});
     	});
 	});
 </script>
@@ -90,7 +84,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 						<div class="<?php echo $classGift ?> exclusive">
 
 						<?php if($isBought == false) { ?>
-								<input type="radio" name="gift" value="1"/>
+								<input type="radio" name="gift" value="<?php echo $id ?>"/>
 						<?php } ?>
 
 						<span class="icon"><!-- --></span>
@@ -101,7 +95,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 							<?php if($link!="") { ?>
 									<a target="_blank" title="Suivez le lien !" href="<?php echo $link ?>"><div class="follow_link"></div></a>
 							<?php } ?>
-							<?php if($isBought== true) { ?>
+							<?php if($isBought== true && $showEdit == true) { ?>
 									<input type="submit" value="" class="offered" title="Cadeau reçu"/>
 							<?php } ?>
 								

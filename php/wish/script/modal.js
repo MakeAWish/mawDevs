@@ -33,6 +33,15 @@ var modal = (function () {
             })
             .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
         }
+        else if (settings.post && settings.post != "" && settings.data) {
+            var jqxhr = $.post(settings.post, {gift : settings.data});
+             
+            /* Put the results in a div */
+            jqxhr.done(function(result) {
+                 method.showModal(result, settings.width, settings.height);
+            })
+            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
+        }
     };
 
     method.showModal = function (targetText, width, height) {
