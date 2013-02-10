@@ -40,12 +40,12 @@
 									<div class="gift_img <?php echo $color ?>">&nbsp;</div>
 									<div class="gift_descr">
 										<span class="gift_title"><?php echo $title ?></span>	
-											<?php if($link!="") { ?>
-											<a target="_blank" title="Suivez le lien !" href="<?php echo $link ?>"><div class="follow_link"></div></a>
-											<?php } ?>
 										<p><?php echo $description ?></p>
 									</div>
-								</div>	
+									<?php if($link!="") { ?>
+										<a target="_blank" title="Suivez le lien !" href="<?php echo $link ?>"><div class="follow_link"></div></a>
+									<?php } ?>
+								</div>
 							<?php }
 							
 						} ?>

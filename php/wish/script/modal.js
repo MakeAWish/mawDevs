@@ -23,18 +23,31 @@ var modal = (function () {
 
     // Open the modal
     method.open = function (settings) {
-        $contenttext.empty().append(settings.content);
+        var targetText = "";
+        if(settings.content && settings.content != "") {
+             method.showModal(settings.content, settings.width, settings.height);
+        }
+        else if (settings.url && settings.url != "") {
+            var jqxhr = $.get(settings.url, function(result) {
+                 method.showModal(result, settings.width, settings.height);
+            })
+            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
+        }
+    };
+
+    method.showModal = function (targetText, width, height) {
+        $contenttext.empty().append(targetText);
 
         $modal.css({
-            width: settings.width || 'auto',
-            height: settings.height || 'auto'
+            width: width || 'auto',
+            height: height || 'auto'
         });
 
         method.center();
         $(window).bind('resize.modal', method.center);
         $modal.show();
         $overlay.show();
-    };
+    }
 
     // Close the modal
     method.close = function () {
@@ -49,19 +62,17 @@ var modal = (function () {
     $modal = $('<div id="popin-modal"></div>');
     $content = $('<div id="popin-content"></div>');
     $contenttext = $('<p id="popin-text"></p>');
-    $validate = $('<a id="popin-validate" href="#">Valider</a>');
-    $close = $('<a id="popin-close" href="#">Annuler</a>');
 
     $modal.hide();
     $overlay.hide();
-    $content.append($contenttext, $validate, $close);
+    $content.append($contenttext);
     $modal.append($content);
 
     $(document).ready(function () {
         $('body').append($overlay, $modal);
     });
-
-    $close.click(function (e) {
+    
+    $(document).on("click", ".popin-close", function (e) {
         e.preventDefault();
         method.close();
     });

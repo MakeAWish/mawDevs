@@ -1,9 +1,5 @@
-body {
-	color: black;
-	}
-
-/* Le titre */
-header {
+/* Le titre et les titres des popin */
+header, h1.typein {
 	color: black;
 }
 
@@ -32,11 +28,6 @@ nav a:hover {
 	box-shadow: 1px 1px 10px  #717171 inset;
 	}
 	
-nav a.active {
-	color: white;
-	}
-	
-
 /* Les images de sprite pour les boutons submit etc */
 input.edit {
 	background: url(../images/sprite.png) no-repeat -0 0;
@@ -46,7 +37,7 @@ input.delete {
 	background: url(../images/sprite.png) no-repeat -128px 0;
 }
 
-a.cancel {
+.cancel {
 	background: url(../images/sprite.png) no-repeat -192px 0;
 }
 
@@ -62,22 +53,3 @@ input.add {
 .gift .icon, .bought .icon {
 	background: url(../images/sprite.png) no-repeat -64px 0;
 } 
-
-.gift:hover, .gift.selected {
-	border-color: #d0d0d0;
-	background-color: #ebebeb;
-	color: black;
-	background: -webkit-gradient(linear, left top, left bottom, from(#e3e3e3), to(##ebebeb));
-	background: -moz-linear-gradient(top, #e3e3e3, ##ebebeb);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e3e3e3', endColorstr='#ebebeb');
-	box-shadow: 1px 1px 10px  #CDCDCD inset;
-	}
-
-.gift_title a {
-	color: black;
-}
-
-.bought, .bought a {
-	color: grey;
-	background-color: #EBEBEB;
-}

@@ -19,7 +19,7 @@ $(window).load(function(){
 		$(this).find('input:checkbox').attr('checked',!isChecked);
 	});
 
-	$('.clic input:submit').click(function(){
+	/* $('.clic input:submit').click(function(){
 		alert($('.gift input:radio[name=gift]:checked').val());
-	});
+	}); */
 });
