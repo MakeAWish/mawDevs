@@ -5,27 +5,27 @@ header, h1.typein {
 
 /* Le menu de navigation */
 nav {
-	background-color: #ffada1;
+	background-color: #ff6c67;
 	border: solid 1px #ff0000;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ffada1), to(#ff8373));
-	background: -moz-linear-gradient(top, #ffada1, #ff8373);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffada1', endColorstr='#ff8373');
+	background: -webkit-gradient(linear, left top, left bottom, from(#ff6c67), to(#ff4141));
+	background: -moz-linear-gradient(top, #ff6c67, #ff4141);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6c67', endColorstr='#ff4141');
 	}
 
 /* Les liens du menu de navigation */
 nav a {
-	background-color: #ff8373;
+	background-color: #ff4141;
 	color: black;
 	border-color: #ff0000;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ff8373), to(#ffada1));
-	background: -moz-linear-gradient(top, #ff8373, #ffada1);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff8373', endColorstr='#ffada1');
+	background: -webkit-gradient(linear, left top, left bottom, from(#ff4141), to(#ff6c67));
+	background: -moz-linear-gradient(top, #ff4141, #ff6c67);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4141', endColorstr='#ff6c67');
 	text-shadow: 1px 1px 1px grey;
 	}
 	
 nav a:hover {
 	color: white;
-	box-shadow: 1px 1px 10px  #ff553f inset;
+	box-shadow: 1px 1px 10px  #ff1e0f  inset;
 	}
 	
 /* Les images de sprite pour les boutons submit etc */

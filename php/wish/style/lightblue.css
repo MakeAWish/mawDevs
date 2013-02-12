@@ -1,0 +1,55 @@
+/* Le titre et les titres des popin */
+header, h1.typein {
+	color: #7392ff;
+}
+
+/* Le menu de navigation */
+nav {
+	background-color: #8ea5ff;
+	border: solid 1px #7392ff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#8ea5ff), to(#a1b1ff));
+	background: -moz-linear-gradient(top, #8ea5ff, #a1b1ff);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8ea5ff', endColorstr='#a1b1ff');
+	}
+
+/* Les liens du menu de navigation */
+nav a {
+	background-color: #a1b1ff;
+	color: black;
+	border-color: #7392ff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#a1b1ff), to(#8ea5ff));
+	background: -moz-linear-gradient(top, #a1b1ff, #8ea5ff);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a1b1ff', endColorstr='#8ea5ff');
+	text-shadow: 1px 1px 1px grey;
+	}
+	
+nav a:hover {
+	color: white;
+	box-shadow: 1px 1px 10px  #4f73ff  inset;
+	}
+	
+/* Les images de sprite pour les boutons submit etc */
+input.edit {
+	background: url(../images/sprite.png) no-repeat -0 -328px;
+}
+
+input.delete {
+	background: url(../images/sprite.png) no-repeat -128px -328px;
+}
+
+.cancel {
+	background: url(../images/sprite.png) no-repeat -192px -328px;
+}
+
+input.validate {
+	background: url(../images/sprite.png) no-repeat -256px -328px;
+}
+
+input.add {
+	background: url(../images/sprite.png) no-repeat -320px -328px;
+}
+
+/* Les images pour les boutons radio de cadeau */
+.gift .icon, .bought .icon {
+	background: url(../images/sprite.png) no-repeat -64px -328px;
+} 
