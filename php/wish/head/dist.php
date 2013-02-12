@@ -2,18 +2,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style/style.css"/>
 
-<link rel="stylesheet" href="style/pink.css"/>
+<?php 
 
-<!-- <link rel="stylesheet" href="style/blue.css"/> => ok Bibou + affecter à Bibou dans la base de données
-<link rel="stylesheet" href="style/brown.css"/>
-<link rel="stylesheet" href="style/green.css"/> => ok Bibou
-<link rel="stylesheet" href="style/lightblue.css"/>
-<link rel="stylesheet" href="style/lightgreen.css"/>
-<link rel="stylesheet" href="style/lightpink.css"/>
-<link rel="stylesheet" href="style/pink.css"/> => ok Bibou
-<link rel="stylesheet" href="style/purple.css"/> => ok Bibou
-<link rel="stylesheet" href="style/red.css"/> => faire plus rouge flash
-<link rel="stylesheet" href="style/black.css"/> -->
+$my_id=$_SESSION['user_id'];
+$queryString="SELECT colors.name FROM users
+					INNER JOIN colors ON colors.id = users.idcolor
+					WHERE users.id = :my_id";
+			$query = $bdd->prepare($queryString);
+			$query->bindParam(':my_id', $my_id); 
+			$query->execute();
+			$ligne = $query->fetch();
+			extract($ligne);
+?>
+
+<link rel="stylesheet" href="style/<?php echo $name?>.css"/>
 
 <script type="text/javascript" src="script/jquery-1.7.2.min.js" ></script><!-- your jQuery version -->
 <script type="text/javascript" src="script/boutons_cadeau.js" ></script>
