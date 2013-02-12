@@ -35,6 +35,12 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
         	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
         	modal.open({post:"/?page=delete", data : checkedElement});
     	});
+
+    	$(document).on("click", "input.validate.offer", function (e) {
+        	e.preventDefault();
+        	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
+        	modal.open({post:"/?page=validategift", data : checkedElement});
+    	});
 	});
 </script>
 
@@ -113,7 +119,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 
 				else { ?>
 					<section class="submit_1">
-						<input class="validate" type="submit" value="" title="Faire un cadeau"/>
+						<input class="validate offer" type="submit" value="" title="Faire un cadeau"/>
 					</section>
 				<?php } ?>				
 				

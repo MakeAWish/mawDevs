@@ -11,7 +11,7 @@
             extract($ligne);
 ?>
 <form action="#" method="post">
-    <h1 class="typein">Voulez-vous supprimer ce souhait ? </h1>
+    <h1 class="typein">Offrir ce cadeau : </h1>
     <section class="typein">
         <input type="hidden" name="gift" value="<?php echo $gift?>"/>
         <p class="typein"><label for="title">Titre :</label>
@@ -23,7 +23,7 @@
     </section>
 
     <section class="submit_2">
-        <input type="hidden" name="page" value="process_delete"/>
+        <input type="hidden" name="page" value="process_validategift"/>
         <input class="validate" type="submit" value="" title="Valider"/>
         <span title="Annuler" class="cancel popin-close"><!-- --></span>
         <span class="close popin-close"><!-- --></span>

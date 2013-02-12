@@ -33,11 +33,11 @@ $queryString="UPDATE wishes, wishlists SET wishes.title = :title, wishes.link = 
 
 
 /* Conclusion */
-header('Location: ./?page=wishlist&add=success');
+header('Location: ./?page=wishlist&edit=success');
 }
 
 else {
- header('Location: ./?page=wishlist&add=failure&cause=title');  
+ header('Location: ./?page=wishlist&edit=failure&cause=title');  
 }
 
 ?>
