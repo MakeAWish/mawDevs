@@ -79,34 +79,54 @@ input[type="submit"], .cancel {
 /********** Les icônes de petit cadeau venant du Sprite : pour la page "Faire un cadeau, en fonction des gens ********/
 /*********************************************************************************************************************/
 
-.gift_img.black {
+.gift_img.black, 
+.gift .icon.black, 
+.bought .icon.black {
 	background: url(../images/sprite.png) no-repeat -64px 0;
 }
-.gift_img.blue {
+.gift_img.blue, 
+.gift .icon.blue, 
+.bought .icon.blue {
 	background: url(../images/sprite.png) no-repeat -64px -82px;
 }
-.gift_img.brown {
+.gift_img.brown, 
+.gift .icon.brown, 
+.bought .icon.brown {
 	background: url(../images/sprite.png) no-repeat -64px -164px;
 }
-.gift_img.green {
+.gift_img.green, 
+.gift .icon.green, 
+.bought .icon.green {
 	background: url(../images/sprite.png) no-repeat -64px -246px;
 }
-.gift_img.lightblue {
+.gift_img.lightblue, 
+.gift .icon.lightblue, 
+.bought .icon.lightblue {
 	background: url(../images/sprite.png) no-repeat -64px -328px;
 }
-.gift_img.lightgreen {
+.gift_img.lightgreen, 
+.gift .icon.lightgreen, 
+.bought .icon.lightgreen {
 	background: url(../images/sprite.png) no-repeat -64px -410px;
 }
-.gift_img.lightpink {
+.gift_img.lightpink, 
+.gift .icon.lightpink, 
+.bought .icon.lightpink {
 	background: url(../images/sprite.png) no-repeat -64px -492px;
 }
-.gift_img.pink {
+.gift_img.pink, 
+.gift .icon.pink, 
+.bought .icon.pink {
 	background: url(../images/sprite.png) no-repeat -64px -574px;
 }
-.gift_img.purple {
+.gift_img.purple, 
+.gift .icon.purple, 
+.bought .icon.purple {
 	background: url(../images/sprite.png) no-repeat -64px -656px;
 }
-.gift_img.red {
+.gift_img.red, 
+.gift .icon.red, 
+.bought .icon.red {
 	background: url(../images/sprite.png) no-repeat -64px -738px;
 }
 
@@ -131,6 +151,17 @@ h1.typein { /* Le titre des popin */
 	text-align: center;
 	margin-bottom: 40px;
 	margin-top: 40px;
+	text-shadow: 2px 1px 2px silver;
+}
+
+h2 {
+	font-family: 'AlexBrushRegular';
+	font-size: 2.2em;
+	text-align: center;
+	margin-bottom: 40px;
+	margin-top: 40px;
+	color: black;
+	text-transform: capitalize;
 	text-shadow: 2px 1px 2px silver;
 }
 

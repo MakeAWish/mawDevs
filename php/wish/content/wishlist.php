@@ -41,6 +41,12 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
         	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
         	modal.open({post:"/?page=validategift", data : checkedElement});
     	});
+
+    	$(document).on("click", "input.validate.offer", function (e) {
+        	e.preventDefault();
+        	var checkedElement = $('.gift input:checkbox[name=gift]:checked').val();
+        	modal.open({post:"/?page=validategift", data : checkedElement});
+    	});
 	});
 </script>
 
@@ -53,9 +59,10 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 
 		if(isset($_GET['user']) and ($_GET['user'] != $my_id)) {
 			$showEdit = false;
-			$queryString="SELECT wishes.*, gifts.iduser FROM wishes
+			$queryString="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
 				INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
 				INNER JOIN users ON wishlists.iduser = users.id
+				INNER JOIN colors ON users.idcolor=colors.id
 				LEFT JOIN gifts ON gifts.idwish = wishes.id
 				WHERE users.id = :other_id";
 			$query = $bdd->prepare($queryString);
@@ -64,9 +71,10 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 	
 		else {
 			$showEdit = true;
-			$queryString="SELECT wishes.*, gifts.iduser FROM wishes
+			$queryString="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
 					INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
 					INNER JOIN users ON wishlists.iduser = users.id
+					INNER JOIN colors ON users.idcolor=colors.id
 					LEFT JOIN gifts ON gifts.idwish = wishes.id
 					WHERE users.id = :my_id";
 			$query = $bdd->prepare($queryString);
@@ -85,15 +93,26 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 						if($iduser != null)	{
 							$classGift = "bought";
 							$isBought = true;
-						} ?>
+						} 
+
+			if(isset($_GET['user']) and ($_GET['user'] != $my_id)) { ?>
+
+						<div class="<?php echo $classGift ?> non_exclusive">
+							<?php if($isBought == false) { ?>
+								<input type="checkbox" name="gift" value="<?php echo $id ?>"/>
+								<?php } ?>
+
+			<?php } else { ?>
 
 						<div class="<?php echo $classGift ?> exclusive">
-
-						<?php if($isBought == false) { ?>
+							<?php if($isBought == false) { ?>
 								<input type="radio" name="gift" value="<?php echo $id ?>"/>
-						<?php } ?>
+								<?php } ?>
+			<?php }
 
-						<span class="icon"><!-- --></span>
+					?>
+
+						<span class="icon <?php echo $name ?>"><!-- --></span>
 						<div class="gift_descr">
 							<span class="gift_title"><?php echo $title ?></span>
 							<p><?php echo $description ?></p>

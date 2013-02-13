@@ -14,12 +14,20 @@
     <h1 class="typein">Offrir ce cadeau : </h1>
     <section class="typein">
         <input type="hidden" name="gift" value="<?php echo $gift?>"/>
+        <h2><?php echo $title ?></h2>
+
+<!--
+        <p class="typein"><label>Titre :</label><span class="show"><?php echo $title ?></span>
+
         <p class="typein"><label for="title">Titre :</label>
             <input name="title" type="text" placeholder=" Titre" value="<?php echo $title ?>"/></p>
         <p class="typein"><label for="link">Lien (facultatif) :</label>
             <input name="link" type="text" placeholder=" Lien" value="<?php echo $link ?>"/></p>
         <p class="typein"><label for="description">Description :</label>
             <textarea name="description" placeholder=" Description"><?php echo $description ?></textarea></p>
+
+-->
+
     </section>
 
     <section class="submit_2">
