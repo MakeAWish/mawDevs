@@ -26,18 +26,18 @@ $queryString="INSERT INTO gifts(iduser, idwish) VALUES (:iduser, :idwish)";
          $query->execute();
 
 
-$queryString2="SELECT id FROM users 
+$queryString2="SELECT users.id FROM users 
 	INNER JOIN wishlists on users.id = wishlists.iduser 
 	INNER JOIN wishes on wishes.idwishlist = wishlists.id
 	WHERE wishes.id = :wish_id
-	ORDER BY UserId LIMIT 0,1";
+	ORDER BY users.id LIMIT 0,1";
 	$query = $bdd->prepare($queryString2);
     $query->bindParam(':wish_id', $gift);
     $query->execute();
     $ligne = $query->fetch();
     extract($ligne);
 
-    header('Location: ./?page=wishlist&user=$ligne');
+    header('Location: ./?page=wishlist&user='.$id);
 }
 
 else {
