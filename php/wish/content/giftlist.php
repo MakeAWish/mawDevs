@@ -1,9 +1,22 @@
-<?php 
+<script type="text/javascript">
+	$(window).load(function(){
+    	$(document).on("click", "input.delete.gifts", function (e) {
+        	e.preventDefault();
+        	var selectedItems = new Array();
+			$('.gift input:checkbox[name=gift]:checked').each(function() {
+				selectedItems.push($(this).attr('value'));
+			});
+        	modal.open({post:"/?page=delete_gift", data : selectedItems.join(",")});
+    	});
+	});
+</script>
+
+<?php
 
 	$my_id=$_SESSION['user_id'];
-		
+
 	try {
-		
+
 		$queryString="SELECT DISTINCT surname, colors.name AS color FROM gifts
 		INNER JOIN wishes ON gifts.idwish = wishes.id
 		INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
@@ -16,7 +29,7 @@
 
 			<form class="clic" method="post">
 				<section class="content">
-					
+
 						<?php while ($ligne = $query->fetch()) {
 							extract($ligne); ?>
 							<p class="gift_receiver">
@@ -31,15 +44,15 @@
 							$query2 = $bdd->prepare($queryString2);
 							$query2->bindParam(':gift_userid', $my_id);
 							$query2->bindParam(':gift_receiver', $surname);
-							$query2->execute(); 
-							
+							$query2->execute();
+
 							while ($ligne = $query2->fetch()) {
 								extract($ligne); ?>
 								<div class="gift non_exclusive">
 								<input type="checkbox" name="gift" value="<?php echo $id_gift ?>"/>
 									<div class="gift_img <?php echo $color ?>">&nbsp;</div>
 									<div class="gift_descr">
-										<span class="gift_title"><?php echo $title ?></span>	
+										<span class="gift_title"><?php echo $title ?></span>
 										<p><?php echo $description ?></p>
 									</div>
 									<?php if($link!="") { ?>
@@ -47,13 +60,13 @@
 									<?php } ?>
 								</div>
 							<?php }
-							
+
 						} ?>
 				</section>
 
 				<section class="submit_1">
-					<a href="delete.php"><input class="delete" type="submit" value="" title="Supprimer de ma liste de cadeaux"/></a>
-				</section>			
+					<input class="delete gifts" type="submit" value="" title="Supprimer de ma liste de cadeaux"/>
+				</section>
 			</form>
 
 <?php }
