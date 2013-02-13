@@ -35,7 +35,7 @@ var modal = (function () {
         }
         else if (settings.post && settings.post != "" && settings.data) {
             var jqxhr = $.post(settings.post, {gift : settings.data});
-             
+
             /* Put the results in a div */
             jqxhr.done(function(result) {
                  method.showModal(result, settings.width, settings.height);
@@ -67,7 +67,7 @@ var modal = (function () {
     };
 
     // Generate the HTML and add it to the document
-    $overlay = $('<div id="popin-overlay"></div>');
+    $overlay = $('<div id="popin-overlay" class="popin-close"></div>');
     $modal = $('<div id="popin-modal"></div>');
     $content = $('<div id="popin-content"></div>');
     $contenttext = $('<p id="popin-text"></p>');
@@ -80,7 +80,7 @@ var modal = (function () {
     $(document).ready(function () {
         $('body').append($overlay, $modal);
     });
-    
+
     $(document).on("click", ".popin-close", function (e) {
         e.preventDefault();
         method.close();

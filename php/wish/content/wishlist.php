@@ -1,4 +1,4 @@
-<!-- On s'assure qu'il y a au moins un titre pour ajouter un cadeau dans la BDD, le lien et la description restent 
+<!-- On s'assure qu'il y a au moins un titre pour ajouter un cadeau dans la BDD, le lien et la description restent
 optionnels -->
 
 <?php
@@ -23,13 +23,13 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
         	e.preventDefault();
         	modal.open({url:"/?page=add"});
     	});
-	
+
 		$(document).on("click", "input.edit", function (e) {
         	e.preventDefault();
         	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
         	modal.open({post:"/?page=edit", data : checkedElement});
     	});
-	
+
 		$(document).on("click", "input.delete", function (e) {
         	e.preventDefault();
         	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
@@ -38,14 +38,11 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 
     	$(document).on("click", "input.validate.offer", function (e) {
         	e.preventDefault();
-        	var checkedElement = $('.gift input:radio[name=gift]:checked').val();
-        	modal.open({post:"/?page=validategift", data : checkedElement});
-    	});
-
-    	$(document).on("click", "input.validate.offer", function (e) {
-        	e.preventDefault();
-        	var checkedElement = $('.gift input:checkbox[name=gift]:checked').val();
-        	modal.open({post:"/?page=validategift", data : checkedElement});
+        	var selectedItems = new Array();
+			$('.gift input:checkbox[name=gift]:checked').each(function() {
+				selectedItems.push($(this).attr('value'));
+			});
+        	modal.open({post:"/?page=make_gift", data : selectedItems.join(",")});
     	});
 	});
 </script>
@@ -54,7 +51,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 
 	$my_id=$_SESSION['user_id'];
 	$showEdit = false;
-		
+
 	try {
 
 		if(isset($_GET['user']) and ($_GET['user'] != $my_id)) {
@@ -68,7 +65,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 			$query = $bdd->prepare($queryString);
 			$query->bindParam(':other_id', $_GET['user']);
 		}
-	
+
 		else {
 			$showEdit = true;
 			$queryString="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
@@ -93,7 +90,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 						if($iduser != null)	{
 							$classGift = "bought";
 							$isBought = true;
-						} 
+						}
 
 			if(isset($_GET['user']) and ($_GET['user'] != $my_id)) { ?>
 
@@ -123,7 +120,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 							<?php if($isBought== true && $showEdit == true) { ?>
 									<input type="submit" value="" class="offered" title="Cadeau reçu"/>
 							<?php } ?>
-								
+
 						</div>
 				<?php }	?>
 				</section>
@@ -133,15 +130,15 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 						<input class="add" type="submit" value="" title="Ajouter"/>
 						<input class="edit" type="submit" value="" title="Modifier"/>
 						<input class="delete" type="submit" value="" title="Supprimer"/>
-					</section>	
-				<?php } 
+					</section>
+				<?php }
 
 				else { ?>
 					<section class="submit_1">
-						<input class="validate offer" type="submit" value="" title="Faire un cadeau"/>
+						<input class="validate offer" type="submit" value="" title="Offrir !"/>
 					</section>
-				<?php } ?>				
-				
+				<?php } ?>
+
 			</form>
 
 <?php }
