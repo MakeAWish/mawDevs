@@ -10,6 +10,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `makeawish`
 --
+CREATE DATABASE `makeawish` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `makeawish`;
 
 -- --------------------------------------------------------
 
@@ -92,7 +94,18 @@ CREATE TABLE IF NOT EXISTS `wishlists` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- Creation de l'utilisateur
+--
+
+CREATE USER 'maw_user'@'localhost' IDENTIFIED BY  '7R34OMg4RT3836Y';
+GRANT USAGE ON * . * TO  'maw_user'@'localhost' IDENTIFIED BY  '7R34OMg4RT3836Y' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+GRANT SELECT , INSERT , UPDATE ON  `makeawish` . * TO  'maw_user'@'localhost';
+GRANT DELETE ON  `makeawish`.`wishes` TO  'maw_user'@'localhost';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
