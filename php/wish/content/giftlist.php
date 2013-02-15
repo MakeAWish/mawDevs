@@ -17,12 +17,13 @@
 
 	try {
 
-		$queryString="SELECT DISTINCT surname, colors.name AS color FROM gifts
+		$queryString="SELECT DISTINCT users.surname, colors.name AS color FROM gifts
 		INNER JOIN wishes ON gifts.idwish = wishes.id
 		INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
 		INNER JOIN users ON users.id = wishlists.iduser
 		INNER JOIN colors ON colors.id = users.idcolor
-		WHERE gifts.iduser = :gift_userid";
+		WHERE gifts.iduser = :gift_userid
+		ORDER BY users.surname";
 		$query = $bdd->prepare($queryString);
 		$query->bindParam(':gift_userid', $my_id);
 		$query->execute(); ?>
