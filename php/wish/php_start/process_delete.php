@@ -21,10 +21,8 @@ $my_id=$_SESSION['user_id'];
 $queryString="DELETE FROM wishes 
 	WHERE id IN (
 		SELECT * FROM ( 
-			SELECT wishes.id 
-			FROM wishes 
-			INNER JOIN wishlists 
-			ON wishes.idwishlist = wishlists.id 
+			SELECT wishes.id FROM wishes 
+			INNER JOIN wishlists ON wishes.idwishlist = wishlists.id 
 			WHERE wishlists.iduser = :userid AND  wishes.id = :gift
 		) AS Q 
 	)";
