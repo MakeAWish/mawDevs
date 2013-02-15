@@ -15,7 +15,6 @@
         <span title="Annuler" class="cancel popin-close"><!-- --></span>
     </section>
     <p class="asterisque">* Mais les yeux ouverts, c'est quand-même plus pratique !</p>
-    <span class="close popin-close"><!-- --></span>
 </form>
 
 

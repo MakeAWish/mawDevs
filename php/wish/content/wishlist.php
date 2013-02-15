@@ -8,7 +8,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 
 	<script type="text/javascript">
 		$(window).load(function(){
-			modal.open({content:"Il faut au moins le titre pour ajouter un cadeau"});
+			modal.open({content:"Pas de titre, pas de cadeau !"});
 		});
 	</script>
 

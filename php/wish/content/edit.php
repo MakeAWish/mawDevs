@@ -26,7 +26,6 @@
         <input type="hidden" name="page" value="process_edit"/>
         <input class="validate" type="submit" value="" title="Valider"/>
         <span title="Annuler" class="cancel popin-close"><!-- --></span>
-        <span class="close popin-close"><!-- --></span>
     </section>
 </form>
 
