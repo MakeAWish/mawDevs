@@ -66,7 +66,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 				INNER JOIN users ON wishlists.iduser = users.id
 				INNER JOIN colors ON users.idcolor=colors.id
 				LEFT JOIN gifts ON gifts.idwish = wishes.id
-				WHERE users.id = :other_id AND (gifts.offered = 0 OR gifts.offered IS NULL)";
+				WHERE users.id = :other_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0";
 			$query = $bdd->prepare($queryString);
 			$query->bindParam(':other_id', $_GET['user']);
 		}
@@ -78,7 +78,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 					INNER JOIN users ON wishlists.iduser = users.id
 					INNER JOIN colors ON users.idcolor=colors.id
 					LEFT JOIN gifts ON gifts.idwish = wishes.id
-					WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL)";
+					WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0";
 			$query = $bdd->prepare($queryString);
 			$query->bindParam(':my_id', $my_id); // Bind "$email" to parameter.
 		}

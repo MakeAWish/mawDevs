@@ -22,7 +22,7 @@
 		INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
 		INNER JOIN users ON users.id = wishlists.iduser
 		INNER JOIN colors ON colors.id = users.idcolor
-		WHERE gifts.iduser = :gift_userid
+		WHERE gifts.iduser = :gift_userid AND (gifts.offered = 0 OR gifts.offered IS NULL)
 		ORDER BY users.surname";
 		$query = $bdd->prepare($queryString);
 		$query->bindParam(':gift_userid', $my_id);
@@ -37,11 +37,11 @@
 							<?php echo $surname; ?>
 							</p>
 
-						<?php $queryString2="SELECT title, link, description, gifts.id AS id_gift FROM gifts
+						<?php $queryString2="SELECT title, link, description, gifts.id AS id_gift, offered FROM gifts
 							INNER JOIN wishes ON gifts.idwish = wishes.id
 							INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
 							INNER JOIN users ON users.id = wishlists.iduser
-							WHERE gifts.iduser = :gift_userid AND surname = :gift_receiver";
+							WHERE gifts.iduser = :gift_userid AND surname = :gift_receiver AND (gifts.offered = 0 OR gifts.offered IS NULL)";
 							$query2 = $bdd->prepare($queryString2);
 							$query2->bindParam(':gift_userid', $my_id);
 							$query2->bindParam(':gift_receiver', $surname);
