@@ -71,10 +71,11 @@ var modal = (function () {
     $modal = $('<div id="popin-modal"></div>');
     $content = $('<div id="popin-content"></div>');
     $contenttext = $('<p id="popin-text"></p>');
+    $close = $('<span class="close popin-close"><!-- --></span>');
 
     $modal.hide();
     $overlay.hide();
-    $content.append($contenttext);
+    $content.append($contenttext, $close);
     $modal.append($content);
 
     $(document).ready(function () {

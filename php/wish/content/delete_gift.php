@@ -2,8 +2,9 @@
     $gift = $_POST['gift'];
     $isPlural = strpos($gift, ",") ? true : false;
 
-    $queryString="SELECT id, title, link, description FROM wishes
-                WHERE id IN ($gift)";
+    $queryString="SELECT title FROM wishes
+                    INNER JOIN gifts ON gifts.idwish = wishes.id
+                    WHERE gifts.id IN ($gift)";
             $query = $bdd->prepare($queryString);
             $query->execute();
 ?>
@@ -22,7 +23,6 @@
         <input type="hidden" name="page" value="process_delete_gift"/>
         <input class="validate" type="submit" value="" title="Valider"/>
         <span title="Annuler" class="cancel popin-close"><!-- --></span>
-        <span class="close popin-close"><!-- --></span>
     </section>
 </form>
 

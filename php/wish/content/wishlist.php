@@ -8,7 +8,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 
 	<script type="text/javascript">
 		$(window).load(function(){
-			modal.open({content:"Il faut au moins le titre pour ajouter un cadeau"});
+			modal.open({content:"Pas de titre, pas de cadeau !"});
 		});
 	</script>
 
@@ -44,6 +44,11 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 			});
         	modal.open({post:"/?page=make_gift", data : selectedItems.join(",")});
     	});
+
+    	$(document).on("click", "input.offered", function (e) {
+        	e.preventDefault();
+        	modal.open({post:"/?page=offered", data : $(e.currentTarget).siblings('input').val()});
+    	});
 	});
 </script>
 
@@ -61,7 +66,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 				INNER JOIN users ON wishlists.iduser = users.id
 				INNER JOIN colors ON users.idcolor=colors.id
 				LEFT JOIN gifts ON gifts.idwish = wishes.id
-				WHERE users.id = :other_id";
+				WHERE users.id = :other_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0";
 			$query = $bdd->prepare($queryString);
 			$query->bindParam(':other_id', $_GET['user']);
 		}
@@ -73,7 +78,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 					INNER JOIN users ON wishlists.iduser = users.id
 					INNER JOIN colors ON users.idcolor=colors.id
 					LEFT JOIN gifts ON gifts.idwish = wishes.id
-					WHERE users.id = :my_id";
+					WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0";
 			$query = $bdd->prepare($queryString);
 			$query->bindParam(':my_id', $my_id); // Bind "$email" to parameter.
 		}
@@ -118,6 +123,7 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 									<a target="_blank" title="Suivez le lien !" href="<?php echo $link ?>"><div class="follow_link"></div></a>
 							<?php } ?>
 							<?php if($isBought== true && $showEdit == true) { ?>
+									<input type="hidden" name="boughtId" value="<?php echo $id ?>" />
 									<input type="submit" value="" class="offered" title="Cadeau reçu"/>
 							<?php } ?>
 
