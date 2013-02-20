@@ -38,7 +38,7 @@ if(isset($_GET['page'])) {
     $active = $_GET['page'];
 }
 ?>
-<nav>
+<nav id="nav">
 	<ul>
 		<?php foreach ($menu as $key => $value) { ?>
             <li><a <?php if($active==$key){ echo 'class="active"'; }?> href="?page=<?php echo $key ?>"><?php echo $value ?></a></li>
