@@ -12,16 +12,15 @@
 }
 
 @font-face {
-    font-family: 'RedressedRegular';
-    src: url('fonts/Redressed-webfont.eot');
-    src: url('fonts/Redressed-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Redressed-webfont.woff') format('woff'),
-         url('fonts/Redressed-webfont.ttf') format('truetype'),
-         url('fonts/Redressed-webfont.svg#RedressedRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+	font-family:'Redressed';
+	src:url('fonts/Redressed.eot') format('eot'),
+	url('fonts/Redressed.woff') format('woff'),
+	url('fonts/Redressed.ttf') format('truetype'),
+	url('fonts/Redressed.svg#Redressed') format('svg');
+	font-weight:normal;
+	font-style:normal;
+	}
 
-}
 
 body {
 	font-family: 'Arial';
@@ -155,7 +154,7 @@ h1.typein { /* Le titre des popin */
 }
 
 h2 {
-	font-family: 'RedressedRegular';
+	font-family: 'Redressed';
 	font-weight: normal;
 	font-size: 2em;
 	text-align: center;
@@ -234,7 +233,7 @@ nav li {
 	}
 
 nav a {
-	font-family: 'RedressedRegular';
+	font-family: 'Redressed';
 	font-size: 1.3em;
 	text-decoration: none;
 	padding: 10px 15px;
@@ -284,7 +283,7 @@ section.content, form.clic {
 }
 
 .gift_title, .bought a {
-	font-family: 'RedressedRegular';
+	font-family: 'Redressed';
 	font-size: 1.3em;
 	text-shadow: 1px 1px 1px silver;
 	text-transform: capitalize;
@@ -363,7 +362,7 @@ div.follow_link, input.offered {
 	padding-top: 10px;
 	margin-left: 10px;
 	text-decoration: underline;
-	font-family: 'RedressedRegular';
+	font-family: 'Redressed';
 	font-size: 1.3em;
 	text-shadow: 1px 1px 1px silver;
 	color: black;
@@ -376,7 +375,7 @@ div.follow_link, input.offered {
 /*********************************************************************************************************************/
 
 p.gift_receiver {
-	font-family: 'RedressedRegular';
+	font-family: 'Redressed';
 	font-size: 1.5em;
 	text-shadow: 1px 1px 1px silver;
 	color: black;
