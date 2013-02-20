@@ -14,23 +14,23 @@ function sec_session_start()
     session_regenerate_id(true); // regenerated the session, delete the old one.
 }
 
-function login($with_email, $with_password, $bdd)
+function login($with_username, $with_password, $bdd)
 {
-    echo "Email : " . $with_email . ";<br />";
+    echo "username : " . $with_username . ";<br />";
     echo "Sha-ed Pwd : " . $with_password . "<br />";
     // Using prepared Statements means that SQL injection is not possible.
-    if ($stmt = $bdd->prepare("SELECT id, email, password, salt FROM users WHERE email = :email LIMIT 1")) {
-        $stmt->bindParam(':email', $with_email, PDO::PARAM_STR, 50); // Bind "$email" to parameter.
+    if ($stmt = $bdd->prepare("SELECT id, username, password, salt FROM users WHERE username = :username LIMIT 1")) {
+        $stmt->bindParam(':username', $with_username, PDO::PARAM_STR, 50); // Bind "$username" to parameter.
         $stmt->execute(); // Execute the prepared query.
 
         if ($existing_user = $stmt->fetch()) { // If the user exists
-            extract($existing_user); // creates $id, $email, $password & $salt
+            extract($existing_user); // creates $id, $username, $password & $salt
             $with_password = hash('sha512', $with_password . $salt); // hash the password with the unique salt.
 
             // We check if the account is locked from too many login attempts
             if (checkbrute($id, $bdd) == true) {
                 // Account is locked
-                // Send an email to user saying their account is locked
+                // Send an username to user saying their account is locked
                 return "locked";
             } else {
                 if ($password == $with_password) { // Check if the password in the database matches the password the user submitted.
@@ -39,8 +39,8 @@ function login($with_email, $with_password, $bdd)
                     $user_browser             = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
                     $id                       = preg_replace("/[^0-9]+/", "", $id); // XSS protection as we might print this value
                     $_SESSION['user_id']      = $id;
-                    $username                 = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $email); // XSS protection as we might print this value
-                    $_SESSION['username']     = $username;
+                    $s_username                 = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username); // XSS protection as we might print this value
+                    $_SESSION['username']     = $s_username;
                     $_SESSION['login_string'] = hash('sha512', $password . $ip_address . $user_browser);
                     // Login successful.
 
@@ -80,12 +80,12 @@ function checkbrute($user_id, $bdd)
     }
 }
 
-function resetPassword($email, $password, $salt, $bdd)
+function resetPassword($username, $password, $salt, $bdd)
 {
-    if ($stmt = $bdd->prepare("UPDATE makeawish.users SET password = :password, salt = :salt WHERE users.email = :email ;")) {
+    if ($stmt = $bdd->prepare("UPDATE makeawish.users SET password = :password, salt = :salt WHERE users.username = :username ;")) {
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':salt', $salt);
-        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':username', $username);
         // Execute the prepared query.
         $stmt->execute();
     }

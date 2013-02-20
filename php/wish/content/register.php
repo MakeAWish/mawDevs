@@ -1,6 +1,6 @@
 <form action="#" method="post">
     <section class="typein">
-        <p class="typein"><span>Email voulu :</span><input type="text" placeholder=" Login" name="email"/></p>
+        <p class="typein"><span>Login :</span><input type="text" placeholder=" Login" name="username"/></p>
         <p class="typein"><span>Mot de passe voulu :</span><input type="password" placeholder=" Mot de passe"  name="password"/></p>
     </section>
     <section class="submit_1">
@@ -13,7 +13,7 @@
 
     if(isset($_POST['p']))
     {
-        $email = $_POST['email'];
+        $username = $_POST['username'];
         // The hashed password from the form
         $password = $_POST['p'];
         // Create a random salt
@@ -21,7 +21,7 @@
         // Create salted password (Careful not to over season)
         $password = hash('sha512', $password.$random_salt);
 
-        $passwordChanged = resetPassword($email, $password, $random_salt, $bdd);
+        $passwordChanged = resetPassword($username, $password, $random_salt, $bdd);
     }
 
     if ($passwordChanged)

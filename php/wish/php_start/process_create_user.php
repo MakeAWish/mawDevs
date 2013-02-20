@@ -11,48 +11,61 @@ if(login_check($bdd) != 1) {
 
 
 /* Condition */
-if(
-	isset($_POST['name']) AND $_POST['name'] AND $_POST['name'] != "" 
-	AND isset($_POST['surname']) AND $_POST['name'] AND $_POST['name'] != ""
+if(	isset($_POST['username']) AND $_POST['username'] AND $_POST['username'] != "" 
+	AND isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
 	AND isset($_POST['email']) AND $_POST['email'] AND $_POST['email'] != ""
-	AND isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != ""
-	) 
+	AND isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != "" ) 
 {
    
 
-/* Travail */
-$name = $_POST['name'];
-$surname = $_POST['surname'];
-$email = $_POST['email'];
-$password = $_POST['p'];
-$color = $_POST['color'];
-$admin = $_POST['admin'];
+    /* Travail */
+    $username = $_POST['username'];
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $password = $_POST['p'];
+    $color = $_POST['color'];
+    $admin = $_POST['admin'];
 
-$queryString="INSERT INTO users(name, surname, email, idcolor, admin) 
-				VALUES (:name, :surname, :email, :color, :admin)";
-         $query = $bdd->prepare($queryString);
-         $query->bindParam(':name', $name);
-         $query->bindParam(':surname', $surname);
-         $query->bindParam(':email', $email);
-         $query->bindParam(':color', $color);
-         $query->bindParam(':admin', $admin);
+    /*******************
+     ** Creation User **
+     *******************/
 
-         $query->execute();
+    $queryString="INSERT INTO users(username, surname, email, idcolor, admin) 
+    				VALUES (:username, :surname, :email, :color, :admin)";
+    $query = $bdd->prepare($queryString);
+    $query->bindParam(':username', $username);
+    $query->bindParam(':surname', $surname);
+    $query->bindParam(':email', $email);
+    $query->bindParam(':color', $color);
+    $query->bindParam(':admin', $admin);
+    $query->execute();
 
-        // Create a random salt
-        $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
-        // Create salted password (Careful not to over season)
-        $password = hash('sha512', $password.$random_salt);
+    /**********************************
+     ** Creation Wishlist par défaut **
+     **********************************/
 
-        resetPassword($email, $password, $random_salt, $bdd);
+    $queryString="INSERT INTO wishlists(iduser)
+                    SELECT id FROM users
+                    WHERE username = :username";
+    $query = $bdd->prepare($queryString);
+    $query->bindParam(':username', $username);
+    $query->execute();
 
+    /************************************
+     ** Initialisation du mot de passe **
+     ************************************/
 
-/* Conclusion */
-header('Location: ./?page=create_user&add=success');
+    // Create a random salt
+    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+    // Create salted password (Careful not to over season)
+    $password = hash('sha512', $password.$random_salt);
+    resetPassword($username, $password, $random_salt, $bdd);
+
+    /* Conclusion */
+    header('Location: ./?page=create_user&add=success');
 }
-
 else {
- header('Location: ./?page=create_user&add=failure');  
+    header('Location: ./?page=create_user&add=failure');  
 }
 
 ?>

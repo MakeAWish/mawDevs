@@ -1,8 +1,15 @@
+<?php 
+
+$queryString="SELECT DISTINCT id, name FROM colors
+                ORDER BY name";
+$query = $bdd->prepare($queryString);
+$query->execute(); ?>
+
 <form action="#" method="post">
     <h1 class="typein">Créer un nouvel utilisateur</h1>
     <section class="typein">
-        <p class="typein"><label for="name">Nom :</label>
-            <input name="name" type="text" placeholder=" Nom" enctype="multipart/form-data"/></p>
+        <p class="typein"><label for="username">Login :</label>
+            <input name="username" type="text" placeholder=" login" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="surname">Prénom :</label>
             <input name="surname" type="text" placeholder=" Prénom" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="email">Email :</label>
@@ -11,16 +18,21 @@
             <input name="password" type="password" placeholder=" Mot de passe" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="color">Couleur associée :</label>
             <select name="color" id="color" enctype="multipart/form-data"/>
-                <option value="2" selected>Noir (par défaut)</option>
-                <option value="3">Bleu</option>
-                <option value="6">Bleu pâle</option>
-                <option value="4">Brun</option>
-                <option value="9">Rose</option>
-                <option value="8">Rose pâle</option>
-                <option value="11">Rouge</option>
-                <option value="5">Vert</option>
-                <option value="7">Vert pâle</option>
-                <option value="10">Violet</option>
+                <?php 
+                $count = 0;
+                while ($ligne = $query->fetch()) 
+                {
+                    extract($ligne);
+                    $selected = "";
+                    $additionalInfo = "";
+                    if($count == 0)
+                    {
+                        $selected = "selected";
+                        $additionalInfo = " (par défaut)";
+                    } 
+                    $count++; ?>                
+                <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $name; echo $additionalInfo; ?></option>
+                <?php } ?>
             </select>
         </p>
         <p class="typein"><label for="admin">Droits d'admin :</label>
