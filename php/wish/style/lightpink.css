@@ -4,7 +4,7 @@ header, h1.typein {
 }
 
 /* Le menu de navigation */
-nav {
+#nav {
 	background-color: #fe9bc5;
 	border: solid 1px #fe88b7;
 	background: -webkit-gradient(linear, left top, left bottom, from(#fe9bc5), to(#fea0cc));
@@ -13,7 +13,7 @@ nav {
 	}
 
 /* Les liens du menu de navigation */
-nav a {
+#nav a {
 	background-color: #fea0cc;
 	color: black;
 	border-color: #fe88b7;
@@ -23,7 +23,7 @@ nav a {
 	text-shadow: 1px 1px 1px grey;
 	}
 	
-nav a:hover {
+#nav a:hover {
 	color: white;
 	box-shadow: 1px 1px 10px  #fe5c9b  inset;
 	}

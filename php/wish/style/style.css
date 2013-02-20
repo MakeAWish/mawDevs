@@ -215,24 +215,24 @@ header span {
 	text-transform: capitalize;
 	}
 
-nav {
+#nav {
 	width: 802px;
 	border-radius: 5px;
 	margin: 0 auto 60px auto;
 	}
 
 
-nav ul {
+#nav ul {
 	margin: 20px 0px;
 	padding: 0px 50px;
 	}
 
-nav li {
+#nav li {
 	display: inline-block;
 	margin: 0 15px;
 	}
 
-nav a {
+#nav a {
 	font-family: 'Redressed';
 	font-size: 1.3em;
 	text-decoration: none;
@@ -242,7 +242,7 @@ nav a {
 	border: outset 1px;
 	}
 
-nav a.active {
+#nav a.active {
 	color: white;
 	}
 	
@@ -440,7 +440,63 @@ p.asterisque { /* Le texte en bas de l'* dans la popin */
         cursor: pointer;
 }
 
+/*********************************************************************************************************************/
+/************************** Le style du menu de navigation pour les administrateurs **********************************/
+/*********************************************************************************************************************/
 
+#admin {
+	width: 100px;
+	height: 200px;
+	border-radius: 5px;
+	float: left;
+	position: absolute;
+	top: 250px;
+	margin-left: 15px;
+	background-color: #d0d0d0;
+	border: solid 1px grey;
+	background: -webkit-gradient(linear, left top, left bottom, from(#d0d0d0), to(#c6c6c6));
+	background: -moz-linear-gradient(top, #d0d0d0, #c6c6c6);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d0d0', endColorstr='#c6c6c6');
+	}
+
+
+#admin ul {
+	margin: 0px;
+	padding: 0px;
+	}
+
+#admin li {
+	display: block;
+	margin: 0px 10px;
+	}
+
+#admin a {
+	font-family: 'Redressed';
+	font-size: 1em;
+	text-decoration: none;
+	color: black;
+	padding: 0px;
+	letter-spacing: 1px;
+	}
+
+#admin a:hover {
+	text-decoration: underline;
+	color: white;
+	}
+
+#admin a:selected {
+	text-decoration: underline;
+	color: white;
+	}
+
+#admin h1 {
+	font-family: 'AlexBrushRegular';
+	text-align: center;
+	font-size: 1.9em;
+	text-decoration: none;
+	margin-top: 15px;
+}
+	
 
 
 
