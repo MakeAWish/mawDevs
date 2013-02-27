@@ -1,8 +1,8 @@
 <?php if(isset($_POST['gift']) AND $_POST['gift']) {
-    $gift = $_POST['gift']; 
+    $gift = $_POST['gift'];
 
-    $queryString="SELECT id, title, link, description FROM wishes 
-                WHERE id = :wish_id 
+    $queryString="SELECT id, title, link, description FROM wishes
+                WHERE id = :wish_id
                 ORDER BY id DESC LIMIT 0,1";
             $query = $bdd->prepare($queryString);
             $query->bindParam(':wish_id', $gift);
@@ -15,11 +15,11 @@
     <section class="typein">
         <input type="hidden" name="gift" value="<?php echo $gift?>"/>
         <p class="typein"><label for="title">Titre :</label>
-            <input name="title" type="text" placeholder=" Titre" value="<?php echo $title ?>"/></p>
+            <input id="title" name="title" type="text" placeholder=" Titre" value="<?php echo $title ?>"/></p>
         <p class="typein"><label for="link">Lien (facultatif) :</label>
-            <input name="link" type="text" placeholder=" Lien" value="<?php echo $link ?>"/></p>
+            <input id="link" name="link" type="text" placeholder=" Lien" value="<?php echo $link ?>"/></p>
         <p class="typein"><label for="description">Description :</label>
-            <textarea name="description" placeholder=" Description"><?php echo $description ?></textarea></p>
+            <textarea id="description" name="description" placeholder=" Description"><?php echo $description ?></textarea></p>
         <p class="typein"><label for="category">Catégorie :</label>
             <select name="category" id="category" enctype="multipart/form-data">
     
