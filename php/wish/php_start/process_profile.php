@@ -11,32 +11,57 @@ if(login_check($bdd) != 1) {
 
 
 /* Condition */
-if(isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != "" AND isset($_POST['email']) AND $_POST['email'] AND $_POST['email'] != "") {
-   
+if(isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
+    AND isset($_POST['email']) AND $_POST['email'] AND $_POST['email'] != "") {
 
-/* Travail */
-$surname = $_POST['surname'];
-$email = $_POST['email'];
-$color = $_POST['color'];
-$my_id=$_SESSION['user_id'];
+    /* Travail */
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $color = $_POST['color'];
+    $my_id=$_SESSION['user_id'];
 
-$queryString="UPDATE users SET users.surname = :surname, users.email = :email, users.idcolor = :color WHERE users.id = :userid";
-         $query = $bdd->prepare($queryString);
-         $query->bindParam(':surname', $surname);
-         $query->bindParam(':email', $email);
-         $query->bindParam(':color', $color);
-         $query->bindParam(':userid', $my_id);
+    $queryString="UPDATE users SET users.surname = :surname, users.email = :email, users.idcolor = :color WHERE users.id = :userid";
+             $query = $bdd->prepare($queryString);
+             $query->bindParam(':surname', $surname);
+             $query->bindParam(':email', $email);
+             $query->bindParam(':color', $color);
+             $query->bindParam(':userid', $my_id);
 
-         $query->execute();
+             $query->execute();
+
+    if(isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != ""
+        AND isset($_POST['new_password']) AND $_POST['new_password'] AND $_POST['new_password'] != "") {
+
+        // Verify that the password is legit
+       $v = $_POST['username'];
+       $password = $_POST['p']; // The hashed password.
+
+       $atempts_login = login($v, $password, $bdd);
+       if($atempts_login == "ok") {
+            $new_password = $_POST['new_p'];
+            // Create a random salt
+            $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+            // Create salted password (Careful not to over season)
+            $new_password = hash('sha512', $new_password.$random_salt);
+
+            $passwordChanged = resetPassword($username, $new_password, $random_salt, $bdd);
+            if (!$passwordChanged){
+                header('Location: ./?page=profile&edit=failure&cause=unablepasswordchange');
+            }
+        }
+        else
+        {
+            header('Location: ./?page=profile&edit=partialsuccess&cause=wrongpassword');
+        }
+
+    }
 
 
-
-/* Conclusion */
-header('Location: ./?page=profile&edit=success');
+    /* Conclusion */
+    header('Location: ./?page=profile&edit=success');
 }
-
 else {
- header('Location: ./?page=profile&edit=failure&cause=empty');  
+    header('Location: ./?page=profile&edit=failure&cause=empty');
 }
 
 ?>
