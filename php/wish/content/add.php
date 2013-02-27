@@ -2,7 +2,7 @@
     <h1 class="typein">Close your eyes...<br/> and make a wish* :</h1>
     <section class="typein">
         <p class="typein"><label for="title">Titre :</label>
-            <input name="title" type="text" placeholder=" Titre" enctype="multipart/form-data"/></p>
+            <input id="title" name="title" type="text" placeholder=" Titre" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="link">Lien (facultatif) :</label>
             <input name="link" type="text" placeholder=" Lien" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="description">Description :</label>
@@ -18,4 +18,3 @@
 </form>
 
 
- 
