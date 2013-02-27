@@ -20,17 +20,8 @@ try {
 <a href="?page=logout">Déconnexion</a>
 
 
-<?php 
-$my_id=$_SESSION['user_id'];
-$queryString="SELECT admin FROM users 
-                WHERE users.id = :user_id";
-            $query = $bdd->prepare($queryString);
-            $query->bindParam(':user_id', $my_id);
-            $query->execute();
-            $ligne = $query->fetch();
-            extract($ligne);
-
-if ($admin == 1) { ?>
+<?php
+if ($isAdmin == 1) { ?>
     |
     <a href="?page=admin">Admin</a>
 <?php
@@ -54,7 +45,7 @@ $menu = array(
     "gift" => "Faire un cadeau",
     "giftlist" => "Ma Giftlist",
     "profile" => "Mon Profil",
-); 
+);
 
 $active = null;
 if(isset($_GET['page'])) {
