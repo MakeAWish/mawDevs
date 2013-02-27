@@ -11,9 +11,9 @@
         <p class="typein"><label for="title">Titre :</label>
             <input id="title" name="title" type="text" placeholder=" Titre" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="link">Lien (facultatif) :</label>
-            <input name="link" type="text" placeholder=" Lien" enctype="multipart/form-data"/></p>
+            <input id="link" name="link" type="text" placeholder=" Lien" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="description">Description :</label>
-            <textarea name="description" placeholder=" Description" enctype="multipart/form-data"></textarea></p>
+            <textarea id="description" name="description" placeholder=" Description" enctype="multipart/form-data"></textarea></p>
         <p class="typein"><label for="category">Catégorie :</label>
             <select name="category" id="category" enctype="multipart/form-data">
     
@@ -27,7 +27,6 @@
                 <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $category; ?></option>
                 <?php } ?>
             </select>
-
     </section>
 
 
