@@ -16,6 +16,29 @@ try {
     }
 ?>
 
+<div class="nav_2">
+<a href="?page=logout">Déconnexion</a>
+
+
+<?php 
+$my_id=$_SESSION['user_id'];
+$queryString="SELECT admin FROM users 
+                WHERE users.id = :user_id";
+            $query = $bdd->prepare($queryString);
+            $query->bindParam(':user_id', $my_id);
+            $query->execute();
+            $ligne = $query->fetch();
+            extract($ligne);
+
+if ($admin == 1) { ?>
+    |
+    <a href="?page=admin">Admin</a>
+<?php
+}
+?>
+
+</div>
+
 <header>
     <?php echo "* Make a Wish";
     if(!empty($surname))
@@ -30,7 +53,7 @@ $menu = array(
     "wishlist" => "Ma Wishlist",
     "gift" => "Faire un cadeau",
     "giftlist" => "Ma Giftlist",
-    "logout" => "Déconnexion",
+    "profile" => "Mon Profil",
 ); 
 
 $active = null;

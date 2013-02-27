@@ -37,7 +37,7 @@ header('Location: ./?page=wishlist&delete=success');
 }
 
 else {
- header('Location: ./?page=wishlist&delete=failure&cause=title');  
+ header('Location: ./?page=wishlist&delete=failure&cause=user');  
 }
 
 ?>

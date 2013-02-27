@@ -174,7 +174,7 @@ p.asterisque{ /* Le texte en * en bas de la popin */
 section.typein, section.question {
 	display: block;
 	margin: 0px auto 0px auto;
-	width: 280px;
+	width: 350px;
 }
 
 p.typein, p.question {
@@ -197,10 +197,36 @@ p.typein label {
 	padding-left: 0px;
 }
 
+span.typein {
+	width: 250px;
+	display: block;
+	margin: 30px auto ;
+	font-family: 'Redressed';
+	font-size: 1.5em;
+	text-align: center;
+	text-shadow: 2px 1px 2px silver;
+}
+
+select {
+	width: 154px;
+}
 
 /*********************************************************************************************************************/
-/*************** Le style du header et du menu de navigation pour les autres pages que la page de login **************/
+/****** Le style du header, du "Déconnexion" et du menu de navigation pour les autres pages que la page de login *****/
 /*********************************************************************************************************************/
+.nav_2 {
+	position: absolute;
+	right: 10px;
+	margin-top: -30px;
+}
+
+.nav_2 a {
+	font-size: 1.2em;
+	font-family: 'Redressed';
+	color: black;
+	text-decoration: none;
+	padding: 0 10px;
+}
 
 header {
 	font-family: 'AlexBrushRegular';
@@ -286,7 +312,6 @@ section.content, form.clic {
 	font-family: 'Redressed';
 	font-size: 1.3em;
 	text-shadow: 1px 1px 1px silver;
-	text-transform: capitalize;
 }
 
 .gift_title a {

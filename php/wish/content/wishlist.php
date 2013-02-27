@@ -17,6 +17,81 @@ if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 }
 ?>
 
+<?php
+if(isset($_GET['add']) and ($_GET['add'] == 'success')) {
+?>
+
+	<script type="text/javascript">
+		$(window).load(function(){
+			modal.open({content:"Voeu ajouté !"});
+		});
+	</script>
+
+<?php
+}
+?>
+
+<?php
+if(isset($_GET['edit']) and ($_GET['edit'] == 'failure')) {
+	if(isset($_GET['cause']) and ($_GET['cause'] == 'title')) {
+?>
+
+	<script type="text/javascript">
+		$(window).load(function(){
+			modal.open({content:"Il faut au moins garder un titre !"});
+		});
+	</script>
+
+<?php
+	}
+}
+?>
+
+<?php
+if(isset($_GET['edit']) and ($_GET['edit'] == 'success')) {
+?>
+
+	<script type="text/javascript">
+		$(window).load(function(){
+			modal.open({content:"Voeu modifié !"});
+		});
+	</script>
+
+<?php
+}
+?>
+
+<?php
+if(isset($_GET['delete']) and ($_GET['delete'] == 'success')) {
+?>
+
+	<script type="text/javascript">
+		$(window).load(function(){
+			modal.open({content:"Voeu supprimé !"});
+		});
+	</script>
+
+<?php
+}
+?>
+
+<?php
+if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
+	if(isset($_GET['cause']) and ($_GET['cause'] == 'user')) {
+?>
+
+	<script type="text/javascript">
+		$(window).load(function(){
+			modal.open({content:"Vous n'avez pas le droit de supprimer ce voeu !"});
+		});
+	</script>
+
+<?php
+	}
+}
+?>
+
+
 <script type="text/javascript">
 	$(window).load(function(){
 		$(document).on("click", "input.add", function (e) {

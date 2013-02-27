@@ -1,8 +1,10 @@
 <?php
 try {
 	$user_id=$_SESSION['user_id'];
-	$queryString="SELECT users.id, users.surname, colors.name AS color  FROM users
+	$queryString="SELECT DISTINCT users.id, users.surname, colors.name AS color  FROM users
 		INNER JOIN colors ON users.idcolor=colors.id
+		INNER JOIN wishlists ON wishlists.iduser=users.id
+		INNER JOIN wishes ON wishes.idwishlist=wishlists.id
 		WHERE users.id <> :thisUser
 		ORDER BY users.surname";
 	$query = $bdd->prepare($queryString);

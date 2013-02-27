@@ -17,7 +17,7 @@ $query->execute(); ?>
         <p class="typein"><label for="password">Mot de passe :</label>
             <input name="password" type="password" placeholder=" Mot de passe" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="color">Couleur associée :</label>
-            <select name="color" id="color" enctype="multipart/form-data"/>
+            <select name="color" id="color" enctype="multipart/form-data">
                 <?php 
                 $count = 0;
                 while ($ligne = $query->fetch()) 

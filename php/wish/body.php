@@ -4,7 +4,6 @@
 	</div>
 
 	<?php include Z::getFile('content'); ?>
-	<?php include Z::getFile('admin'); ?>
 
 
 </div>
