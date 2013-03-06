@@ -52,7 +52,7 @@ if(isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
             }
             else
             {
-                header('Location: ./?page=profile&edit=success&password=changed');
+                header('Location: ./?page=login');
             }
         }
         else
