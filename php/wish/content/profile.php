@@ -18,9 +18,9 @@
 <form action="#" method="post">
     <section class="typein">
         <span class="typein"> Modifier mon profil :</span>
-        <input name="username" type="hidden" value=" <?php echo $username ?>"/>
+        <input name="username" type="hidden" value="<?php echo $username ?>"/>
         <p class="typein"><label for="surname">Prénom :</label>
-            <input name="surname" type="text" placeholder=" Prénom" value=" <?php echo $surname ?>"/></p>
+            <input name="surname" type="text" placeholder=" Prénom" value="<?php echo $surname ?>"/></p>
         <p class="typein"><label for="email">Email :</label>
             <input name="email" type="email" placeholder=" Email" value=" <?php echo $email ?>"/></p>
         <p class="typein"><label for="color">Couleur de thème :</label>

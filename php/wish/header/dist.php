@@ -17,16 +17,14 @@ try {
 ?>
 
 <div class="nav_2">
-<a href="?page=logout">Déconnexion</a>
-
-
 <?php
-if ($isAdmin == 1) { ?>
-    |
+if (isset($isAdmin) && $isAdmin == 1) { ?>
     <a href="?page=admin">Admin</a>
+    |
 <?php
 }
 ?>
+<a href="?page=logout">Déconnexion</a>
 
 </div>
 

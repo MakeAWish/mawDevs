@@ -16,8 +16,8 @@ function sec_session_start()
 
 function login($with_username, $with_password, $bdd)
 {
-    echo "username : " . $with_username . ";<br />";
-    echo "Sha-ed Pwd : " . $with_password . "<br />";
+    echo "username : '" . $with_username . "'<br />";
+    echo "Sha-ed Pwd : '" . $with_password . "'<br />";
     // Using prepared Statements means that SQL injection is not possible.
     if ($stmt = $bdd->prepare("SELECT id, username, password, salt FROM users WHERE username = :username LIMIT 1")) {
         $stmt->bindParam(':username', $with_username, PDO::PARAM_STR, 50); // Bind "$username" to parameter.

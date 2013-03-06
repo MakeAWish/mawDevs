@@ -30,13 +30,14 @@ if(isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
              $query->execute();
 
     if(isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != ""
-        AND isset($_POST['new_password']) AND $_POST['new_password'] AND $_POST['new_password'] != "") {
+        AND isset($_POST['new_p']) AND $_POST['new_p'] AND $_POST['new_p'] != "") {
 
         // Verify that the password is legit
        $v = $_POST['username'];
        $password = $_POST['p']; // The hashed password.
 
        $atempts_login = login($v, $password, $bdd);
+       echo "atempts login : ".$atempts_login;
        if($atempts_login == "ok") {
             $new_password = $_POST['new_p'];
             // Create a random salt
@@ -44,24 +45,29 @@ if(isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
             // Create salted password (Careful not to over season)
             $new_password = hash('sha512', $new_password.$random_salt);
 
-            $passwordChanged = resetPassword($username, $new_password, $random_salt, $bdd);
+            echo 'new password : '.$new_password;
+            $passwordChanged = resetPassword($v, $new_password, $random_salt, $bdd);
             if (!$passwordChanged){
-                header('Location: ./?page=profile&edit=failure&cause=unablepasswordchange');
+                header('Location: ./?page=profile&edit=success&password=unchanged&cause=unknown');
+            }
+            else
+            {
+                header('Location: ./?page=profile&edit=success&password=changed');
             }
         }
         else
         {
-            header('Location: ./?page=profile&edit=partialsuccess&cause=wrongpassword');
+            header('Location: ./?page=profile&edit=success&password=unchanged&cause=wrong');
         }
 
     }
-
-
-    /* Conclusion */
-    header('Location: ./?page=profile&edit=success');
+    else
+    {
+        header('Location: ./?page=profile&edit=success');
+    }
 }
 else {
-    header('Location: ./?page=profile&edit=failure&cause=empty');
+    header('Location: ./?page=profile&edit=failure');
 }
 
 ?>
