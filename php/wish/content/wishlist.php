@@ -1,6 +1,9 @@
 <!-- On s'assure qu'il y a au moins un titre pour ajouter un cadeau dans la BDD, le lien et la description restent
 optionnels -->
 
+
+<!-- Code pour tous les messages d'erreur suite aux différentes modal -->
+
 <?php
 if(isset($_GET['add']) and ($_GET['add'] == 'failure')) {
 	if(isset($_GET['cause']) and ($_GET['cause'] == 'title')) {
@@ -91,6 +94,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 }
 ?>
 
+<!-- Code pour toutes les modal -->
 
 <script type="text/javascript">
 	$(window).load(function(){
@@ -127,43 +131,63 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 	});
 </script>
 
+
+<!-- Code de la page -->
+
+<section class="content">
 <?php
 
 	$my_id=$_SESSION['user_id'];
-	$showEdit = false;
+	$showEdit = true;
+	$useridforfilter = $my_id;
+
+	if(isset($_GET['user']) and ($_GET['user'] != $my_id)) {
+		$useridforfilter = $_GET['user'] ;
+		$showEdit = false;
+	}
 
 	try {
 
-		if(isset($_GET['user']) and ($_GET['user'] != $my_id)) {
-			$showEdit = false;
-			$queryString="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
-				INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
-				INNER JOIN users ON wishlists.iduser = users.id
-				INNER JOIN colors ON users.idcolor=colors.id
-				LEFT JOIN gifts ON gifts.idwish = wishes.id
-				WHERE users.id = :other_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0";
-			$query = $bdd->prepare($queryString);
-			$query->bindParam(':other_id', $_GET['user']);
-		}
-
-		else {
-			$showEdit = true;
-			$queryString="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
+		$queryString="SELECT DISTINCT categories.id AS idcategory, category FROM wishes
+					INNER JOIN categories ON wishes.idcategory = categories.id
 					INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
 					INNER JOIN users ON wishlists.iduser = users.id
 					INNER JOIN colors ON users.idcolor=colors.id
 					LEFT JOIN gifts ON gifts.idwish = wishes.id
-					WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0";
-			$query = $bdd->prepare($queryString);
-			$query->bindParam(':my_id', $my_id); // Bind "$email" to parameter.
-		}
-
+					WHERE users.id = :userid AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
+					ORDER BY category";
+		$query = $bdd->prepare($queryString);
+		$query->bindParam (':userid', $useridforfilter);
 		$query->execute();
+
+		while ($ligne = $query->fetch()) {
+							extract($ligne); ?>
+							<p class="category">
+							<?php echo $category; ?>
+							</p>
+
+
+		<?php
+		
+			$queryString2="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
+					INNER JOIN categories ON wishes.idcategory = categories.id
+					INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
+					INNER JOIN users ON wishlists.iduser = users.id
+					INNER JOIN colors ON users.idcolor=colors.id
+					LEFT JOIN gifts ON gifts.idwish = wishes.id
+					WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
+					AND categories.id =:idcategory";
+			$query2 = $bdd->prepare($queryString2);
+			$query2->bindParam(':my_id', $useridforfilter);
+			$query2->bindParam(':idcategory', $idcategory); // Bind "$email" to parameter.
+
+
+		$query2->execute();
 ?>
 
 			<form class="clic" method="post">
-				<section class="content">
-				<?php while ($ligne = $query->fetch()) {
+				
+				<?php while ($ligne = $query2->fetch()) {
 						extract($ligne);
 						$classGift = "gift";
 						$isBought = false;
@@ -172,7 +196,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 							$isBought = true;
 						}
 
-			if(isset($_GET['user']) and ($_GET['user'] != $my_id)) { ?>
+			if ($showEdit == false) { ?>
 
 						<div class="<?php echo $classGift ?> non_exclusive">
 							<?php if($isBought == false) { ?>
@@ -203,8 +227,8 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 							<?php } ?>
 
 						</div>
-				<?php }	?>
-				</section>
+				<?php }	}?>
+</section>
 
 				<?php if ($showEdit) { ?>
 					<section class="submit_3">
@@ -223,6 +247,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 			</form>
 
 <?php }
+
 		catch (PDOException $e)
 		{
 			echo 'Erreur : ' . $e->getMessage();

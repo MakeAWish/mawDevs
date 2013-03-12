@@ -399,7 +399,7 @@ div.follow_link, input.offered {
 /**** Le style de la page "Giftlist" pour le paragraphe qui affiche le nom de la personne à qui on fait le cadeau ****/
 /*********************************************************************************************************************/
 
-p.gift_receiver {
+p.gift_receiver, p.category {
 	font-family: 'Redressed';
 	font-size: 1.5em;
 	text-shadow: 1px 1px 1px silver;
