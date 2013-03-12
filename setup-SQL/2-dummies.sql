@@ -29,6 +29,7 @@ INSERT INTO `categories` (`id`, `category`) VALUES
 --
 
 INSERT INTO `colors` (`id`, `name`) VALUES
+(1, 'red'),
 (2, 'black'),
 (3, 'blue'),
 (4, 'brown'),
@@ -37,8 +38,7 @@ INSERT INTO `colors` (`id`, `name`) VALUES
 (7, 'lightgreen'),
 (8, 'lightpink'),
 (9, 'pink'),
-(10, 'purple'),
-(11, 'red');
+(10, 'purple');
 
 -- --------------------------------------------------------
 
