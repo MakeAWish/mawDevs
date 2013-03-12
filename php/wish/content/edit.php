@@ -38,6 +38,7 @@
                 <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $category; ?></option>
                 <?php } ?>
             </select>
+        </p>
     </section>
 
     <section class="submit_2">
