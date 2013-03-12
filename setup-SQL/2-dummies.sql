@@ -10,24 +10,35 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `makeawish`
 --
+USE `makeawish`;
 
 -- --------------------------------------------------------
+
+--
+-- Contenu de la table `categories`
+--
+
+INSERT INTO `categories` (`id`, `category`) VALUES
+(1, 'sport'),
+(2, 'culture'),
+(3, 'multimedia'),
+(4, 'aucune');
 
 --
 -- Contenu de la table `colors`
 --
 
-INSERT INTO `colors` (`name`) VALUES
-('black'),
-('blue'),
-('brown'),
-('green'),
-('lightblue'),
-('lightgreen'),
-('lightpink'),
-('pink'),
-('purple'),
-('red');
+INSERT INTO `colors` (`id`, `name`) VALUES
+(2, 'black'),
+(3, 'blue'),
+(4, 'brown'),
+(5, 'green'),
+(6, 'lightblue'),
+(7, 'lightgreen'),
+(8, 'lightpink'),
+(9, 'pink'),
+(10, 'purple'),
+(11, 'red');
 
 -- --------------------------------------------------------
 
@@ -35,9 +46,9 @@ INSERT INTO `colors` (`name`) VALUES
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`name`, `surname`, `email`, `password`, `idcolor`, `salt`) VALUES
-('lastname1', 'firstname1', 'email1@domain.com', '', 1, ''),
-('lastname2', 'firstname2', 'email2@domain.com', '', 2, '');
+
+INSERT INTO `users` (`id`, `username`, `surname`, `email`, `password`, `idcolor`, `salt`, `admin`) VALUES
+(1, 'admin', 'admin', 'admin@domain.com', 'bfbb9d051864136a8fd2bb3032b874d1f5756c4d7cb8a9bfe7a13358ca1d04d58cb0473bd7969ae279eb0880f1a432251c732d7b10cdab4ce81fa5bc4fdcd0b0', 1, '48cb6c49b8dd517f75b1402ae332f02a513e3419646e7a8dbe4ade5350ba00260618ea9368097325860f7356c5f7def0c987fac0188fa303ddb57f37b8aef5ee', 1);
 
 -- --------------------------------------------------------
 
@@ -45,8 +56,7 @@ INSERT INTO `users` (`name`, `surname`, `email`, `password`, `idcolor`, `salt`) 
 -- Contenu de la table `wishlists`
 --
 INSERT INTO `wishlists` (`iduser`) VALUES
-(1),
-(2);
+(1);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

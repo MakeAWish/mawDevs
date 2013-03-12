@@ -20,6 +20,24 @@
             <input name="link" type="text" placeholder=" Lien" value="<?php echo $link ?>"/></p>
         <p class="typein"><label for="description">Description :</label>
             <textarea name="description" placeholder=" Description"><?php echo $description ?></textarea></p>
+        <p class="typein"><label for="category">Catégorie :</label>
+            <select name="category" id="category" enctype="multipart/form-data">
+    
+            <?php 
+
+            $queryString2="SELECT DISTINCT id, category FROM categories
+                ORDER BY category";
+            $query2 = $bdd->prepare($queryString2);
+            $query2->execute();
+                $count = 0;
+                while ($ligne = $query2->fetch()) 
+                {
+                    extract($ligne);
+                    $selected = "";
+                    $count++; ?>                
+                <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $category; ?></option>
+                <?php } ?>
+            </select>
     </section>
 
     <section class="submit_2">
