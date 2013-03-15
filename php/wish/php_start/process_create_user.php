@@ -11,12 +11,12 @@ if(login_check($bdd) != 1) {
 
 
 /* Condition */
-if(	isset($_POST['username']) AND $_POST['username'] AND $_POST['username'] != "" 
+if(	isset($_POST['username']) AND $_POST['username'] AND $_POST['username'] != ""
 	AND isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
 	AND isset($_POST['email']) AND $_POST['email'] AND $_POST['email'] != ""
-	AND isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != "" ) 
+	AND isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != "" )
 {
-   
+
 
     /* Travail */
     $username = $_POST['username'];
@@ -30,7 +30,7 @@ if(	isset($_POST['username']) AND $_POST['username'] AND $_POST['username'] != "
      ** Creation User **
      *******************/
 
-    $queryString="INSERT INTO users(username, surname, email, idcolor, admin) 
+    $queryString="INSERT INTO users(username, surname, email, idcolor, admin)
     				VALUES (:username, :surname, :email, :color, :admin)";
     $query = $bdd->prepare($queryString);
     $query->bindParam(':username', $username);
@@ -62,10 +62,10 @@ if(	isset($_POST['username']) AND $_POST['username'] AND $_POST['username'] != "
     resetPassword($username, $password, $random_salt, $bdd);
 
     /* Conclusion */
-    header('Location: ./?page=create_user&add=success');
+    header('Location: ./?page=admin&add=success');
 }
 else {
-    header('Location: ./?page=create_user&add=failure');  
+    header('Location: ./?page=admin&add=failure');
 }
 
 ?>
