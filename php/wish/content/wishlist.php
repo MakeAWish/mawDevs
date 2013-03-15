@@ -155,7 +155,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 					INNER JOIN colors ON users.idcolor=colors.id
 					LEFT JOIN gifts ON gifts.idwish = wishes.id
 					WHERE users.id = :userid AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
-					ORDER BY categories.id";
+					ORDER BY category";
 		$query = $bdd->prepare($queryString);
 		$query->bindParam (':userid', $useridforfilter);
 		$query->execute();
@@ -168,7 +168,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 
 
 		<?php
-		
+
 			$queryString2="SELECT wishes.*, gifts.iduser, colors.name FROM wishes
 					INNER JOIN categories ON wishes.idcategory = categories.id
 					INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
@@ -186,7 +186,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 ?>
 
 			<form class="clic" method="post">
-				
+
 				<?php while ($ligne = $query2->fetch()) {
 						extract($ligne);
 						$classGift = "gift";
