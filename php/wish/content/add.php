@@ -18,13 +18,10 @@
             <select name="category" id="category" enctype="multipart/form-data">
     
             <?php 
-                $count = 0;
                 while ($ligne = $query->fetch()) 
                 {
-                    extract($ligne);
-                    $selected = "";
-                    $count++; ?>                
-                <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $category; ?></option>
+                    extract($ligne);?>                
+                <option value="<?php echo $id; ?>"><?php echo $category; ?></option>
                 <?php } ?>
             </select>
         </p>

@@ -155,7 +155,7 @@ if(isset($_GET['delete']) and ($_GET['delete'] == 'failure')) {
 					INNER JOIN colors ON users.idcolor=colors.id
 					LEFT JOIN gifts ON gifts.idwish = wishes.id
 					WHERE users.id = :userid AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
-					ORDER BY category";
+					ORDER BY categories.id";
 		$query = $bdd->prepare($queryString);
 		$query->bindParam (':userid', $useridforfilter);
 		$query->execute();

@@ -309,9 +309,14 @@ section.content, form.clic {
 }
 
 .gift_title, .bought a {
+	display: block;
 	font-family: 'Redressed';
 	font-size: 1.3em;
 	text-shadow: 1px 1px 1px silver;
+}
+
+.gift_title:first-letter {
+	text-transform: capitalize;
 }
 
 .gift_title a {
@@ -342,6 +347,7 @@ section.content, form.clic {
 	display: inline-block;
 	vertical-align: top;
 	margin-left: 42px;
+	width: 530px;
 	}
 
 .gift_descr p {
