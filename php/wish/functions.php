@@ -82,7 +82,7 @@ function checkbrute($user_id, $bdd)
 
 function resetPassword($username, $password, $salt, $bdd)
 {
-    if ($stmt = $bdd->prepare("UPDATE makeawish.users SET password = :password, salt = :salt WHERE users.username = :username ;")) {
+    if ($stmt = $bdd->prepare("UPDATE users SET password = :password, salt = :salt WHERE users.username = :username ;")) {
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':salt', $salt);
         $stmt->bindParam(':username', $username);
