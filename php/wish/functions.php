@@ -14,27 +14,31 @@ function sec_session_start()
     session_regenerate_id(true); // regenerated the session, delete the old one.
 }
 
+function debug($message)
+{
+    global $debugMessages;
+    if(isset($debugMessages)) {
+        array_push($debugMessages, $message);
+    }
+}
+
 function login($with_username, $with_password, $bdd)
 {
-    echo "username : '" . $with_username . "'<br />";
-    echo "Sha-ed Pwd : '" . $with_password . "'<br />";
     // Using prepared Statements means that SQL injection is not possible.
     if ($stmt = $bdd->prepare("SELECT id, username, password, salt FROM users WHERE username = :username LIMIT 1")) {
         $stmt->bindParam(':username', $with_username, PDO::PARAM_STR, 50); // Bind "$username" to parameter.
         $stmt->execute(); // Execute the prepared query.
 
         if ($existing_user = $stmt->fetch()) { // If the user exists
+            debug("User exists");
             extract($existing_user); // creates $id, $username, $password & $salt
             $with_password = hash('sha512', $with_password . $salt); // hash the password with the unique salt.
-
             // We check if the account is locked from too many login attempts
             if (checkbrute($id, $bdd) == true) {
-                // Account is locked
-                // Send an username to user saying their account is locked
+                debug("User account is locked");
                 return "locked";
             } else {
                 if ($password == $with_password) { // Check if the password in the database matches the password the user submitted.
-                    // Password is correct!
                     $ip_address               = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user.
                     $user_browser             = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
                     $id                       = preg_replace("/[^0-9]+/", "", $id); // XSS protection as we might print this value
@@ -42,19 +46,16 @@ function login($with_username, $with_password, $bdd)
                     $s_username                 = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username); // XSS protection as we might print this value
                     $_SESSION['username']     = $s_username;
                     $_SESSION['login_string'] = hash('sha512', $password . $ip_address . $user_browser);
-                    // Login successful.
-
                     return "ok";
                 } else {
-                    // Password is not correct
-                    // We record this attempt in the database
+                    debug("User password is wrong. We record this attempt in the database");
                     $now = time();
                     $bdd->query("INSERT INTO login_attempts (user_id, time) VALUES ('$id', '$now')");
                     return "failed";
                 }
             }
         } else {
-            // No user exists.
+            debug("No user with this username");
             return "no_user";
         }
     }
@@ -105,26 +106,27 @@ function login_check($bdd)
         if ($stmt = $bdd->prepare("SELECT password FROM users WHERE id = :user_id LIMIT 1")) {
             $stmt->bindParam(':user_id', $user_id); // Bind "$user_id" to parameter.
             $stmt->execute(); // Execute the prepared query.
+
             if ($stmt->rowCount() == 1) { // If the user exists
                 extract($stmt->fetch());
                 $login_check = hash('sha512', $password . $ip_address . $user_browser);
                 if ($login_check == $login_string) {
-                    // Logged In!!!!
+                    debug("User has been verified");
                     return true;
                 } else {
-                    // Not logged in
+                    debug("Login check failed : unable to match login string");
                     return false;
                 }
             } else {
-                // Not logged in
+                debug("Login check failed : unable to find user");
                 return false;
             }
         } else {
-            // Not logged in
+            debug("Login check failed : unable to prepare request");
             return false;
         }
     } else {
-        // Not logged in
+        debug("Login check failed : some parameters are not found");
         return false;
     }
 }

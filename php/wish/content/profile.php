@@ -1,4 +1,9 @@
 <?php
+    // S'il y a une action à faire (ediction, suppression, ajout, on la fait)
+    if(isset($_POST['action'])){
+        include 'process/'.$_POST['action'].'.php';
+    }
+
     $my_id=$_SESSION['user_id'];
     $queryString="SELECT users.id, users.username, surname, email, password, idcolor AS useridcolor FROM users
                 INNER JOIN colors ON colors.id=users.idcolor
@@ -15,7 +20,7 @@
             $query->execute();
 ?>
 
-<form action="#" method="post">
+<form method="post">
     <section class="typein">
         <span class="typein"> Modifier mon profil :</span>
         <input name="username" type="hidden" value="<?php echo $username ?>"/>
@@ -51,7 +56,7 @@
     </section>
 
     <section class="submit_2">
-        <input type="hidden" name="page" value="process_profile"/>
+        <input type="hidden" name="action" value="edit_profile"/>
         <input class="validate" type="submit" value="" title="Valider" onclick="formhash(this.form, this.form.password, this.form.new_password);" />
         <input class="cancel" type="reset" value ="" title="Annuler"/>
     </section>

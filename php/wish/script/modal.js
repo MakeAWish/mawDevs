@@ -34,7 +34,7 @@ var modal = (function () {
             .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
         }
         else if (settings.post && settings.post != "" && settings.data) {
-            var jqxhr = $.post(settings.post, {gift : settings.data});
+            var jqxhr = $.post(settings.post, {data : settings.data});
 
             /* Put the results in a div */
             jqxhr.done(function(result) {

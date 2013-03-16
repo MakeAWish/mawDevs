@@ -1,29 +1,29 @@
 black =>
-	 - pour le texte du body, on le laisse tel quel
-	 - pour le titre => #db0058
+     - pour le texte du body, on le laisse tel quel
+     - pour le titre => #db0058
 
 silver =>
 
-	 - pour les ombres de texte : on le laisse tel quel
-	 - pour le dégradé de la barre de navigation (le plus clair) => #ee6b9e
+     - pour les ombres de texte : on le laisse tel quel
+     - pour le dégradé de la barre de navigation (le plus clair) => #ee6b9e
 
 #aaaaaa =>
 
-	 - pour le dégradé de la barre de navigation (le plus foncé des deux) => #ee3b80
+     - pour le dégradé de la barre de navigation (le plus foncé des deux) => #ee3b80
 
 white
 
-grey => 
-	 - pour les bordures du menu de navigation et des boutons de menu => #db0058 (#8f0037)
-	 - pour le texte des cadeaux déjà achetés
-	 - pour le texte dans la popin en *
+grey =>
+     - pour les bordures du menu de navigation et des boutons de menu => #db0058 (#8f0037)
+     - pour le texte des cadeaux déjà achetés
+     - pour le texte dans la popin en *
 
 #d0d0d0
-	 - pour la bordure des cadeaux au survol
+     - pour la bordure des cadeaux au survol
 
 #ebebeb
-	 - pour le background des cadeaux au survol et en sélection et des cadeaux déjà achetés
+     - pour le background des cadeaux au survol et en sélection et des cadeaux déjà achetés
 
 
 #e3e3e3
-	 - pour le dégradé (plus clair des deux) des cadeaux au survol et en sélection
+     - pour le dégradé (plus clair des deux) des cadeaux au survol et en sélection
