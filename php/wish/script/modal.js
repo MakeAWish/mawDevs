@@ -25,15 +25,18 @@ var modal = (function () {
     method.open = function (settings) {
         var targetText = "";
         if(settings.content && settings.content != "") {
-             method.showModal(settings.content, settings.width, settings.height);
+            $overlay.fadeIn(200);
+            method.showModal(settings.content, settings.width, settings.height);
         }
         else if (settings.url && settings.url != "") {
+            $overlay.fadeIn(200);
             var jqxhr = $.get(settings.url, function(result) {
                  method.showModal(result, settings.width, settings.height);
             })
             .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
         }
         else if (settings.post && settings.post != "" && settings.data) {
+            $overlay.fadeIn(200);
             var jqxhr = $.post(settings.post, {data : settings.data});
 
             /* Put the results in a div */
@@ -54,16 +57,17 @@ var modal = (function () {
 
         method.center();
         $(window).bind('resize.modal', method.center);
-        $modal.show();
-        $overlay.show();
+        $overlay.fadeIn(200);
+        $modal.fadeIn(200);
     }
 
     // Close the modal
     method.close = function () {
-        $modal.hide();
-        $overlay.hide();
-        $contenttext.empty();
-        $(window).unbind('resize.modal');
+        $overlay.fadeOut(200);
+        $modal.fadeOut(200, function () {
+            $contenttext.empty();
+            $(window).unbind('resize.modal');
+        });
     };
 
     // Generate the HTML and add it to the document
