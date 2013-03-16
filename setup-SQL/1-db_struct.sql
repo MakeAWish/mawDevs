@@ -51,7 +51,8 @@ CREATE TABLE IF NOT EXISTS `gifts` (
   `iduser` int(11) NOT NULL,
   `idwish` int(11) NOT NULL,
   `offered` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idwish` (`idwish`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
