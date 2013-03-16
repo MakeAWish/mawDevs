@@ -8,7 +8,7 @@
 
 "Make A Wish" is developed by Helene Schapira, with the occasional help of her husband Boris :)
 
-## Dependancies
+## Dependencies
 
 ### Z-Framework
 
