@@ -1,55 +1,55 @@
 /* Le titre et les titres des popin */
 header, h1.typein {
-	color: #ff0000;
+    color: #ff0000;
 }
 
 /* Le menu de navigation */
 #nav {
-	background-color: #ff6c67;
-	border: solid 1px #ff0000;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ff6c67), to(#ff4141));
-	background: -moz-linear-gradient(top, #ff6c67, #ff4141);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6c67', endColorstr='#ff4141');
-	}
+    background-color: #ff6c67;
+    border: solid 1px #ff0000;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff6c67), to(#ff4141));
+    background: -moz-linear-gradient(top, #ff6c67, #ff4141);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6c67', endColorstr='#ff4141');
+    }
 
 /* Les liens du menu de navigation */
 #nav a {
-	background-color: #ff4141;
-	color: black;
-	border-color: #ff0000;
-	background: -webkit-gradient(linear, left top, left bottom, from(#ff4141), to(#ff6c67));
-	background: -moz-linear-gradient(top, #ff4141, #ff6c67);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4141', endColorstr='#ff6c67');
-	text-shadow: 1px 1px 1px grey;
-	}
-	
+    background-color: #ff4141;
+    color: black;
+    border-color: #ff0000;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ff4141), to(#ff6c67));
+    background: -moz-linear-gradient(top, #ff4141, #ff6c67);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff4141', endColorstr='#ff6c67');
+    text-shadow: 1px 1px 1px grey;
+    }
+
 #nav a:hover {
-	color: white;
-	box-shadow: 1px 1px 10px  #ff1e0f  inset;
-	}
-	
+    color: white;
+    box-shadow: 1px 1px 10px  #ff1e0f  inset;
+    }
+
 /* Les images de sprite pour les boutons submit etc */
 input.edit {
-	background: url(../images/sprite.png) no-repeat -0 -738px;
+    background: url(../images/sprite.png) no-repeat -0 -738px;
 }
 
 input.delete {
-	background: url(../images/sprite.png) no-repeat -128px -738px;
+    background: url(../images/sprite.png) no-repeat -128px -738px;
 }
 
 .cancel {
-	background: url(../images/sprite.png) no-repeat -192px -738px;
+    background: url(../images/sprite.png) no-repeat -192px -738px;
 }
 
 input.validate {
-	background: url(../images/sprite.png) no-repeat -256px -738px;
+    background: url(../images/sprite.png) no-repeat -256px -738px;
 }
 
 input.add {
-	background: url(../images/sprite.png) no-repeat -320px -738px;
+    background: url(../images/sprite.png) no-repeat -320px -738px;
 }
 
 /* Les images pour les boutons radio de cadeau */
 .gift .icon, .bought .icon {
-	background: url(../images/sprite.png) no-repeat -64px -738px;
-} 
+    background: url(../images/sprite.png) no-repeat -64px -738px;
+}

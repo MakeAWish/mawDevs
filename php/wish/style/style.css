@@ -12,21 +12,21 @@
 }
 
 @font-face {
-	font-family:'Redressed';
-	src:url('fonts/Redressed.eot') format('eot'),
-	url('fonts/Redressed.woff') format('woff'),
-	url('fonts/Redressed.ttf') format('truetype'),
-	url('fonts/Redressed.svg#Redressed') format('svg');
-	font-weight:normal;
-	font-style:normal;
-	}
+    font-family:'Redressed';
+    src:url('fonts/Redressed.eot') format('eot'),
+    url('fonts/Redressed.woff') format('woff'),
+    url('fonts/Redressed.ttf') format('truetype'),
+    url('fonts/Redressed.svg#Redressed') format('svg');
+    font-weight:normal;
+    font-style:normal;
+    }
 
 
 body {
-	font-family: 'Arial';
-	margin: 0px;
-	color: black;
-	}
+    font-family: 'Arial';
+    margin: 0px;
+    color: black;
+    }
 
 
 /*********************************************************************************************************************/
@@ -34,21 +34,21 @@ body {
 /*********************************************************************************************************************/
 
 .submit_1 {
-	width: 52px;
-	height: 40px;
-	margin: 40px auto 0px auto;
+    width: 52px;
+    height: 40px;
+    margin: 40px auto 0px auto;
 }
 
 .submit_2 {
-	width: 110px;
-	height: 40px;
-	margin: 40px auto 0px auto;
+    width: 110px;
+    height: 40px;
+    margin: 40px auto 0px auto;
 }
 
 .submit_3 {
-	width: 164px;
-	height: 40px;
-	margin: 40px auto 0px auto;
+    width: 164px;
+    height: 40px;
+    margin: 40px auto 0px auto;
 }
 
 
@@ -57,76 +57,76 @@ body {
 /*********************************************************************************************************************/
 
 input[type="submit"], .gift .icon, .bought .icon, .gift_img, .cancel {
-	display: inline-block;
-	vertical-align: top;
-	width: 32px;
-	height: 37px;
-	border: none;
-	cursor: pointer;
+    display: inline-block;
+    vertical-align: top;
+    width: 32px;
+    height: 37px;
+    border: none;
+    cursor: pointer;
 }
 
 input[type="submit"], .cancel {
-	margin : 0 10px;
+    margin : 0 10px;
 }
 
 .gift .icon, .bought .icon, .gift_imgs {
-	float:left;
-	}
+    float:left;
+    }
 
 
 /*********************************************************************************************************************/
 /********** Les icônes de petit cadeau venant du Sprite : pour la page "Faire un cadeau, en fonction des gens ********/
 /*********************************************************************************************************************/
 
-.gift_img.black, 
-.gift .icon.black, 
+.gift_img.black,
+.gift .icon.black,
 .bought .icon.black {
-	background: url(../images/sprite.png) no-repeat -64px 0;
+    background: url(../images/sprite.png) no-repeat -64px 0;
 }
-.gift_img.blue, 
-.gift .icon.blue, 
+.gift_img.blue,
+.gift .icon.blue,
 .bought .icon.blue {
-	background: url(../images/sprite.png) no-repeat -64px -82px;
+    background: url(../images/sprite.png) no-repeat -64px -82px;
 }
-.gift_img.brown, 
-.gift .icon.brown, 
+.gift_img.brown,
+.gift .icon.brown,
 .bought .icon.brown {
-	background: url(../images/sprite.png) no-repeat -64px -164px;
+    background: url(../images/sprite.png) no-repeat -64px -164px;
 }
-.gift_img.green, 
-.gift .icon.green, 
+.gift_img.green,
+.gift .icon.green,
 .bought .icon.green {
-	background: url(../images/sprite.png) no-repeat -64px -246px;
+    background: url(../images/sprite.png) no-repeat -64px -246px;
 }
-.gift_img.lightblue, 
-.gift .icon.lightblue, 
+.gift_img.lightblue,
+.gift .icon.lightblue,
 .bought .icon.lightblue {
-	background: url(../images/sprite.png) no-repeat -64px -328px;
+    background: url(../images/sprite.png) no-repeat -64px -328px;
 }
-.gift_img.lightgreen, 
-.gift .icon.lightgreen, 
+.gift_img.lightgreen,
+.gift .icon.lightgreen,
 .bought .icon.lightgreen {
-	background: url(../images/sprite.png) no-repeat -64px -410px;
+    background: url(../images/sprite.png) no-repeat -64px -410px;
 }
-.gift_img.lightpink, 
-.gift .icon.lightpink, 
+.gift_img.lightpink,
+.gift .icon.lightpink,
 .bought .icon.lightpink {
-	background: url(../images/sprite.png) no-repeat -64px -492px;
+    background: url(../images/sprite.png) no-repeat -64px -492px;
 }
-.gift_img.pink, 
-.gift .icon.pink, 
+.gift_img.pink,
+.gift .icon.pink,
 .bought .icon.pink {
-	background: url(../images/sprite.png) no-repeat -64px -574px;
+    background: url(../images/sprite.png) no-repeat -64px -574px;
 }
-.gift_img.purple, 
-.gift .icon.purple, 
+.gift_img.purple,
+.gift .icon.purple,
 .bought .icon.purple {
-	background: url(../images/sprite.png) no-repeat -64px -656px;
+    background: url(../images/sprite.png) no-repeat -64px -656px;
 }
-.gift_img.red, 
-.gift .icon.red, 
+.gift_img.red,
+.gift .icon.red,
 .bought .icon.red {
-	background: url(../images/sprite.png) no-repeat -64px -738px;
+    background: url(../images/sprite.png) no-repeat -64px -738px;
 }
 
 
@@ -135,8 +135,8 @@ input[type="submit"], .cancel {
 /*********************************************************************************************************************/
 
 header.login {
-	margin-top: 12%;
-	margin-bottom: 60px;
+    margin-top: 12%;
+    margin-bottom: 60px;
 }
 
 
@@ -145,133 +145,133 @@ header.login {
 /*********************************************************************************************************************/
 
 h1.typein { /* Le titre des popin */
-	font-family: 'AlexBrushRegular';
-	font-size: 2.5em;
-	text-align: center;
-	margin-bottom: 40px;
-	margin-top: 40px;
-	text-shadow: 2px 1px 2px silver;
+    font-family: 'AlexBrushRegular';
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    text-shadow: 2px 1px 2px silver;
 }
 
 h2 {
-	font-family: 'Redressed';
-	font-weight: normal;
-	font-size: 2em;
-	text-align: center;
-	margin-bottom: 40px;
-	margin-top: 40px;
-	color: black;
-	text-transform: capitalize;
-	text-shadow: 2px 1px 2px silver;
+    font-family: 'Redressed';
+    font-weight: normal;
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    color: black;
+    text-transform: capitalize;
+    text-shadow: 2px 1px 2px silver;
 }
 
 p.asterisque{ /* Le texte en * en bas de la popin */
-	font-family: "Arial";
-	font-size: 12px;
-	font-style: italic;
+    font-family: "Arial";
+    font-size: 12px;
+    font-style: italic;
 }
 
 section.typein, section.question {
-	display: block;
-	margin: 0px auto 0px auto;
-	width: 350px;
+    display: block;
+    margin: 0px auto 0px auto;
+    width: 350px;
 }
 
 p.typein, p.question {
-	text-align: right;
-	clear: both;
+    text-align: right;
+    clear: both;
 }
 
 p.typein label {
-	float: left;
-	padding-top: 5px;
+    float: left;
+    padding-top: 5px;
 }
 
 .typein textarea, .typein input{
-	width: 150px;
-	font-family: "Arial";
+    width: 150px;
+    font-family: "Arial";
 }
 
 .typein textarea {
-	margin: 2px 0px;
-	padding-left: 0px;
+    margin: 2px 0px;
+    padding-left: 0px;
 }
 
 span.typein {
-	width: 250px;
-	display: block;
-	margin: 30px auto ;
-	font-family: 'Redressed';
-	font-size: 1.5em;
-	text-align: center;
-	text-shadow: 2px 1px 2px silver;
+    width: 250px;
+    display: block;
+    margin: 30px auto ;
+    font-family: 'Redressed';
+    font-size: 1.5em;
+    text-align: center;
+    text-shadow: 2px 1px 2px silver;
 }
 
 select {
-	width: 154px;
+    width: 154px;
 }
 
 /*********************************************************************************************************************/
 /****** Le style du header, du "Déconnexion" et du menu de navigation pour les autres pages que la page de login *****/
 /*********************************************************************************************************************/
 .nav_2 {
-	position: absolute;
-	right: 10px;
-	margin-top: -30px;
+    position: absolute;
+    right: 10px;
+    margin-top: -30px;
 }
 
 .nav_2 a {
-	font-size: 1.2em;
-	font-family: 'Redressed';
-	color: black;
-	text-decoration: none;
-	padding: 0 10px;
+    font-size: 1.2em;
+    font-family: 'Redressed';
+    color: black;
+    text-decoration: none;
+    padding: 0 10px;
 }
 
 header {
-	font-family: 'AlexBrushRegular';
-	font-size: 5em;
-	text-align: center;
-	margin-bottom: 40px;
-	margin-top: 40px;
-	text-shadow: 2px 1px 2px silver;
-	}
+    font-family: 'AlexBrushRegular';
+    font-size: 5em;
+    text-align: center;
+    margin-bottom: 40px;
+    margin-top: 40px;
+    text-shadow: 2px 1px 2px silver;
+    }
 
 header span {
-	text-transform: capitalize;
-	}
+    text-transform: capitalize;
+    }
 
 #nav {
-	width: 802px;
-	border-radius: 5px;
-	margin: 0 auto 60px auto;
-	}
+    width: 802px;
+    border-radius: 5px;
+    margin: 0 auto 60px auto;
+    }
 
 
 #nav ul {
-	margin: 20px 0px;
-	padding: 0px 50px;
-	}
+    margin: 20px 0px;
+    padding: 0px 50px;
+    }
 
 #nav li {
-	display: inline-block;
-	margin: 0 15px;
-	}
+    display: inline-block;
+    margin: 0 15px;
+    }
 
 #nav a {
-	font-family: 'Redressed';
-	font-size: 1.3em;
-	text-decoration: none;
-	padding: 10px 15px;
-	border-radius: 5px;
-	letter-spacing: 1px;
-	border: outset 1px;
-	}
+    font-family: 'Redressed';
+    font-size: 1.3em;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    border: outset 1px;
+    }
 
 #nav a.active {
-	color: white;
-	}
-	
+    color: white;
+    }
+
 
 /*********************************************************************************************************************/
 /****** Le style des sections de contenu des pages Wishlist, Faire un cadeau et Giftlist => quand l'utilisateur ******/
@@ -279,11 +279,11 @@ header span {
 /*********************************************************************************************************************/
 
 section.content, form.clic {
-	display: block;
-	margin-left: 0%;
-	width: 656px;
-	margin: 0 auto 20px auto;
-	}
+    display: block;
+    margin-left: 0%;
+    width: 656px;
+    margin: 0 auto 20px auto;
+    }
 
 
 /*********************************************************************************************************************/
@@ -292,68 +292,68 @@ section.content, form.clic {
 /*********************************************************************************************************************/
 
 .gift, .bought {
-	display: block;
-	float: left;
-	clear: both;
-	margin-bottom: 15px;
-	width:100%;
-	padding: 15px;
-	}
+    display: block;
+    float: left;
+    clear: both;
+    margin-bottom: 15px;
+    width:100%;
+    padding: 15px;
+    }
 
 .gift {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .gift:hover, .gift.selected {
-	border-radius: 8px;
+    border-radius: 8px;
 }
 
 .gift_title, .bought a {
-	display: block;
-	font-family: 'Redressed';
-	font-size: 1.3em;
-	text-shadow: 1px 1px 1px silver;
+    display: block;
+    font-family: 'Redressed';
+    font-size: 1.3em;
+    text-shadow: 1px 1px 1px silver;
 }
 
 .gift_title:first-letter {
-	text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 .gift_title a {
-	color: black;
+    color: black;
 }
 
 .bought {
-	font-style: italic;
-	border-radius: 5px;
+    font-style: italic;
+    border-radius: 5px;
 }
 
 .bought, .bought a {
-	color: grey;
-	background-color: #EBEBEB;
+    color: grey;
+    background-color: #EBEBEB;
 }
 
 .gift:hover, .gift.selected {
-	border-color: #d0d0d0;
-	background-color: #ebebeb;
-	color: black;
-	background: -webkit-gradient(linear, left top, left bottom, from(#e3e3e3), to(##ebebeb));
-	background: -moz-linear-gradient(top, #e3e3e3, ##ebebeb);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e3e3e3', endColorstr='#ebebeb');
-	box-shadow: 1px 1px 10px  #CDCDCD inset;
-	}
+    border-color: #d0d0d0;
+    background-color: #ebebeb;
+    color: black;
+    background: -webkit-gradient(linear, left top, left bottom, from(#e3e3e3), to(##ebebeb));
+    background: -moz-linear-gradient(top, #e3e3e3, ##ebebeb);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e3e3e3', endColorstr='#ebebeb');
+    box-shadow: 1px 1px 10px  #CDCDCD inset;
+    }
 
 .gift_descr {
-	display: inline-block;
-	vertical-align: top;
-	margin-left: 42px;
-	width: 530px;
-	}
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 42px;
+    width: 530px;
+    }
 
 .gift_descr p {
-	display: block;
-	margin-top: 5px;
-	margin-bottom: 5px;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 
@@ -363,24 +363,24 @@ section.content, form.clic {
 /*********************************************************************************************************************/
 
 .gift:hover .follow_link, .gift.selected .follow_link, .bought:hover .offered, .bought:hover .follow_link {
-	visibility: visible;
+    visibility: visible;
 }
 
 input.offered {
-	background: url(../images/happy.png) no-repeat;
+    background: url(../images/happy.png) no-repeat;
 }
 
 div.follow_link {
-	background: url(../images/arrow.png) no-repeat;
+    background: url(../images/arrow.png) no-repeat;
 }
 
 div.follow_link, input.offered {
-	display: inline-block;
-	float: right;
-	margin: 0 0 0 15px;
-	visibility: hidden;
-	width:32px;
-	height: 32px;
+    display: inline-block;
+    float: right;
+    margin: 0 0 0 15px;
+    visibility: hidden;
+    width:32px;
+    height: 32px;
 }
 
 
@@ -389,15 +389,15 @@ div.follow_link, input.offered {
 /*********************************************************************************************************************/
 
 .gift_people {
-	display: inline-block;
-	padding-top: 10px;
-	margin-left: 10px;
-	text-decoration: underline;
-	font-family: 'Redressed';
-	font-size: 1.3em;
-	text-shadow: 1px 1px 1px silver;
-	color: black;
-	text-transform: capitalize;
+    display: inline-block;
+    padding-top: 10px;
+    margin-left: 10px;
+    text-decoration: underline;
+    font-family: 'Redressed';
+    font-size: 1.3em;
+    text-shadow: 1px 1px 1px silver;
+    color: black;
+    text-transform: capitalize;
 }
 
 
@@ -406,12 +406,12 @@ div.follow_link, input.offered {
 /*********************************************************************************************************************/
 
 p.gift_receiver, p.category {
-	font-family: 'Redressed';
-	font-size: 1.5em;
-	text-shadow: 1px 1px 1px silver;
-	color: black;
-	text-transform: capitalize;
-	text-decoration: underline;
+    font-family: 'Redressed';
+    font-size: 1.5em;
+    text-shadow: 1px 1px 1px silver;
+    color: black;
+    text-transform: capitalize;
+    text-decoration: underline;
 }
 
 
@@ -420,9 +420,9 @@ p.gift_receiver, p.category {
 /*********************************************************************************************************************/
 
 .input_hidden {
-	position: absolute;
-	left: -99999px;
-	}
+    position: absolute;
+    left: -99999px;
+    }
 
 
 /*********************************************************************************************************************/
@@ -457,13 +457,13 @@ p.gift_receiver, p.category {
 }
 
 p.asterisque { /* Le texte en bas de l'* dans la popin */
-	color: grey;
+    color: grey;
 }
 
 .close {   /* Pour la petite icône ronde qui permet de fermer la popin */
-		width : 32px;
-		height: 32px;
-		position:absolute;
+        width : 32px;
+        height: 32px;
+        position:absolute;
         top:-8px; /* Half the icon's height */
         right:-8px; /* half the icon's width */
         z-index:50;
@@ -476,54 +476,54 @@ p.asterisque { /* Le texte en bas de l'* dans la popin */
 /*********************************************************************************************************************/
 
 #admin {
-	width: 100px;
-	height: 200px;
-	border-radius: 5px;
-	float: left;
-	position: absolute;
-	top: 250px;
-	margin-left: 15px;
-	background-color: #d0d0d0;
-	border: solid 1px grey;
-	background: -webkit-gradient(linear, left top, left bottom, from(#d0d0d0), to(#c6c6c6));
-	background: -moz-linear-gradient(top, #d0d0d0, #c6c6c6);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d0d0', endColorstr='#c6c6c6');
-	}
+    width: 100px;
+    height: 200px;
+    border-radius: 5px;
+    float: left;
+    position: absolute;
+    top: 250px;
+    margin-left: 15px;
+    background-color: #d0d0d0;
+    border: solid 1px grey;
+    background: -webkit-gradient(linear, left top, left bottom, from(#d0d0d0), to(#c6c6c6));
+    background: -moz-linear-gradient(top, #d0d0d0, #c6c6c6);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d0d0d0', endColorstr='#c6c6c6');
+    }
 
 
 #admin ul {
-	margin: 0px;
-	padding: 0px;
-	}
+    margin: 0px;
+    padding: 0px;
+    }
 
 #admin li {
-	display: block;
-	margin: 0px 10px;
-	}
+    display: block;
+    margin: 0px 10px;
+    }
 
 #admin a {
-	font-family: 'Redressed';
-	font-size: 1em;
-	text-decoration: none;
-	color: black;
-	padding: 0px;
-	letter-spacing: 1px;
-	}
+    font-family: 'Redressed';
+    font-size: 1em;
+    text-decoration: none;
+    color: black;
+    padding: 0px;
+    letter-spacing: 1px;
+    }
 
 #admin a:hover {
-	text-decoration: underline;
-	color: white;
-	}
+    text-decoration: underline;
+    color: white;
+    }
 
 #admin a:selected {
-	text-decoration: underline;
-	color: white;
-	}
+    text-decoration: underline;
+    color: white;
+    }
 
 #admin h1 {
-	font-family: 'AlexBrushRegular';
-	text-align: center;
-	font-size: 1.9em;
-	text-decoration: none;
-	margin-top: 15px;
+    font-family: 'AlexBrushRegular';
+    text-align: center;
+    font-size: 1.9em;
+    text-decoration: none;
+    margin-top: 15px;
 }

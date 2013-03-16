@@ -1,9 +1,9 @@
-<?php 
-
-$queryString="SELECT DISTINCT id, name FROM colors
-                ORDER BY name";
-$query = $bdd->prepare($queryString);
-$query->execute(); ?>
+<?php
+    // S'il y a une action à faire (ediction, suppression, ajout, on la fait)
+    if(isset($_POST['action'])){
+        include 'process/'.$_POST['action'].'.php';
+    }
+?>
 
 <form action="#" method="post">
     <h1 class="typein">Créer un nouvel utilisateur</h1>
@@ -18,20 +18,22 @@ $query->execute(); ?>
             <input name="password" type="password" placeholder=" Mot de passe" enctype="multipart/form-data"/></p>
         <p class="typein"><label for="color">Couleur associée :</label>
             <select name="color" id="color" enctype="multipart/form-data">
-                <?php 
-                $count = 0;
-                while ($ligne = $query->fetch()) 
+                <?php
+                $getColors = $bdd->prepare("SELECT DISTINCT id, name FROM colors
+                                            ORDER BY name");
+                $getColors->execute();
+                $count = true;
+                while ($color = $getColors->fetch(PDO::FETCH_OBJ))
                 {
-                    extract($ligne);
                     $selected = "";
                     $additionalInfo = "";
-                    if($count == 0)
+                    if($count)
                     {
                         $selected = "selected";
                         $additionalInfo = " (par défaut)";
-                    } 
-                    $count++; ?>                
-                <option value="<?php echo $id; ?>" <?php echo $selected; ?>><?php echo $name; echo $additionalInfo; ?></option>
+                        $count = false;
+                    }?>
+                    <option value="<?php echo $color->id; ?>" <?php echo $selected; ?>><?php echo $color->name; echo $additionalInfo; ?></option>
                 <?php } ?>
             </select>
         </p>
@@ -44,7 +46,7 @@ $query->execute(); ?>
     </section>
 
     <section class="submit_1">
-        <input type="hidden" name="page" value="process_create_user"/>
+        <input type="hidden" name="action" value="create_user"/>
         <input class="validate" type="submit" value="" title="Valider" onclick="formhash(this.form, this.form.password);"/>
     </section>
 </form>
