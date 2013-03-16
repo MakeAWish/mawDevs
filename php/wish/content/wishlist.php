@@ -30,9 +30,11 @@
                                                 WHERE users.id = :userid AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
                                                 ORDER BY category");
         $getWishesCategories->bindParam (':userid', $useridforfilter);
-        $getWishesCategories->execute();
+        $getWishesCategories->execute();?>
 
-        while ($category = $getWishesCategories->fetch(PDO::FETCH_OBJ)) {?>
+        <form class="clic" method="post">
+            <?php
+            while ($category = $getWishesCategories->fetch(PDO::FETCH_OBJ)) {?>
             <p class="category">
                 <?php echo $category->name ?>
             </p>
@@ -49,9 +51,8 @@
             $getWishesForCategory->bindParam(':my_id', $useridforfilter);
             $getWishesForCategory->bindParam(':idcategory', $category->id); // Bind "$email" to parameter.
             $getWishesForCategory->execute();
-            ?>
-            <form class="clic" method="post">
-                <?php while ($wish = $getWishesForCategory->fetch(PDO::FETCH_OBJ)) {
+
+            while ($wish = $getWishesForCategory->fetch(PDO::FETCH_OBJ)) {
                         $classGift = "gift";
                         $isBought = false;
                         if($wish->buyerid != null)    {
@@ -87,9 +88,9 @@
                                     <input type="submit" value="" class="offered" title="Cadeau reçu"/>
                                 <?php } ?>
                             </div>
-                <?php } ?>
-            </form>
-        <?php } ?>
+                <?php }
+            } ?>
+        </form>
     </section>
 
     <?php if ($showEdit) { ?>
