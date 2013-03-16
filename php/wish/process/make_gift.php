@@ -3,9 +3,9 @@
         $wishesIds = $_POST['data'];
         $my_id=$_SESSION['user_id'];
 
-        $query = $bdd->prepare("INSERT INTO gifts(iduser, idwish)
-                                    SELECT :iduser, id FROM wishes
-                                    WHERE id IN ($wishesIds)");
+        $query = $bdd->prepare("INSERT IGNORE INTO gifts(iduser, idwish)
+                                SELECT :iduser, id FROM wishes
+                                WHERE id IN ($wishesIds)");
         $query->bindParam(':iduser', $my_id);
         $query->execute();
         if($query->rowCount() > 0){
