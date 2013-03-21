@@ -12,7 +12,7 @@
     </section>
 
     <section class="submit_1">
-        <input type="hidden" name="page" value="reset"/>
+        <input type="hidden" name="page" value="password-reset"/>
         <input type="hidden" name="action" value="reset_password"/>
         <input class="validate" type="submit" value="" title="Réinitialiser le mot de passe" />
     </section>
