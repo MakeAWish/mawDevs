@@ -1,3 +1,10 @@
+<?php
+    // S'il y a une action à faire (ediction, suppression, ajout, on la fait)
+    if(isset($_POST['action'])){
+        include 'process/'.$_POST['action'].'.php';
+    }
+?>
+
 <script type="text/javascript">
 
 $(window).load(function(){

@@ -145,7 +145,7 @@ function send_reset_mail($surname, $email, $linkId, $bdd)
     $body= str_replace("{reset-link}", $_SERVER['SERVER_NAME']."/?page=password-new&linkid=".$linkId, $body);
 
     // SMTP
-    $transport = Swift_SmtpTransport::newInstance('smtp.alwaysdata.com', 25)
+    $transport = Swift_SmtpTransport::newInstance('smtp.alwaysdata.com', 587)
     ->setUsername('makeawish@borisschapira.com')
     ->setPassword('!Liayf13*');
 
