@@ -142,7 +142,7 @@ function send_reset_mail($surname, $email, $linkId, $bdd)
 
     $body= file_get_contents('mail/templates/reset/basic-inline.html');
     $body= str_replace("{surname}", $surname, $body);
-    $body= str_replace("{reset-link}", $_SERVER['SERVER_NAME']."/?page=new-password&linkid=".$linkId, $body);
+    $body= str_replace("{reset-link}", $_SERVER['SERVER_NAME']."/?page=password-new&linkid=".$linkId, $body);
 
     // SMTP
     $transport = Swift_SmtpTransport::newInstance('smtp.alwaysdata.com', 25)
