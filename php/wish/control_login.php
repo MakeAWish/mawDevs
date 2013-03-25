@@ -12,8 +12,7 @@ $queryString="SELECT admin as isAdmin FROM users
 $query = $bdd->prepare($queryString);
 $query->bindParam(':user_id', $my_id);
 $query->execute();
-$ligne = $query->fetch();
-extract($ligne);
+$isAdmin = $query->fetch(PDO::FETCH_OBJ)->isAdmin;
 
 if(isset($_GET['page']) AND $_GET['page'] == "admin" AND $isAdmin != 1) {
     header('Location: ./?page=logout');
