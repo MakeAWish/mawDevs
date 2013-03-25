@@ -1,5 +1,5 @@
 var modal = (function () {
-    var
+    var $timer,
     method = {},
     $overlay,
     $modal,
@@ -23,17 +23,21 @@ var modal = (function () {
 
     // Open the modal
     method.open = function (settings) {
-        var targetText = "";
+        var nbSec, targetText = "";
+        if(settings.timeout && settings.timeout != "") {
+            nbSec = settings.timeout;
+        }
+
         if(settings.content && settings.content != "") {
             $overlay.fadeIn(200);
-            method.showModal(settings.content, settings.width, settings.height);
+            method.showModal(settings.content, settings.width, settings.height, nbSec);
         }
         else if (settings.url && settings.url != "") {
             $overlay.fadeIn(200);
             var jqxhr = $.get(settings.url, function(result) {
-                 method.showModal(result, settings.width, settings.height);
+                 method.showModal(result, settings.width, settings.height, nbSec);
             })
-            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
+            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height, 20000); })
         }
         else if (settings.post && settings.post != "" && settings.data) {
             $overlay.fadeIn(200);
@@ -41,13 +45,13 @@ var modal = (function () {
 
             /* Put the results in a div */
             jqxhr.done(function(result) {
-                 method.showModal(result, settings.width, settings.height);
+                 method.showModal(result, settings.width, settings.height, nbSec);
             })
-            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height); })
+            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height, 20000); })
         }
     };
 
-    method.showModal = function (targetText, width, height) {
+    method.showModal = function (targetText, width, height, timeout) {
         $contenttext.empty().append(targetText);
 
         $modal.css({
@@ -59,10 +63,15 @@ var modal = (function () {
         $(window).bind('resize.modal', method.center);
         $overlay.fadeIn(200);
         $modal.fadeIn(200);
+
+        if(!isNaN(timeout)) {
+            $timer = setTimeout(method.close, parseInt(timeout, 10));
+        }
     }
 
     // Close the modal
     method.close = function () {
+        clearTimeout($timer);
         $overlay.fadeOut(200);
         $modal.fadeOut(200, function () {
             $contenttext.empty();
