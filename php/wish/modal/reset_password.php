@@ -6,7 +6,7 @@
 
     <section class="submit_1">
         <input type="hidden" name="page" value="login"/>
-        <input type="hidden" name="action" value="reset_password"/>
+        <input type="hidden" name="action" value="ask_reset"/>
         <input class="validate" type="submit" value="" title="Réinitialiser le mot de passe" />
     </section>
 </form>
