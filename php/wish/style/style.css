@@ -211,6 +211,15 @@ select {
     width: 154px;
 }
 
+a.forgot {
+    display: block;
+    float: right;
+    font-size: 0.8em;
+    color: grey;
+    font-style: italic;
+    margin-top: 3px;
+}
+
 /*********************************************************************************************************************/
 /****** Le style du header, du "Déconnexion" et du menu de navigation pour les autres pages que la page de login *****/
 /*********************************************************************************************************************/

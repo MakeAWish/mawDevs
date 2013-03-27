@@ -64,7 +64,7 @@ function login($with_username, $with_password, $bdd)
 function checkbrute($user_id, $bdd)
 {
     // Get timestamp of current time
-    $now            = time();
+    $now = time();
     // All login attempts are counted from the past 2 hours.
     $valid_attempts = $now - (2 * 60 * 60);
 
@@ -128,6 +128,68 @@ function login_check($bdd)
     } else {
         debug("Login check failed : some parameters are not found");
         return false;
+    }
+}
+
+function send_reset_mail($surname, $email, $linkId, $bdd)
+{
+    global $currentWebSite;
+    require_once 'mail/swift_required.php';
+
+    $aMailsDest = array(
+        $email => $surname
+    );
+
+    $body= file_get_contents('mail/templates/reset/basic-inline.html');
+    $body= str_replace("{surname}", $surname, $body);
+    $body= str_replace("{reset-link}", $_SERVER['SERVER_NAME']."/?page=password-new&linkid=".$linkId, $body);
+
+    // SMTP
+    $transport = Swift_SmtpTransport::newInstance('smtp.alwaysdata.com', 587)
+    ->setUsername('makeawish@borisschapira.com')
+    ->setPassword('!Liayf13*');
+
+    $mailer = Swift_Mailer::newInstance($transport);
+
+    $message = Swift_Message::newInstance()
+    ->setSubject('Réinitialisation du mot de passe')
+    ->setFrom(array('makeawish@borisschapira.com' => 'Make a Wish'))
+    ->setTo($aMailsDest)
+    ->setBody($body);
+
+    // And optionally an alternative body
+    //->addPart('<q>Here is the message itself</q>', 'text/html')
+
+    // Optionally add any attachments
+    //->attach(Swift_Attachment::fromPath('my-document.pdf'));
+
+    $type = $message->getHeaders()->get('Content-Type');
+    $type->setValue('text/html');
+    $type->setParameter('charset', 'utf-8');
+
+    $result = $mailer->send($message);
+}
+
+function issueLinkId($userid, $username, $bdd)
+{
+    // request from before are considered used
+    $bdd->query("UPDATE login_reset SET used = 1 WHERE user_id = '$userid'");
+    debug("All previous links marked as userd");
+
+    // create new linkid
+    $linkid = md5(uniqid($username, true));
+    debug("Unique link id : $linkid");
+
+    // create new request
+    $logLink = $bdd->prepare("INSERT INTO login_reset (user_id, linkid, time) VALUES (:userId, :linkId, :now)");
+    $logLink->bindParam(':userId', $userid);
+    $logLink->bindParam(':linkId', $linkid);
+    $logLink->bindParam(':now', time());
+    $logLink->execute();
+    if($logLink->rowCount() > 0){
+        return $linkid;
+    } else {
+        return null;
     }
 }
 

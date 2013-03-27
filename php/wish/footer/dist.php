@@ -11,7 +11,7 @@
                 <?php }
                 if(isset($debugMessages)) {
                     foreach ($debugMessages as &$message) {
-                        echo "console.log('".addslashes($message)."');";
+                        echo "window.console && console.log('".addslashes($message)."');";
                     }
                 } ?>
             });
