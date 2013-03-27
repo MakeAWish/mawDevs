@@ -6,7 +6,7 @@
                                     INNER JOIN colors ON users.idcolor=colors.id
                                     INNER JOIN wishlists ON wishlists.iduser=users.id
                                     INNER JOIN wishes ON wishes.idwishlist=wishlists.id
-                                    WHERE users.id <> :thisUser
+                                    WHERE users.id <> :thisUser AND wishes.deleted = 0
                                     ORDER BY users.surname");
         $getUsersThatHaveWishes->bindParam(':thisUser', $user_id); // Bind "$email" to parameter.
         $getUsersThatHaveWishes->execute();
