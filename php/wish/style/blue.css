@@ -14,7 +14,7 @@ header, h1.typein {
 
 /* Les liens du menu de navigation */
 #nav a {
-    background-color: #ee6b9e;
+    background-color: #7573d9;
     color: black;
     border-color: #00137f;
     background: -webkit-gradient(linear, left top, left bottom, from(#7573d9), to(#a1a4e5));
