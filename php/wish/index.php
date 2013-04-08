@@ -20,7 +20,7 @@
 
 require_once '../Z.php';
 
-$Z = new Z(array('content','header','php_start', 'admin', 'modal', 'footer'),dirname(__FILE__));
+$Z = new Z(array('content', 'header', 'php_start', 'admin', 'modal', 'footer'), dirname(__FILE__));
 include Z::getPageFile(
-                isset($_REQUEST['page'])?$_REQUEST['page']:'login',
-                isset($_REQUEST['zajax'])?$_REQUEST['zajax']:null);
+    isset($_REQUEST['page']) ? $_REQUEST['page'] : 'login',
+    isset($_REQUEST['zajax']) ? $_REQUEST['zajax'] : null);

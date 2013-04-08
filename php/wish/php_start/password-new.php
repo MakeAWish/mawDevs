@@ -1,4 +1,4 @@
 <?php
-    // Connect to DB
-    include 'init.php';
+// Connect to DB
+include 'init.php';
 ?>

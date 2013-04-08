@@ -10,7 +10,7 @@ header, h1.typein {
     background: -webkit-gradient(linear, left top, left bottom, from(#fe9bc5), to(#fea0cc));
     background: -moz-linear-gradient(top, #fe9bc5, #fea0cc);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe9bc5', endColorstr='#fea0cc');
-    }
+}
 
 /* Les liens du menu de navigation */
 #nav a {
@@ -21,12 +21,12 @@ header, h1.typein {
     background: -moz-linear-gradient(top, #fea0cc, #fe9bc5);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fea0cc', endColorstr='#fe9bc5');
     text-shadow: 1px 1px 1px grey;
-    }
+}
 
 #nav a:hover {
     color: white;
-    box-shadow: 1px 1px 10px  #fe5c9b  inset;
-    }
+    box-shadow: 1px 1px 10px #fe5c9b inset;
+}
 
 /* Les images de sprite pour les boutons submit etc */
 input.edit {

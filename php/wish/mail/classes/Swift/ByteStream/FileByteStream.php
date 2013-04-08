@@ -41,7 +41,7 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
     /**
      * Create a new FileByteStream for $path.
      *
-     * @param string  $path
+     * @param string $path
      * @param boolean $writable if true
      */
     public function __construct($path, $writable = false)
@@ -179,13 +179,13 @@ class Swift_ByteStream_FileByteStream extends Swift_ByteStream_AbstractFilterabl
     /** Streams in a readOnly stream ensuring copy if needed */
     private function _seekReadStreamToPosition($offset)
     {
-        if ($this->_seekable===null) {
+        if ($this->_seekable === null) {
             $this->_getReadStreamSeekableStatus();
         }
         if ($this->_seekable === false) {
             $currentPos = ftell($this->_reader);
-            if ($currentPos<$offset) {
-                $toDiscard = $offset-$currentPos;
+            if ($currentPos < $offset) {
+                $toDiscard = $offset - $currentPos;
                 fread($this->_reader, $toDiscard);
 
                 return;

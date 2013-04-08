@@ -25,10 +25,10 @@ interface Swift_CharacterReader
     /**
      * Returns the complete character map
      *
-     * @param string  $string
+     * @param string $string
      * @param integer $startOffset
-     * @param array   $currentMap
-     * @param mixed   $ignoredChars
+     * @param array $currentMap
+     * @param mixed $ignoredChars
      *
      * @return integer
      */
@@ -51,7 +51,7 @@ interface Swift_CharacterReader
      * A value of -1 means this cannot possibly be a valid character.
      *
      * @param integer[] $bytes
-     * @param integer   $size
+     * @param integer $size
      *
      * @return integer
      */

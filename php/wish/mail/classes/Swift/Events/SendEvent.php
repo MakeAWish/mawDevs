@@ -53,7 +53,7 @@ class Swift_Events_SendEvent extends Swift_Events_EventObject
     /**
      * Create a new SendEvent for $source and $message.
      *
-     * @param Swift_Transport    $source
+     * @param Swift_Transport $source
      * @param Swift_Mime_Message $message
      */
     public function __construct(Swift_Transport $source, Swift_Mime_Message $message)

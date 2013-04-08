@@ -28,9 +28,9 @@ interface Swift_KeyCache
      *
      * @see MODE_WRITE, MODE_APPEND
      *
-     * @param string  $nsKey
-     * @param string  $itemKey
-     * @param string  $string
+     * @param string $nsKey
+     * @param string $itemKey
+     * @param string $string
      * @param integer $mode
      */
     public function setString($nsKey, $itemKey, $string, $mode);
@@ -40,10 +40,10 @@ interface Swift_KeyCache
      *
      * @see MODE_WRITE, MODE_APPEND
      *
-     * @param string                 $nsKey
-     * @param string                 $itemKey
+     * @param string $nsKey
+     * @param string $itemKey
      * @param Swift_OutputByteStream $os
-     * @param integer                $mode
+     * @param integer $mode
      */
     public function importFromByteStream($nsKey, $itemKey, Swift_OutputByteStream $os, $mode);
 
@@ -53,8 +53,8 @@ interface Swift_KeyCache
      * NOTE: The stream will always write in append mode.
      * If the optional third parameter is passed all writes will go through $is.
      *
-     * @param string                $nsKey
-     * @param string                $itemKey
+     * @param string $nsKey
+     * @param string $itemKey
      * @param Swift_InputByteStream $is      optional input stream
      *
      * @return Swift_InputByteStream
@@ -74,8 +74,8 @@ interface Swift_KeyCache
     /**
      * Get data back out of the cache as a ByteStream.
      *
-     * @param string                $nsKey
-     * @param string                $itemKey
+     * @param string $nsKey
+     * @param string $itemKey
      * @param Swift_InputByteStream $is      stream to write the data to
      */
     public function exportToByteStream($nsKey, $itemKey, Swift_InputByteStream $is);

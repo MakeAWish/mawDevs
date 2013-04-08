@@ -24,7 +24,7 @@ class Swift_Encoder_Base64Encoder implements Swift_Encoder
      * If the first line needs to be shorter, indicate the difference with
      * $firstLineOffset.
      *
-     * @param string  $string          to encode
+     * @param string $string          to encode
      * @param integer $firstLineOffset
      * @param integer $maxLineLength   optional, 0 indicates the default of 76 bytes
      *
@@ -42,10 +42,10 @@ class Swift_Encoder_Base64Encoder implements Swift_Encoder
         if (0 != $firstLineOffset) {
             $firstLine = substr(
                 $encodedString, 0, $maxLineLength - $firstLineOffset
-                ) . "\r\n";
+            ) . "\r\n";
             $encodedString = substr(
                 $encodedString, $maxLineLength - $firstLineOffset
-                );
+            );
         }
 
         return $firstLine . trim(chunk_split($encodedString, $maxLineLength, "\r\n"));

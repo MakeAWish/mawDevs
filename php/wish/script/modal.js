@@ -1,12 +1,12 @@
 var modal = (function () {
     var $timer,
-    method = {},
-    $overlay,
-    $modal,
-    $content,
-    $contenttext,
-    $basket,
-    $close;
+        method = {},
+        $overlay,
+        $modal,
+        $content,
+        $contenttext,
+        $basket,
+        $close;
 
     // Center the modal in the viewport
     method.center = function () {
@@ -24,30 +24,34 @@ var modal = (function () {
     // Open the modal
     method.open = function (settings) {
         var nbSec, targetText = "";
-        if(settings.timeout && settings.timeout != "") {
+        if (settings.timeout && settings.timeout != "") {
             nbSec = settings.timeout;
         }
 
-        if(settings.content && settings.content != "") {
+        if (settings.content && settings.content != "") {
             $overlay.fadeIn(200);
             method.showModal(settings.content, settings.width, settings.height, nbSec);
         }
         else if (settings.url && settings.url != "") {
             $overlay.fadeIn(200);
-            var jqxhr = $.get(settings.url, function(result) {
-                 method.showModal(result, settings.width, settings.height, nbSec);
+            var jqxhr = $.get(settings.url, function (result) {
+                method.showModal(result, settings.width, settings.height, nbSec);
             })
-            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height, 20000); })
+                .fail(function () {
+                    method.showModal("Une erreur s'est produite", settings.width, settings.height, 20000);
+                })
         }
         else if (settings.post && settings.post != "" && settings.data) {
             $overlay.fadeIn(200);
-            var jqxhr = $.post(settings.post, {data : settings.data});
+            var jqxhr = $.post(settings.post, {data: settings.data});
 
             /* Put the results in a div */
-            jqxhr.done(function(result) {
-                 method.showModal(result, settings.width, settings.height, nbSec);
+            jqxhr.done(function (result) {
+                method.showModal(result, settings.width, settings.height, nbSec);
             })
-            .fail(function() {  method.showModal("Une erreur s'est produite", settings.width, settings.height, 20000); })
+                .fail(function () {
+                    method.showModal("Une erreur s'est produite", settings.width, settings.height, 20000);
+                })
         }
     };
 
@@ -64,7 +68,7 @@ var modal = (function () {
         $overlay.fadeIn(200);
         $modal.fadeIn(200);
 
-        if(!isNaN(timeout)) {
+        if (!isNaN(timeout)) {
             $timer = setTimeout(method.close, parseInt(timeout, 10));
         }
     }

@@ -87,9 +87,9 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      *
      * @link http://www.php.net/manual/en/openssl.pkcs7.flags.php
      *
-     * @param string       $certificate
+     * @param string $certificate
      * @param string|array $privateKey  If the key needs an passphrase use array('file-location', 'passphrase') instead
-     * @param integer      $signOptions Bitwise operator options for openssl_pkcs7_sign()
+     * @param integer $signOptions Bitwise operator options for openssl_pkcs7_sign()
      *
      * @return Swift_Signers_SMimeSigner
      */
@@ -118,7 +118,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * @link http://nl3.php.net/manual/en/openssl.ciphers.php
      *
      * @param string|array $recipientCerts Either an single X.509 certificate, or an assoc array of X.509 certificates.
-     * @param integer      $cipher
+     * @param integer $cipher
      *
      * @return Swift_Signers_SMimeSigner
      */
@@ -232,7 +232,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
 
     /**
      * @param Swift_InputByteStream $inputStream
-     * @param Swift_SignedMessage   $mimeEntity
+     * @param Swift_SignedMessage $mimeEntity
      */
     protected function toSMimeByteStream(Swift_InputByteStream $inputStream, Swift_SignedMessage $message)
     {
@@ -281,7 +281,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     }
 
     /**
-     * @param Swift_FileStream      $outputStream
+     * @param Swift_FileStream $outputStream
      * @param Swift_InputByteStream $inputStream
      *
      * @throws Swift_IoException
@@ -298,7 +298,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
     }
 
     /**
-     * @param Swift_FileStream      $outputStream
+     * @param Swift_FileStream $outputStream
      * @param Swift_InputByteStream $is
      *
      * @throws Swift_IoException
@@ -316,7 +316,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
 
     /**
      * @param Swift_OutputByteStream $fromStream
-     * @param Swift_InputByteStream  $toStream
+     * @param Swift_InputByteStream $toStream
      */
     protected function copyFromOpenSSLOutput(Swift_OutputByteStream $fromStream, Swift_InputByteStream $toStream)
     {
@@ -342,7 +342,7 @@ class Swift_Signers_SMimeSigner implements Swift_Signers_BodySigner
      * Merges an OutputByteStream to Swift_SignedMessage.
      *
      * @param Swift_OutputByteStream $fromStream
-     * @param Swift_Message          $message
+     * @param Swift_Message $message
      */
     protected function streamToMime(Swift_OutputByteStream $fromStream, Swift_Message $message)
     {

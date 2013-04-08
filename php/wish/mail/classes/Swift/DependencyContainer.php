@@ -42,7 +42,9 @@ class Swift_DependencyContainer
      *
      * Use {@link getInstance()} instead.
      */
-    public function __construct() { }
+    public function __construct()
+    {
+    }
 
     /**
      * Returns a singleton of the DependencyContainer.
@@ -99,7 +101,7 @@ class Swift_DependencyContainer
         if (!$this->has($itemName)) {
             throw new Swift_DependencyException(
                 'Cannot lookup dependency "' . $itemName . '" since it is not registered.'
-                );
+            );
         }
 
         switch ($this->_store[$itemName]['lookupType']) {
@@ -310,7 +312,7 @@ class Swift_DependencyContainer
         if ($reflector->getConstructor()) {
             return $reflector->newInstanceArgs(
                 $this->createDependenciesFor($itemName)
-                );
+            );
         } else {
             return $reflector->newInstance();
         }
@@ -332,7 +334,7 @@ class Swift_DependencyContainer
         if (!isset($this->_endPoint)) {
             throw new BadMethodCallException(
                 'Component must first be registered by calling register()'
-                );
+            );
         }
 
         return $this->_endPoint;

@@ -31,8 +31,8 @@ class Swift_Transport_Esmtp_Auth_CramMd5Authenticator implements Swift_Transport
      * Try to authenticate the user with $username and $password.
      *
      * @param Swift_Transport_SmtpAgent $agent
-     * @param string                    $username
-     * @param string                    $password
+     * @param string $username
+     * @param string $password
      *
      * @return boolean
      */
@@ -43,7 +43,7 @@ class Swift_Transport_Esmtp_Auth_CramMd5Authenticator implements Swift_Transport
             $challenge = base64_decode(substr($challenge, 4));
             $message = base64_encode(
                 $username . ' ' . $this->_getResponse($password, $challenge)
-                );
+            );
             $agent->executeCommand(sprintf("%s\r\n", $message), array(235));
 
             return true;
@@ -75,7 +75,7 @@ class Swift_Transport_Esmtp_Auth_CramMd5Authenticator implements Swift_Transport
         $k_ipad = substr($secret, 0, 64) ^ str_repeat(chr(0x36), 64);
         $k_opad = substr($secret, 0, 64) ^ str_repeat(chr(0x5C), 64);
 
-        $inner  = pack('H32', md5($k_ipad . $challenge));
+        $inner = pack('H32', md5($k_ipad . $challenge));
         $digest = md5($k_opad . $inner);
 
         return $digest;

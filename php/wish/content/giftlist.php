@@ -1,16 +1,16 @@
-<script type="text/javascript" src="script/giftlist.js" ></script>
+<script type="text/javascript" src="script/giftlist.js"></script>
 
 <?php
-    // S'il y a une action à faire (ediction, suppression, ajout, on la fait)
-    if(isset($_POST['action'])){
-        include 'process/'.$_POST['action'].'.php';
-    }
+// S'il y a une action à faire (ediction, suppression, ajout, on la fait)
+if (isset($_POST['action'])) {
+    include 'process/' . $_POST['action'] . '.php';
+}
 ?>
 
 <form class="clic" method="post">
     <section class="content">
         <?php
-        $my_id=$_SESSION['user_id'];
+        $my_id = $_SESSION['user_id'];
         try {
             $getReveivers = $bdd->prepare("SELECT DISTINCT users.surname, colors.name AS color FROM gifts
                                                         INNER JOIN wishes ON gifts.idwish = wishes.id
@@ -22,7 +22,8 @@
             $getReveivers->bindParam(':gift_userid', $my_id);
             $getReveivers->execute();
 
-            while ($receiver = $getReveivers->fetch(PDO::FETCH_OBJ)) {?>
+            while ($receiver = $getReveivers->fetch(PDO::FETCH_OBJ)) {
+                ?>
                 <p class="gift_receiver">
                     <?php echo $receiver->surname; ?>
                 </p>
@@ -37,25 +38,27 @@
                 $getGiftsForReceiver->bindParam(':gift_receiver', $receiver->surname);
                 $getGiftsForReceiver->execute();
 
-                while ($gift = $getGiftsForReceiver->fetch(PDO::FETCH_OBJ)) {?>
+                while ($gift = $getGiftsForReceiver->fetch(PDO::FETCH_OBJ)) {
+                    ?>
                     <div class="gift non_exclusive">
-                    <input type="checkbox" name="gift" value="<?php echo $gift->id ?>"/>
+                        <input type="checkbox" name="gift" value="<?php echo $gift->id ?>"/>
+
                         <div class="gift_img <?php echo $receiver->color ?>">&nbsp;</div>
                         <div class="gift_descr">
                             <span class="gift_title"><?php echo $gift->title ?></span>
+
                             <p><?php echo $gift->description ?></p>
                         </div>
-                        <?php if($gift->link!="") { ?>
+                        <?php if ($gift->link != "") { ?>
                             <a target="_blank" title="Suivez le lien !" href="<?php echo $gift->link ?>">
                                 <div class="follow_link"></div>
                             </a>
                         <?php } ?>
                     </div>
-                <?php }
+                <?php
+                }
             }
-        }
-        catch (PDOException $e)
-        {
+        } catch (PDOException $e) {
             echo 'Erreur : ' . $e->getMessage();
         }?>
     </section>

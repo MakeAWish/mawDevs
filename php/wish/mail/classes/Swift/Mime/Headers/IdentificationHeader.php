@@ -29,7 +29,7 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
     /**
      * Creates a new IdentificationHeader with the given $name and $id.
      *
-     * @param string             $name
+     * @param string $name
      * @param Swift_Mime_Grammar $grammar
      */
     public function __construct($name, Swift_Mime_Grammar $grammar)
@@ -171,13 +171,13 @@ class Swift_Mime_Headers_IdentificationHeader extends Swift_Mime_Headers_Abstrac
     {
         if (!preg_match(
             '/^' . $this->getGrammar()->getDefinition('id-left') . '@' .
-            $this->getGrammar()->getDefinition('id-right') . '$/D',
+                $this->getGrammar()->getDefinition('id-right') . '$/D',
             $id
-            ))
-        {
+        )
+        ) {
             throw new Swift_RfcComplianceException(
                 'Invalid ID given <' . $id . '>'
-                );
+            );
         }
     }
 }

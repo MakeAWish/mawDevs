@@ -58,8 +58,7 @@ class Swift_SignedMessage extends Swift_Message
     {
         if ($signer instanceof Swift_Signers_HeaderSigner) {
             $this->headerSigners[] = $signer;
-        }
-        elseif ($signer instanceof Swift_Signers_BodySigner) {
+        } elseif ($signer instanceof Swift_Signers_BodySigner) {
             $this->bodySigners[] = $signer;
         }
 
@@ -121,7 +120,7 @@ class Swift_SignedMessage extends Swift_Message
 
     protected function saveMessage()
     {
-        $this->savedMessage = array('headers'=> array());
+        $this->savedMessage = array('headers' => array());
         $this->savedMessage['body'] = $this->getBody();
         $this->savedMessage['children'] = $this->getChildren();
     }

@@ -73,10 +73,10 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     /**
      * Create a new ThrottlerPlugin.
      *
-     * @param integer               $rate
-     * @param integer               $mode,   defaults to {@link BYTES_PER_MINUTE}
+     * @param integer $rate
+     * @param integer $mode,   defaults to {@link BYTES_PER_MINUTE}
      * @param Swift_Plugins_Sleeper $sleeper (only needed in testing)
-     * @param Swift_Plugins_Timer   $timer   (only needed in testing)
+     * @param Swift_Plugins_Timer $timer   (only needed in testing)
      */
     public function __construct($rate, $mode = self::BYTES_PER_MINUTE, Swift_Plugins_Sleeper $sleeper = null, Swift_Plugins_Timer $timer = null)
     {
@@ -99,7 +99,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
         }
         $duration = $time - $this->_start;
 
-        switch($this->_mode) {
+        switch ($this->_mode) {
             case self::BYTES_PER_MINUTE :
                 $sleep = $this->_throttleBytesPerMinute($duration);
                 break;
@@ -171,7 +171,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     {
         $expectedDuration = $this->getBytesOut() / ($this->_rate / 60);
 
-        return (int) ceil($expectedDuration - $timePassed);
+        return (int)ceil($expectedDuration - $timePassed);
     }
 
     /**
@@ -185,7 +185,7 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     {
         $expectedDuration = $this->_messages / ($this->_rate);
 
-        return (int) ceil($expectedDuration - $timePassed);
+        return (int)ceil($expectedDuration - $timePassed);
     }
 
     /**
@@ -199,6 +199,6 @@ class Swift_Plugins_ThrottlerPlugin extends Swift_Plugins_BandwidthMonitorPlugin
     {
         $expectedDuration = $this->_messages / ($this->_rate / 60);
 
-        return (int) ceil($expectedDuration - $timePassed);
+        return (int)ceil($expectedDuration - $timePassed);
     }
 }

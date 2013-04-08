@@ -33,7 +33,7 @@ class Swift_Signer_PeclDKIMSigner extends Swift_Signers_DKIMSigner
 
     public function addSignature(Swift_Mime_HeaderSet $headers)
     {
-        if (! $this->_peclLoaded) {
+        if (!$this->_peclLoaded) {
             return parent::addSignature($headers);
         } else {
             dkim_eom($this->_dkimHandler);
@@ -45,13 +45,13 @@ class Swift_Signer_PeclDKIMSigner extends Swift_Signers_DKIMSigner
 
     public function setHeaders(Swift_Mime_HeaderSet $headers)
     {
-        if (! $this->_peclLoaded) {
+        if (!$this->_peclLoaded) {
             return parent::setHeaders($headers);
         }
         //dkim_sign(privateKey, selector, domain[, header_canon[, body_canon[, sign_alg[, body_length]]]])
         $bodyLen = $this->_bodyLen();
         if (is_bool($bodyLen)) {
-            $bodyLen = - 1;
+            $bodyLen = -1;
         }
         $hash = ($this->_hashAlgorithm == 'rsa-sha1') ? DKIM_SIGN_RSASHA1 : DKIM_SIGN_RSASHA256;
         $bodyCanon = ($this->_bodyCanon == 'simple') ? DKIM_CANON_SIMPLE : DKIM_CANON_RELAXED;
@@ -61,7 +61,7 @@ class Swift_Signer_PeclDKIMSigner extends Swift_Signers_DKIMSigner
         $listHeaders = $headers->listAll();
         foreach ($listHeaders as $hName) {
             // Check if we need to ignore Header
-            if (! isset($this->_ignoredHeaders[strtolower($hName)])) {
+            if (!isset($this->_ignoredHeaders[strtolower($hName)])) {
                 $tmp = $headers->getAll($hName);
                 if ($headers->has($hName)) {
                     foreach ($tmp as $header) {
@@ -79,7 +79,7 @@ class Swift_Signer_PeclDKIMSigner extends Swift_Signers_DKIMSigner
 
     public function startBody()
     {
-        if (! $this->_peclLoaded) {
+        if (!$this->_peclLoaded) {
             return parent::startBody();
         }
         dkim_eoh($this->_dkimHandler);
@@ -89,7 +89,7 @@ class Swift_Signer_PeclDKIMSigner extends Swift_Signers_DKIMSigner
 
     public function endBody()
     {
-        if (! $this->_peclLoaded) {
+        if (!$this->_peclLoaded) {
             return parent::endBody();
         }
         dkim_eob($this->_dkimHandler);
@@ -107,7 +107,7 @@ class Swift_Signer_PeclDKIMSigner extends Swift_Signers_DKIMSigner
 
     protected function _canonicalizeBody($string)
     {
-        if (! $this->_peclLoaded) {
+        if (!$this->_peclLoaded) {
             return parent::_canonicalizeBody($string);
         }
         dkim_body($this->_dkimHandler, $string);

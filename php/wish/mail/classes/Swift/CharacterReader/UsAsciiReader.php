@@ -20,20 +20,20 @@ class Swift_CharacterReader_UsAsciiReader implements Swift_CharacterReader
     /**
      * Returns the complete character map.
      *
-     * @param string  $string
+     * @param string $string
      * @param integer $startOffset
-     * @param array   $currentMap
-     * @param string  $ignoredChars
+     * @param array $currentMap
+     * @param string $ignoredChars
      *
      * @return integer
      */
     public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
     {
-        $strlen=strlen($string);
-        $ignoredChars='';
+        $strlen = strlen($string);
+        $ignoredChars = '';
         for ($i = 0; $i < $strlen; ++$i) {
-            if ($string[$i]>"\x07F") { // Invalid char
-                $currentMap[$i+$startOffset]=$string[$i];
+            if ($string[$i] > "\x07F") { // Invalid char
+                $currentMap[$i + $startOffset] = $string[$i];
             }
         }
 
@@ -58,7 +58,7 @@ class Swift_CharacterReader_UsAsciiReader implements Swift_CharacterReader
      * A value of zero means this is already a valid character.
      * A value of -1 means this cannot possibly be a valid character.
      *
-     * @param string  $bytes
+     * @param string $bytes
      * @param integer $size
      *
      * @return integer

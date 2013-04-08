@@ -3,8 +3,8 @@
 function sec_session_start()
 {
     $session_name = 'sec_session_id'; // Set a custom session name
-    $secure       = false; // Set to true if using https.
-    $httponly     = true; // This stops javascript being able to access the session id.
+    $secure = false; // Set to true if using https.
+    $httponly = true; // This stops javascript being able to access the session id.
 
     ini_set('session.use_only_cookies', 1); // Forces sessions to only use cookies.
     $cookieParams = session_get_cookie_params(); // Gets current cookies params.
@@ -17,7 +17,7 @@ function sec_session_start()
 function debug($message)
 {
     global $debugMessages;
-    if(isset($debugMessages)) {
+    if (isset($debugMessages)) {
         array_push($debugMessages, $message);
     }
 }
@@ -39,12 +39,12 @@ function login($with_username, $with_password, $bdd)
                 return "locked";
             } else {
                 if ($password == $with_password) { // Check if the password in the database matches the password the user submitted.
-                    $ip_address               = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user.
-                    $user_browser             = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
-                    $id                       = preg_replace("/[^0-9]+/", "", $id); // XSS protection as we might print this value
-                    $_SESSION['user_id']      = $id;
-                    $s_username                 = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username); // XSS protection as we might print this value
-                    $_SESSION['username']     = $s_username;
+                    $ip_address = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user.
+                    $user_browser = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
+                    $id = preg_replace("/[^0-9]+/", "", $id); // XSS protection as we might print this value
+                    $_SESSION['user_id'] = $id;
+                    $s_username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username); // XSS protection as we might print this value
+                    $_SESSION['username'] = $s_username;
                     $_SESSION['login_string'] = hash('sha512', $password . $ip_address . $user_browser);
                     return "ok";
                 } else {
@@ -97,10 +97,10 @@ function login_check($bdd)
 {
     // Check if all session variables are set
     if (isset($_SESSION['user_id'], $_SESSION['username'], $_SESSION['login_string'])) {
-        $user_id      = $_SESSION['user_id'];
+        $user_id = $_SESSION['user_id'];
         $login_string = $_SESSION['login_string'];
-        $username     = $_SESSION['username'];
-        $ip_address   = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user.
+        $username = $_SESSION['username'];
+        $ip_address = $_SERVER['REMOTE_ADDR']; // Get the IP address of the user.
         $user_browser = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
 
         if ($stmt = $bdd->prepare("SELECT password FROM users WHERE id = :user_id LIMIT 1")) {
@@ -140,22 +140,22 @@ function send_reset_mail($surname, $email, $linkId, $bdd)
         $email => $surname
     );
 
-    $body= file_get_contents('mail/templates/reset/basic-inline.html');
-    $body= str_replace("{surname}", $surname, $body);
-    $body= str_replace("{reset-link}", $_SERVER['SERVER_NAME']."/?page=password-new&linkid=".$linkId, $body);
+    $body = file_get_contents('mail/templates/reset/basic-inline.html');
+    $body = str_replace("{surname}", $surname, $body);
+    $body = str_replace("{reset-link}", $_SERVER['SERVER_NAME'] . "/?page=password-new&linkid=" . $linkId, $body);
 
     // SMTP
     $transport = Swift_SmtpTransport::newInstance('smtp.alwaysdata.com', 587)
-    ->setUsername('makeawish@borisschapira.com')
-    ->setPassword('!Liayf13*');
+        ->setUsername('makeawish@borisschapira.com')
+        ->setPassword('!Liayf13*');
 
     $mailer = Swift_Mailer::newInstance($transport);
 
     $message = Swift_Message::newInstance()
-    ->setSubject('Réinitialisation du mot de passe')
-    ->setFrom(array('makeawish@borisschapira.com' => 'Make a Wish'))
-    ->setTo($aMailsDest)
-    ->setBody($body);
+        ->setSubject('Réinitialisation du mot de passe')
+        ->setFrom(array('makeawish@borisschapira.com' => 'Make a Wish'))
+        ->setTo($aMailsDest)
+        ->setBody($body);
 
     // And optionally an alternative body
     //->addPart('<q>Here is the message itself</q>', 'text/html')
@@ -186,7 +186,7 @@ function issueLinkId($userid, $username, $bdd)
     $logLink->bindParam(':linkId', $linkid);
     $logLink->bindParam(':now', time());
     $logLink->execute();
-    if($logLink->rowCount() > 0){
+    if ($logLink->rowCount() > 0) {
         return $linkid;
     } else {
         return null;

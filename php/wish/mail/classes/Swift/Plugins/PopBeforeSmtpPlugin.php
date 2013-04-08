@@ -47,9 +47,9 @@ class Swift_Plugins_PopBeforeSmtpPlugin implements Swift_Events_TransportChangeL
     /**
      * Create a new PopBeforeSmtpPlugin for $host and $port.
      *
-     * @param string  $host
+     * @param string $host
      * @param integer $port
-     * @param string  $crypto as "tls" or "ssl"
+     * @param string $crypto as "tls" or "ssl"
      */
     public function __construct($host, $port = 110, $crypto = null)
     {
@@ -61,9 +61,9 @@ class Swift_Plugins_PopBeforeSmtpPlugin implements Swift_Events_TransportChangeL
     /**
      * Create a new PopBeforeSmtpPlugin for $host and $port.
      *
-     * @param string  $host
+     * @param string $host
      * @param integer $port
-     * @param string  $crypto as "tls" or "ssl"
+     * @param string $crypto as "tls" or "ssl"
      *
      * @return Swift_Plugins_PopBeforeSmtpPlugin
      */
@@ -105,7 +105,7 @@ class Swift_Plugins_PopBeforeSmtpPlugin implements Swift_Events_TransportChangeL
      */
     public function setTimeout($timeout)
     {
-        $this->_timeout = (int) $timeout;
+        $this->_timeout = (int)$timeout;
 
         return $this;
     }
@@ -150,8 +150,8 @@ class Swift_Plugins_PopBeforeSmtpPlugin implements Swift_Events_TransportChangeL
         } else {
             if (!isset($this->_socket)) {
                 if (!$socket = fsockopen(
-                    $this->_getHostString(), $this->_port, $errno, $errstr, $this->_timeout))
-                {
+                    $this->_getHostString(), $this->_port, $errno, $errstr, $this->_timeout)
+                ) {
                     throw new Swift_Plugins_Pop_Pop3Exception(
                         sprintf('Failed to connect to POP3 host [%s]: %s', $this->_host, $errstr)
                     );

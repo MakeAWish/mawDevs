@@ -25,7 +25,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
      *
      * @var int
      */
-    private $_retryLimit=10;
+    private $_retryLimit = 10;
 
     /**
      * Create a new FileSpool.
@@ -40,7 +40,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
 
         if (!file_exists($this->_path)) {
             if (!mkdir($this->_path, 0777, true)) {
-                throw new Swift_IoException('Unable to create Path ['.$this->_path.']');
+                throw new Swift_IoException('Unable to create Path [' . $this->_path . ']');
             }
         }
     }
@@ -78,7 +78,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
      */
     public function setRetryLimit($limit)
     {
-        $this->_retryLimit=$limit;
+        $this->_retryLimit = $limit;
     }
 
     /**
@@ -122,10 +122,10 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
         foreach (new DirectoryIterator($this->_path) as $file) {
             $file = $file->getRealPath();
 
-            if (substr($file, - 16) == '.message.sending') {
+            if (substr($file, -16) == '.message.sending') {
                 $lockedtime = filectime($file);
                 if ((time() - $lockedtime) > $timeout) {
-                    rename($file, substr($file, 0, - 8));
+                    rename($file, substr($file, 0, -8));
                 }
             }
         }
@@ -135,7 +135,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
      * Sends messages using the given transport instance.
      *
      * @param Swift_Transport $transport        A transport instance
-     * @param string[]        $failedRecipients An array of failures by-reference
+     * @param string[] $failedRecipients An array of failures by-reference
      *
      * @return integer The number of sent e-mail's
      */
@@ -145,7 +145,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
             $transport->start();
         }
 
-        $failedRecipients = (array) $failedRecipients;
+        $failedRecipients = (array)$failedRecipients;
         $count = 0;
         $time = time();
         foreach (new DirectoryIterator($this->_path) as $file) {
@@ -156,12 +156,12 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
             }
 
             /* We try a rename, it's an atomic operation, and avoid locking the file */
-            if (rename($file, $file.'.sending')) {
-                $message = unserialize(file_get_contents($file.'.sending'));
+            if (rename($file, $file . '.sending')) {
+                $message = unserialize(file_get_contents($file . '.sending'));
 
                 $count += $transport->send($message, $failedRecipients);
 
-                unlink($file.'.sending');
+                unlink($file . '.sending');
             } else {
                 /* This message has just been catched by another process */
                 continue;
@@ -193,7 +193,7 @@ class Swift_FileSpool extends Swift_ConfigurableSpool
         $ret = '';
         $strlen = strlen($base);
         for ($i = 0; $i < $count; ++$i) {
-            $ret .= $base[((int) rand(0, $strlen - 1))];
+            $ret .= $base[((int)rand(0, $strlen - 1))];
         }
 
         return $ret;
