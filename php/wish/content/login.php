@@ -12,12 +12,6 @@ if (isset($_POST['action'])) {
             e.preventDefault();
             modal.open({url: "/?page=reset_password&zajax=modal"});
         });
-
-        document.getElementById("login").addEventListener("submit", function (event) {
-            event.target.checkValidity();
-            event.preventDefault(); // Prevent form submission and contact with server
-            event.stopPropagation();
-        }, false);
     });
 </script>
 
