@@ -45,9 +45,9 @@ if (isset($_POST['surname']) AND $_POST['surname'] AND $_POST['surname'] != ""
             $passwordChanged = resetPassword($v, $new_password, $random_salt, $bdd);
             if (!$passwordChanged) {
                 debug("Profile modified, but not the password : wrong password");
-                $clientMessage = "Votre profil a été mis à jour mais pas votre mot de passe.";
+                $clientMessage = "Votre profil a été mis à jour mais pas votre mot de passe";
             } else {
-                $clientMessage = "Votre profil et votre mot de passe ont été mis à jour !";
+                $clientMessage = "Votre profil et votre mot de passe ont été mis à jour ! Par contre, on va sûrement vous demander de vous reconnecter...";
             }
         } else {
             debug("Profile modified, but not the password : wrong password");

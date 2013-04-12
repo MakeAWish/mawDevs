@@ -22,7 +22,8 @@ $query->execute();
 
 <form method="post">
     <section class="typein">
-        <span class="typein"> Modifier mon profil :</span>
+        <span class="typein" data-step="3" data-position="top"
+        data-intro="Vous pouvez modifier diverses informations relatives à votre profil"> Modifier mon profil :</span>
         <input name="username" type="hidden" value="<?php echo $username ?>"/>
 
         <p class="typein"><label for="surname">Prénom :</label>
@@ -48,7 +49,8 @@ $query->execute();
 
         <hr/>
 
-        <span class="typein">Modifier mon mot de passe :</span>
+        <span class="typein" data-step="4" data-position="top"
+        data-intro="Vous pouvez modifier votre mot de passe, à condition de connaître l'actuel bien sûr !">Modifier mon mot de passe :</span>
 
         <p class="typein"><label for="password">Mot de passe actuel :</label>
             <input name="password" type="password" placeholder=" Mot de passe"/></p>
@@ -57,7 +59,8 @@ $query->execute();
             <input name="new_password" type="password" placeholder=" Nouveau mot de passe"/></p>
     </section>
 
-    <section class="submit_2">
+    <section class="submit_2"  data-step="5" data-position="top"
+        data-intro="N'oubliez pas de valider, sinon ça ne sert à rien !">
         <input type="hidden" name="action" value="edit_profile"/>
         <input class="validate" type="submit" value="" title="Valider"
                onclick="formhash(this.form, this.form.password, this.form.new_password);"/>

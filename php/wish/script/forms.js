@@ -8,8 +8,6 @@ function formhash(form, password, new_password) {
     // Finally submit the form.
     if(!form.checkValidity || form.checkValidity())
     {
-        if(password) { password.value = ""; }
-        if(new_password) { new_password.value = ""; }
         form.submit();
     }
 }

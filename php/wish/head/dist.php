@@ -25,7 +25,7 @@ if (isset($_SESSION['user_id'])) {
 <!-- <![endif]-->
 
 <script type="text/javascript" src="script/jquery-1.7.2.min.js"></script><!-- your jQuery version -->
-<script type="text/javascript" src="script/boutons_cadeau.js"></script>
+<script type="text/javascript" src="script/maw.js"></script>
 <script type="text/javascript" src="script/sha512.js"></script>
 <script type="text/javascript" src="script/forms.js"></script>
 <script type="text/javascript" src="script/modal.js"></script>

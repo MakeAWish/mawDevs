@@ -13,11 +13,19 @@ if (isset($_POST['action'])) {
 
     $my_id = $_SESSION['user_id'];
     $showEdit = true;
+    $helpMessage = "Si vous en avez saisi, vous verrez ici la liste de vos voeux";
     $useridforfilter = $my_id;
 
     if (isset($_GET['user']) and ($_GET['user'] != $my_id)) {
         $useridforfilter = $_GET['user'];
         $showEdit = false;
+
+        $getUser = $bdd->prepare("SELECT users.surname FROM users WHERE users.id = :thisUser ");
+        $getUser->bindParam(':thisUser', $useridforfilter);
+        $getUser->execute();
+        $user = $getUser->fetch(PDO::FETCH_OBJ);
+
+        $helpMessage = "Voici la liste des cadeaux que vous pouvez faire à $user->surname";
     }
 
     try {
@@ -32,7 +40,7 @@ if (isset($_POST['action'])) {
     $getWishesCategories->bindParam(':userid', $useridforfilter);
     $getWishesCategories->execute();?>
 
-    <form class="clic" method="post" data-step="3" data-intro="Si vous en avez saisi, vous verrez ici la liste de vos voeux.">
+    <form class="clic" method="post" data-step="3" data-position="top" data-intro="<?php echo $helpMessage ?>">
         <?php
         while ($category = $getWishesCategories->fetch(PDO::FETCH_OBJ)) {?>
         <p class="category">
@@ -102,7 +110,7 @@ if (isset($_POST['action'])) {
         <input class="delete" type="submit" value="" title="Supprimer"/>
     </section>
 <?php } else { ?>
-    <section class="submit_1">
+    <section class="submit_1" data-step="4" data-position="top" data-intro="Pour signaler que vous souhaitez offrir un ou plusieurs cadeaux, cliquez sur ce(s) cadeau(x) puis sur Valider">
         <input class="validate offer" type="submit" value="" title="Offrir !"/>
     </section>
 <?php

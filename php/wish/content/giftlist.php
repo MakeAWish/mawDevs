@@ -8,7 +8,7 @@ if (isset($_POST['action'])) {
 ?>
 
 <form class="clic" method="post">
-    <section class="content">
+    <section class="content" data-step="3" data-position="top" data-intro="Les cadeaux sont répartis par personne. Il n'y a plus qu'à les acheter et les offrir !">
         <?php
         $my_id = $_SESSION['user_id'];
         try {
@@ -43,8 +43,7 @@ if (isset($_POST['action'])) {
                     <div class="gift non_exclusive">
                         <input type="checkbox" name="gift" value="<?php echo $gift->id ?>"/>
 
-                        <div class="gift_img <?php echo $receiver->color ?>">&nbsp;</div>
-                        <div class="gift_descr">
+                        <div class="gift_img <?php echo $receiver->color ?>">&nbsp;</div><div class="gift_descr">
                             <span class="gift_title"><?php echo $gift->title ?></span>
 
                             <p><?php echo $gift->description ?></p>
@@ -63,7 +62,7 @@ if (isset($_POST['action'])) {
         }?>
     </section>
 
-    <section class="submit_1">
+    <section class="submit_1" data-step="3" data-position="top" data-intro="Si vous changez d'avis sur un ou des cadeaux, sélectionnez-les et cliquez sur Supprimer">
         <input class="delete gifts" type="submit" value="" title="Supprimer de ma liste de cadeaux"/>
     </section>
 </form>

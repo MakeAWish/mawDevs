@@ -8,7 +8,7 @@ if (isset($_POST['data']) AND $_POST['data']) {
     $query->bindParam(':userid', $currentUserId);
     $query->execute();
     if ($query->rowCount() > 0) {
-        $clientMessage = "Ce cadeau n'est plus considéré comme offert !";
+        $clientMessage = "Ok, bien enregistré ! Ces cadeaux sont désormais disponibles pour que d'autres les offrent !";
     } else {
         debug("Unable to delete gift : wrong user");
         $clientMessage = "Désolé, mais vous n'avez pas le droit de supprimer ce cadeau.";

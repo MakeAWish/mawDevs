@@ -9,7 +9,7 @@ if (isset($_POST['data']) AND $_POST['data']) {
     $query->bindParam(':iduser', $my_id);
     $query->execute();
     if ($query->rowCount() > 0) {
-        $clientMessage = "Cela va faire un heureux !";
+        $clientMessage = "Les cadeaux ont été ajoutés à votre Giftlist. Cela va faire un heureux !";
     } else {
         debug("Unable to make gift : no wishes");
         $clientMessage = "Désolé, mais vous n'avez pas été assez rapide : ce voeu est déjà acheté !";

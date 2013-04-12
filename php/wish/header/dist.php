@@ -4,7 +4,7 @@
         ?>
         <a href="?page=admin">Admin</a> |
     <?php } ?>
-    <span class="helpLink"><a href="javascript:void(0);" onclick="javascript:introJs().start();">Aide</a> |</span>
+    <span class="helpLink"><a href="#">Aide</a> |</span>
     <a href="?page=logout">Déconnexion</a>
 </div>
 
@@ -36,7 +36,7 @@ $menu = array(
 $help = array(
     "wishlist" => "Ceci est votre Wishlist, vous pouvez y ajouter tous vos voeux",
     "gift" => "D'humeur généreuse ? Vous êtes au bon endroit pour faire un cadeau",
-    "giftlist" => "Si on en croit nos registres, voici les cadeaux que vous devez offrir",
+    "giftlist" => "Si on en croit nos registres, voici les cadeaux que vous comptez offrir",
     "profile" => "Ceci est votre page de profil"
 );
 

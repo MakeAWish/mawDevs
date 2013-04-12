@@ -410,6 +410,10 @@ div.follow_link, input.offered {
     text-transform: capitalize;
 }
 
+.people{
+    text-decoration : none;
+}
+
 /*********************************************************************************************************************/
 /**** Le style de la page "Giftlist" pour le paragraphe qui affiche le nom de la personne à qui on fait le cadeau ****/
 /*********************************************************************************************************************/
@@ -539,5 +543,5 @@ p.asterisque {
 }
 
 .helpLink {
-    display:none;
+    /*display:none;*/
 }
