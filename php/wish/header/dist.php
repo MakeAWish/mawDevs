@@ -38,7 +38,6 @@ $help = array(
     "gift" => "D'humeur généreuse ? Vous êtes au bon endroit pour faire un cadeau",
     "giftlist" => "Si on en croit nos registres, voici les cadeaux que vous devez offrir",
     "profile" => "Ceci est votre page de profil"
->>>>>>> feature/introJs-Help
 );
 
 $page = null;
