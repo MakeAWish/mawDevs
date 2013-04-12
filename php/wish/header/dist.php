@@ -29,7 +29,7 @@ $menu = array(
     "wishlist" => "Ma Wishlist",
     "gift" => "Faire un cadeau",
     "giftlist" => "Ma Giftlist",
-    "profile" => "Mon Profil",
+    "profile" => "Mon Profil"
 );
 
 $page = null;

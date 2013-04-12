@@ -307,10 +307,8 @@ section.content, form.clic {
 
 .gift, .bought {
     display: block;
-    float: left;
     clear: both;
     margin-bottom: 15px;
-    width: 100%;
     padding: 15px;
 }
 
@@ -361,7 +359,7 @@ section.content, form.clic {
     display: inline-block;
     vertical-align: top;
     margin-left: 42px;
-    width: 530px;
+    width: 500px;
 }
 
 .gift_descr p {
