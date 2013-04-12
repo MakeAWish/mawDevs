@@ -32,7 +32,7 @@ if (isset($_POST['action'])) {
     $getWishesCategories->bindParam(':userid', $useridforfilter);
     $getWishesCategories->execute();?>
 
-    <form class="clic" method="post">
+    <form class="clic" method="post" data-step="3" data-intro="Si vous en avez saisi, vous verrez ici la liste de vos voeux.">
         <?php
         while ($category = $getWishesCategories->fetch(PDO::FETCH_OBJ)) {?>
         <p class="category">
@@ -96,7 +96,7 @@ if (isset($_POST['action'])) {
 </section>
 
 <?php if ($showEdit) { ?>
-    <section class="submit_3">
+    <section class="submit_3" data-step="4" data-position="top" data-intro="Vous pouvez ajouter un voeu en cliquant sur Ajouter. Pour modifier un voeu, cliquez d'abord sur le voeu, puis sur Modifier ou Supprimer">
         <input class="add" type="submit" value="" title="Ajouter"/>
         <input class="edit" type="submit" value="" title="Modifier"/>
         <input class="delete" type="submit" value="" title="Supprimer"/>
