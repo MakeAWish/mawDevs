@@ -6,10 +6,10 @@ function formhash(form, password, new_password) {
         addOrUpdateHiddenInput(form, "new_p", new_password.value)
     }
     // Finally submit the form.
-    if(form.checkValidity())
+    if(!form.checkValidity || form.checkValidity())
     {
-        password && password.value = "";
-        new_password && new_password.value = "";
+        if(password) { password.value = ""; }
+        if(new_password) { new_password.value = ""; }
         form.submit();
     }
 }
