@@ -173,7 +173,9 @@ function send_reset_mail($surname, $email, $linkId, $bdd)
 function issueLinkId($userid, $username, $bdd)
 {
     // request from before are considered used
-    $bdd->query("UPDATE login_reset SET used = 1 WHERE user_id = '$userid'");
+    $bdd->query("UPDATE public_links, public_links_type SET used = 1
+        WHERE user_id = '$userid' AND public_links_type.id = public_links.type_id
+        AND public_links_type.type='reset'");
     debug("All previous links marked as userd");
 
     // create new linkid
@@ -181,13 +183,34 @@ function issueLinkId($userid, $username, $bdd)
     debug("Unique link id : $linkid");
 
     // create new request
-    $logLink = $bdd->prepare("INSERT INTO login_reset (user_id, linkid, time) VALUES (:userId, :linkId, :now)");
+    $logLink = $bdd->prepare("INSERT INTO public_links (user_id, type_id, linkid, time)
+        SELECT :userId, id, :linkId, :now FROM public_links_type WHERE public_links_type.type='reset'");
     $logLink->bindParam(':userId', $userid);
     $logLink->bindParam(':linkId', $linkid);
     $logLink->bindParam(':now', time());
     $logLink->execute();
     if ($logLink->rowCount() > 0) {
         return $linkid;
+    } else {
+        return null;
+    }
+}
+
+function bdd_getResetUser($bdd, $linkid)
+{
+    $getReset = $bdd->prepare("SELECT user_id FROM public_links
+        INNER JOIN public_links_type ON public_links_type.id = public_links.type_id
+        WHERE linkid = :linkId AND used=0 AND public_links_type.type='reset'");
+    $getReset->bindParam(":linkId", $linkid);
+    $getReset->execute();
+    if ($getReset->rowCount() > 0) {
+        $reset = $getReset->fetch(PDO::FETCH_OBJ);
+        $resetIsUsed = $bdd->prepare("UPDATE public_links, public_links_type SET used = 1
+        WHERE linkid = :linkId AND public_links_type.id = public_links.type_id
+        AND public_links_type.type='reset'");
+        $resetIsUsed->bindParam(":linkId", $linkid);
+        $resetIsUsed->execute();
+        return $reset;
     } else {
         return null;
     }

@@ -2,15 +2,12 @@
 if (isset($_GET['linkid']) AND $_GET['linkid']) {
     $linkid = $_GET['linkid'];
 
-    $getReset = $bdd->prepare("SELECT user_id FROM login_reset WHERE linkid = :linkId AND used=0");
-    $getReset->bindParam(":linkId", $linkid);
-    $getReset->execute();
-    if ($getReset->rowCount() > 0) {
-        $reset = $getReset->fetch(PDO::FETCH_OBJ);
-        $resetIsUsed = $bdd->prepare("UPDATE login_reset SET used=1 WHERE linkid = :linkId ");
-        $resetIsUsed->bindParam(":linkId", $linkid);
-        $resetIsUsed->execute();
-        ?>
+    $reset = bdd_getResetUser($bdd, $linkid);
+
+    if (is_null($reset)) {?>
+        Une erreur empêche d'afficher la page ou le lien est obsolète.
+    <?php
+    } else { ?>
         <form method="post">
             <section class="typein">
                 <p class="typein"><label for="password">Saisissez votre nouveau mot de passe :</label><input
@@ -29,11 +26,8 @@ if (isset($_GET['linkid']) AND $_GET['linkid']) {
                        onclick="formhash(this.form, this.form.password, this.form.password2);"/>
             </section>
         </form>
-    <?php } else { ?>
-        blabla lien obsolète ou déjà utilisé
-    <?php
-    }
+    <?php }
 } else {
     ?>
-    Blablabla erreur paramètre
+    Il manque probablement un morceau de l'URL. Veuillez vérifier le mail qui vous a été envoyé.
 <?php } ?>

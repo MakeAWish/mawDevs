@@ -70,12 +70,33 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `login_reset`
+-- Structure de la table `public_links_type`
 --
 
-DROP TABLE IF EXISTS `login_reset`;
-CREATE TABLE IF NOT EXISTS `login_reset` (
+CREATE TABLE IF NOT EXISTS `public_links_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `public_links_type`
+--
+
+INSERT INTO `public_links_type` (`type`) VALUES
+('reset'),
+('public_profile');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `public_links`
+--
+
+DROP TABLE IF EXISTS `public_links`;
+CREATE TABLE IF NOT EXISTS `public_links` (
   `user_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
   `linkid` varchar(32) NOT NULL,
   `time` varchar(30) NOT NULL,
   `used` tinyint(1) NOT NULL,

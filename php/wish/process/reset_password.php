@@ -8,8 +8,9 @@ if (isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != ""
     $userId = $_POST['userid'];
     $linkid = $_GET['linkid'];
     $getUser = $bdd->prepare("SELECT users.username FROM users
-                                    INNER JOIN login_reset ON users.id = login_reset.user_id
-                                    WHERE linkid = :linkId AND users.id = :thisUser ");
+        INNER JOIN public_links ON users.id = public_links.user_id
+        INNER JOIN public_links_type ON public_links_type.id = public_links.type_id
+        WHERE linkid = :linkId AND users.id = :thisUser AND public_links_type.type='reset'");
     $getUser->bindParam(':thisUser', $userId);
     $getUser->bindParam(':linkId', $linkid);
     $getUser->execute();
