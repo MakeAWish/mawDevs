@@ -4,46 +4,33 @@ if (isset($_POST['action'])) {
     include 'process/' . $_POST['action'] . '.php';
 }
 
-$my_id = $_SESSION['user_id'];
-$queryString = "SELECT users.id, users.username, surname, email, password, idcolor AS useridcolor FROM users
-                INNER JOIN colors ON colors.id=users.idcolor
-                WHERE users.id = :user_id";
-$query = $bdd->prepare($queryString);
-$query->bindParam(':user_id', $my_id);
-$query->execute();
-$ligne = $query->fetch();
-extract($ligne);
-
-$queryString = "SELECT DISTINCT id AS idcolor, name AS colorname FROM colors
-                ORDER BY name";
-$query = $bdd->prepare($queryString);
-$query->execute();
+$current_user = new User($_SESSION['user_id']);
+$colors = bdd_getColors($bdd);
 ?>
 
 <form method="post">
     <section class="typein">
         <span class="typein" data-step="3" data-position="top"
         data-intro="Vous pouvez modifier diverses informations relatives à votre profil"> Modifier mon profil :</span>
-        <input name="username" type="hidden" value="<?php echo $username ?>"/>
+        <input name="username" type="hidden" value="<?php echo $current_user->username ?>"/>
 
         <p class="typein"><label for="surname">Prénom :</label>
-            <input name="surname" type="text" placeholder=" Prénom" value="<?php echo $surname ?>"/></p>
+            <input name="surname" type="text" placeholder=" Prénom" value="<?php echo $current_user->surname ?>"/></p>
 
         <p class="typein"><label for="email">Email :</label>
-            <input name="email" type="email" placeholder=" Email" value=" <?php echo $email ?>"/></p>
+            <input name="email" type="email" placeholder=" Email" value=" <?php echo $current_user->email ?>"/></p>
 
         <p class="typein"><label for="color">Couleur de thème :</label>
             <select name="color" id="color" enctype="multipart/form-data">
                 <?php
                 $count = 0;
-                while ($ligne = $query->fetch()) {
-                    extract($ligne);
+                foreach($colors as &$color){
                     $selected = "";
-                    if ($idcolor == $useridcolor) {
+                    if ($color->id == $current_user->color->id) {
                         $selected = "selected";
                     }
                     $count++; ?>
-                    <option value="<?php echo $idcolor; ?>" <?php echo $selected; ?>><?php echo $colorname; ?></option>
+                    <option value="<?php echo $color->id; ?>" <?php echo $selected; ?>><?php echo $color->name ?></option>
                 <?php } ?>
             </select>
 

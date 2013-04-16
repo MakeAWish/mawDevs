@@ -1,6 +1,7 @@
 <?php
 
-include 'functions.php';
+require_once('functions.php');
+require_once('classes/user.php');
 
 /*****************************/
 /***** Connect to DB *********/

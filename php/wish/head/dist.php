@@ -5,16 +5,8 @@
 <?php
 $styleSheet = "black";
 if (isset($_SESSION['user_id'])) {
-    $my_id = $_SESSION['user_id'];
-    $queryString = "SELECT colors.name FROM users
-            INNER JOIN colors ON colors.id = users.idcolor
-            WHERE users.id = :my_id";
-    $query = $bdd->prepare($queryString);
-    $query->bindParam(':my_id', $my_id);
-    $query->execute();
-    if ($resultat = $query->fetch(PDO::FETCH_OBJ)) {
-        $styleSheet = $resultat->name;
-    }
+    $current_user = new User($_SESSION['user_id']);
+    $styleSheet = $current_user->color->name;
 }
 ?>
 <link rel="stylesheet" href="style/<?php echo $styleSheet ?>.css"/>

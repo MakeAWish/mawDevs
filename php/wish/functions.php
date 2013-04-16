@@ -196,6 +196,17 @@ function issueLinkId($userid, $username, $bdd)
     }
 }
 
+/************************************/
+/******* BDD Requests ***************/
+/************************************/
+
+function bdd_getColors($bdd)
+{
+    $getColors = $bdd->prepare("SELECT DISTINCT id, name FROM colors ORDER BY name");
+    $getColors->execute();
+    return $getColors->fetchAll(PDO::FETCH_OBJ);
+}
+
 function bdd_getResetUser($bdd, $linkid)
 {
     $getReset = $bdd->prepare("SELECT user_id FROM public_links
@@ -214,6 +225,94 @@ function bdd_getResetUser($bdd, $linkid)
     } else {
         return null;
     }
+}
+
+function bdd_getUser($bdd, $user_id){
+    $getUser = $bdd->prepare("SELECT users.id, users.username, surname, email, idcolor, colors.name as namecolor FROM users
+                INNER JOIN colors ON colors.id=users.idcolor
+                WHERE users.id = :user_id");
+    $getUser->bindParam(':user_id', $user_id);
+    $getUser->execute();
+    return $getUser->fetch(PDO::FETCH_OBJ);
+}
+
+function bdd_getColor($bdd, $color_id)
+{
+    $getColor = $bdd->prepare("SELECT DISTINCT id, name FROM colors WHERE colors.id = :color_id");
+    $getColor->bindParam(':color_id', $color_id);
+    $getColor->execute();
+    return $getColor->fetch(PDO::FETCH_OBJ);
+}
+
+function bdd_getOtherUsersThatHaveWishes($bdd, $excluded_user_id)
+{
+        $getUsersThatHaveWishes = $bdd->prepare("SELECT DISTINCT users.id, users.surname, colors.name AS color  FROM users
+                                    INNER JOIN colors ON users.idcolor=colors.id
+                                    INNER JOIN wishlists ON wishlists.iduser=users.id
+                                    INNER JOIN wishes ON wishes.idwishlist=wishlists.id
+                                    WHERE users.id <> :thisUser AND wishes.deleted = 0
+                                    ORDER BY users.surname");
+        $getUsersThatHaveWishes->bindParam(':thisUser', $excluded_user_id); // Bind "$email" to parameter.
+        $getUsersThatHaveWishes->execute();
+    return $getUsersThatHaveWishes->fetchAll(PDO::FETCH_OBJ);
+}
+
+function bdd_getGiftsReceivers($bdd, $buyer_id)
+{
+    $getGiftsReceivers = $bdd->prepare("SELECT DISTINCT users.surname, colors.name AS color FROM gifts
+                                INNER JOIN wishes ON gifts.idwish = wishes.id
+                                INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
+                                INNER JOIN users ON users.id = wishlists.iduser
+                                INNER JOIN colors ON colors.id = users.idcolor
+                                WHERE gifts.iduser = :buyer_id AND (gifts.offered = 0 OR gifts.offered IS NULL)
+                                ORDER BY users.surname");
+    $getGiftsReceivers->bindParam(':buyer_id', $buyer_id);
+    $getGiftsReceivers->execute();
+    return $getGiftsReceivers->fetchAll(PDO::FETCH_OBJ);
+}
+
+function bdd_getGiftsForReceiver($bdd, $buyer_id, $receiver_surname)
+{
+    $getGiftsForReceiver = $bdd->prepare("SELECT title, link, description, gifts.id AS id, offered FROM gifts
+                        INNER JOIN wishes ON gifts.idwish = wishes.id
+                        INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
+                        INNER JOIN users ON users.id = wishlists.iduser
+                        WHERE gifts.iduser = :gift_userid AND surname = :gift_receiver AND (gifts.offered = 0 OR gifts.offered IS NULL)");
+    $getGiftsForReceiver->bindParam(':gift_userid', $buyer_id);
+    $getGiftsForReceiver->bindParam(':gift_receiver', $receiver_surname);
+    $getGiftsForReceiver->execute();
+    return $getGiftsForReceiver->fetchAll(PDO::FETCH_OBJ);
+}
+
+function bdd_getCategoriesOfWishes($bdd, $receiver_id)
+{
+    $getCategoriesOfWishes = $bdd->prepare("SELECT DISTINCT categories.id, category AS name FROM wishes
+        INNER JOIN categories ON wishes.idcategory = categories.id
+        INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
+        INNER JOIN users ON wishlists.iduser = users.id
+        INNER JOIN colors ON users.idcolor=colors.id
+        LEFT JOIN gifts ON gifts.idwish = wishes.id
+        WHERE users.id = :receiver_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
+        ORDER BY category");
+    $getCategoriesOfWishes->bindParam(':receiver_id', $receiver_id);
+    $getCategoriesOfWishes->execute();
+    return $getCategoriesOfWishes->fetchAll(PDO::FETCH_OBJ);
+}
+
+function bdd_getWishesOfUserForCategory($bdd, $receiver_id, $category_id)
+{
+    $getWishesOfUserForCategory = $bdd->prepare("SELECT wishes.*, gifts.id as giftid, gifts.iduser AS buyerid, colors.name as colorname FROM wishes
+                                        INNER JOIN categories ON wishes.idcategory = categories.id
+                                        INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
+                                        INNER JOIN users ON wishlists.iduser = users.id
+                                        INNER JOIN colors ON users.idcolor=colors.id
+                                        LEFT JOIN gifts ON gifts.idwish = wishes.id
+                                        WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
+                                        AND categories.id =:idcategory");
+    $getWishesOfUserForCategory->bindParam(':my_id', $receiver_id);
+    $getWishesOfUserForCategory->bindParam(':idcategory', $category_id); // Bind "$email" to parameter.
+    $getWishesOfUserForCategory->execute();
+    return $getWishesOfUserForCategory->fetchAll(PDO::FETCH_OBJ);
 }
 
 ?>

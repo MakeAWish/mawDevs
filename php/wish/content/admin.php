@@ -23,11 +23,9 @@ if (isset($_POST['action'])) {
         <p class="typein"><label for="color">Couleur associée :</label>
             <select name="color" id="color" enctype="multipart/form-data">
                 <?php
-                $getColors = $bdd->prepare("SELECT DISTINCT id, name FROM colors
-                                            ORDER BY name");
-                $getColors->execute();
                 $count = true;
-                while ($color = $getColors->fetch(PDO::FETCH_OBJ)) {
+                $colors = bdd_getColors($bdd);
+                foreach($colors as &$color) {
                     $selected = "";
                     $additionalInfo = "";
                     if ($count) {

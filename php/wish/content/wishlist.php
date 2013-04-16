@@ -19,53 +19,27 @@ if (isset($_POST['action'])) {
     if (isset($_GET['user']) and ($_GET['user'] != $my_id)) {
         $useridforfilter = $_GET['user'];
         $showEdit = false;
-
-        $getUser = $bdd->prepare("SELECT users.surname FROM users WHERE users.id = :thisUser ");
-        $getUser->bindParam(':thisUser', $useridforfilter);
-        $getUser->execute();
-        $user = $getUser->fetch(PDO::FETCH_OBJ);
-
-        $helpMessage = "Voici la liste des cadeaux que vous pouvez faire à $user->surname";
+        $receiver = new User($useridforfilter);
+        $helpMessage = "Voici la liste des cadeaux que vous pouvez faire à $receiver->surname";
     }
 
     try {
-    $getWishesCategories = $bdd->prepare("SELECT DISTINCT categories.id, category AS name FROM wishes
-                                                INNER JOIN categories ON wishes.idcategory = categories.id
-                                                INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
-                                                INNER JOIN users ON wishlists.iduser = users.id
-                                                INNER JOIN colors ON users.idcolor=colors.id
-                                                LEFT JOIN gifts ON gifts.idwish = wishes.id
-                                                WHERE users.id = :userid AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
-                                                ORDER BY category");
-    $getWishesCategories->bindParam(':userid', $useridforfilter);
-    $getWishesCategories->execute();?>
+        $categoriesOfWishes = bdd_getCategoriesOfWishes($bdd, $useridforfilter);?>
 
     <form class="clic" method="post" data-step="3" data-position="top" data-intro="<?php echo $helpMessage ?>">
         <?php
-        while ($category = $getWishesCategories->fetch(PDO::FETCH_OBJ)) {?>
+        foreach($categoriesOfWishes as &$category) {?>
         <p class="category">
             <?php echo $category->name ?>
         </p>
         <?php
-
-        $getWishesForCategory = $bdd->prepare("SELECT wishes.*, gifts.id as giftid, gifts.iduser AS buyerid, colors.name as colorname FROM wishes
-                                        INNER JOIN categories ON wishes.idcategory = categories.id
-                                        INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
-                                        INNER JOIN users ON wishlists.iduser = users.id
-                                        INNER JOIN colors ON users.idcolor=colors.id
-                                        LEFT JOIN gifts ON gifts.idwish = wishes.id
-                                        WHERE users.id = :my_id AND (gifts.offered = 0 OR gifts.offered IS NULL) AND wishes.deleted = 0
-                                        AND categories.id =:idcategory");
-        $getWishesForCategory->bindParam(':my_id', $useridforfilter);
-        $getWishesForCategory->bindParam(':idcategory', $category->id); // Bind "$email" to parameter.
-        $getWishesForCategory->execute();
-
-        while ($wish = $getWishesForCategory->fetch(PDO::FETCH_OBJ)) {
-        $classGift = "gift";
-        $isBought = false;
-        if ($wish->buyerid != null) {
-            $classGift = "bought";
-            $isBought = true;
+        $getWishesOfUserForCategory  = bdd_getWishesOfUserForCategory($bdd, $useridforfilter, $category->id);
+        foreach($getWishesOfUserForCategory as &$wish) {
+            $classGift = "gift";
+            $isBought = false;
+            if ($wish->buyerid != null) {
+                $classGift = "bought";
+                $isBought = true;
         }
 
         if ($showEdit == false) { ?>

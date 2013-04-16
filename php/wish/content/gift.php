@@ -2,16 +2,8 @@
     <?php
     try {
         $user_id = $_SESSION['user_id'];
-        $getUsersThatHaveWishes = $bdd->prepare("SELECT DISTINCT users.id, users.surname, colors.name AS color  FROM users
-                                    INNER JOIN colors ON users.idcolor=colors.id
-                                    INNER JOIN wishlists ON wishlists.iduser=users.id
-                                    INNER JOIN wishes ON wishes.idwishlist=wishlists.id
-                                    WHERE users.id <> :thisUser AND wishes.deleted = 0
-                                    ORDER BY users.surname");
-        $getUsersThatHaveWishes->bindParam(':thisUser', $user_id); // Bind "$email" to parameter.
-        $getUsersThatHaveWishes->execute();
-
-        while ($user = $getUsersThatHaveWishes->fetch(PDO::FETCH_OBJ)) {
+        $otherUsersThatHaveWishes = bdd_getOtherUsersThatHaveWishes($bdd, $user_id);
+        foreach($otherUsersThatHaveWishes as &$user){
             ?>
             <a class="people" href="/?page=wishlist&user=<?php echo $user->id ?>">
                 <div class="gift">

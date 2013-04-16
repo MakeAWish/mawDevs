@@ -12,7 +12,8 @@ if ($showError OR $showDebug) {
             <?php }
             if(isset($debugMessages)) {
                 foreach ($debugMessages as &$message) {
-                    echo "window.console && console.log('".addslashes($message)."');";
+                    $text = trim(preg_replace('/\s+/', ' ', addslashes($message)));
+                    echo "window.console && console.log('$text');";
                 }
             } ?>
         });

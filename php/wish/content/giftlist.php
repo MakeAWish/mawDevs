@@ -12,33 +12,14 @@ if (isset($_POST['action'])) {
         <?php
         $my_id = $_SESSION['user_id'];
         try {
-            $getReveivers = $bdd->prepare("SELECT DISTINCT users.surname, colors.name AS color FROM gifts
-                                                        INNER JOIN wishes ON gifts.idwish = wishes.id
-                                                        INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
-                                                        INNER JOIN users ON users.id = wishlists.iduser
-                                                        INNER JOIN colors ON colors.id = users.idcolor
-                                                        WHERE gifts.iduser = :gift_userid AND (gifts.offered = 0 OR gifts.offered IS NULL)
-                                                        ORDER BY users.surname");
-            $getReveivers->bindParam(':gift_userid', $my_id);
-            $getReveivers->execute();
-
-            while ($receiver = $getReveivers->fetch(PDO::FETCH_OBJ)) {
+            $getGiftsReceivers = bdd_getGiftsReceivers($bdd, $my_id);
+            foreach($getGiftsReceivers as &$receiver){
+                $getGiftsForReceiver = bdd_getGiftsForReceiver($bdd, $my_id, $receiver->surname);
                 ?>
                 <p class="gift_receiver">
                     <?php echo $receiver->surname; ?>
                 </p>
-
-                <?php
-                $getGiftsForReceiver = $bdd->prepare("SELECT title, link, description, gifts.id AS id, offered FROM gifts
-                        INNER JOIN wishes ON gifts.idwish = wishes.id
-                        INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
-                        INNER JOIN users ON users.id = wishlists.iduser
-                        WHERE gifts.iduser = :gift_userid AND surname = :gift_receiver AND (gifts.offered = 0 OR gifts.offered IS NULL)");
-                $getGiftsForReceiver->bindParam(':gift_userid', $my_id);
-                $getGiftsForReceiver->bindParam(':gift_receiver', $receiver->surname);
-                $getGiftsForReceiver->execute();
-
-                while ($gift = $getGiftsForReceiver->fetch(PDO::FETCH_OBJ)) {
+                <?php foreach($getGiftsForReceiver as &$gift){
                     ?>
                     <div class="gift non_exclusive">
                         <input type="checkbox" name="gift" value="<?php echo $gift->id ?>"/>
