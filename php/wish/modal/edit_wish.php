@@ -5,14 +5,11 @@ include 'init.php';
 include 'control_login.php';
 
 if (isset($_POST['data']) AND $_POST['data']) {
-    $wish_id = $_POST['data'];
 
-    $getWish = $bdd->prepare("SELECT title, link, description, idcategory AS wishcategoryid FROM wishes
-                                    WHERE wishes.id = :wish_id
-                                    ORDER BY wishes.id DESC LIMIT 0,1");
-    $getWish->bindParam(':wish_id', $wish_id);
-    $getWish->execute();
-    $wish = $getWish->fetch(PDO::FETCH_OBJ);
+    $wish_id = $_POST['data'];
+    $wish = new Wish($wish_id);
+    $categories = availableCategories();
+
     ?>
     <form method="post">
         <h1 class="typein">Modifier ce souhait : </h1>
@@ -32,12 +29,10 @@ if (isset($_POST['data']) AND $_POST['data']) {
             <p class="typein"><label for="category">Catégorie :</label>
                 <select name="category" id="category" enctype="multipart/form-data">
                     <?php
-                    $getCategories = $bdd->prepare("SELECT DISTINCT id, category AS name FROM categories
-                                                ORDER BY category");
-                    $getCategories->execute();
-                    while ($category = $getCategories->fetch(PDO::FETCH_OBJ)) {
+                    foreach($categories as &$category) {
                         $selected = "";
-                        if ($wishcategoryid == $category->id) {
+                        var_dump($category);
+                        if ($wish->category->id == $category->id) {
                             $selected = "selected";
                         }?>
                         <option

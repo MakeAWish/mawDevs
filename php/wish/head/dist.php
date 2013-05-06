@@ -5,7 +5,7 @@
 <?php
 $styleSheet = "black";
 if (isset($_SESSION['user_id'])) {
-    $current_user = new User($_SESSION['user_id']);
+    $current_user = currentUser();
     $styleSheet = $current_user->color->name;
 }
 ?>

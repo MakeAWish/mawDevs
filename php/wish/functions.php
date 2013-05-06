@@ -1,4 +1,5 @@
 <?php
+require_once('functions_context.php');
 
 function sec_session_start()
 {
@@ -196,9 +197,46 @@ function issueLinkId($userid, $username, $bdd)
     }
 }
 
+
+
+
+
+
+
+
+
+
 /************************************/
 /******* BDD Requests ***************/
 /************************************/
+
+
+
+
+
+
+
+
+
+
+/************************************/
+/******* Very Simple Requests *******/
+/************************************/
+
+
+
+
+
+
+
+
+function bdd_getColor($bdd, $color_id)
+{
+    $getColor = $bdd->prepare("SELECT DISTINCT id, name FROM colors WHERE colors.id = :color_id");
+    $getColor->bindParam(':color_id', $color_id);
+    $getColor->execute();
+    return $getColor->fetch(PDO::FETCH_OBJ);
+}
 
 function bdd_getColors($bdd)
 {
@@ -236,13 +274,69 @@ function bdd_getUser($bdd, $user_id){
     return $getUser->fetch(PDO::FETCH_OBJ);
 }
 
-function bdd_getColor($bdd, $color_id)
+function bdd_getCategory($bdd, $category_id)
 {
-    $getColor = $bdd->prepare("SELECT DISTINCT id, name FROM colors WHERE colors.id = :color_id");
-    $getColor->bindParam(':color_id', $color_id);
-    $getColor->execute();
-    return $getColor->fetch(PDO::FETCH_OBJ);
+    $getCategory = $bdd->prepare("SELECT DISTINCT id, category as name FROM categories WHERE categories.id = :category_id");
+    $getCategory->bindParam(':category_id', $category_id);
+    $getCategory->execute();
+    return $getCategory->fetch(PDO::FETCH_OBJ);
 }
+
+function bdd_getCategories($bdd)
+{
+    $getCategories = $bdd->prepare("SELECT DISTINCT id, category as name FROM categories ORDER BY name");
+    $getCategories->execute();
+    return $getCategories->fetchAll(PDO::FETCH_OBJ);
+}
+
+function bdd_getWish($bdd, $wish_id)
+{
+
+    $getWish = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory FROM wishes
+        WHERE wishes.id = :wish_id");
+    $getWish->bindParam(':wish_id', $wish_id);
+    $getWish->execute();
+    return $getWish->fetch(PDO::FETCH_OBJ);
+
+}
+
+function bdd_getWishlists($bdd, $user_id)
+{
+    $getWishlists = $bdd->prepare("SELECT DISTINCT wishlists.id FROM wishlists
+        WHERE wishlists.iduser = :user_id");
+    $getWishlists->bindParam(':user_id', $user_id);
+    $getWishlists->execute();
+    return $getWishlists->fetchAll(PDO::FETCH_OBJ);
+}
+
+function bdd_getWishes($bdd, $wishlist_id)
+{
+
+    $getWishes = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory FROM wishes
+        INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
+        WHERE wishlists.id = :wishlist_id AND wishes.deleted = 0");
+    $getWishes->bindParam(':wishlist_id', $wishlist_id);
+    $getWishes->execute();
+    return $getWishes->fetchAll(PDO::FETCH_OBJ);
+
+}
+
+
+
+
+
+
+
+/************************************/
+/******* Complex Requests ***********/
+/************************************/
+
+
+
+
+
+
+
 
 function bdd_getOtherUsersThatHaveWishes($bdd, $excluded_user_id)
 {

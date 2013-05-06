@@ -1,5 +1,6 @@
 <?php
 require_once('color.php');
+require_once('wishlist.php');
 
 class User {
     // Eléments de notre panier
@@ -7,7 +8,8 @@ class User {
         $username,
         $surname,
         $email,
-        $color;
+        $color,
+        $wishlists;
     private $isAdmin = 0;
 
     // Ajout de $num articles de type $artnr au panier
@@ -19,8 +21,18 @@ class User {
         $this->username= $baseUser->username;
         $this->surname= $baseUser->surname;
         $this->email= $baseUser->email;
+
         $idcolor = $baseUser->idcolor;
         $this->color= new Color($idcolor);
+
+        $wishlists = array();
+        $bdd_wishlists = bdd_getWishlists($bdd, $id);
+        foreach($bdd_wishlists as &$bdd_wishlist) {
+            $wishlist = new Wishlist($bdd_wishlist->id);
+            if(count($wishlist->wishes) > 0) {
+                array_push($wishlists,$wishlist);
+            }
+        }
     }
 }
 ?>

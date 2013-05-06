@@ -4,7 +4,7 @@ if (isset($_POST['action'])) {
     include 'process/' . $_POST['action'] . '.php';
 }
 
-$current_user = new User($_SESSION['user_id']);
+$current_user = currentUser();
 $colors = bdd_getColors($bdd);
 ?>
 
