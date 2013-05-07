@@ -1,14 +1,14 @@
 <?php
 // Connect to DB
-include 'init.php';
+include 'lib/init.php';
 // Control User Rights and Status
-include 'control_login.php';
+include 'lib/control_login.php';
 
 if (isset($_POST['data']) AND $_POST['data']) {
 
     $wish_id = $_POST['data'];
     $wish = new Wish($wish_id);
-    $categories = availableCategories();
+    $categories = maw_categories();
 
     ?>
     <form method="post">
@@ -31,7 +31,6 @@ if (isset($_POST['data']) AND $_POST['data']) {
                     <?php
                     foreach($categories as &$category) {
                         $selected = "";
-                        var_dump($category);
                         if ($wish->category->id == $category->id) {
                             $selected = "selected";
                         }?>

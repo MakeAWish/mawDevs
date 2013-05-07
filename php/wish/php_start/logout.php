@@ -1,6 +1,6 @@
 <?php
 // Connect to DB
-include 'init.php';
+include 'lib/init.php';
 
 sec_session_start();
 // Unset all session values

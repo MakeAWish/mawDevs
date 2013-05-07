@@ -274,6 +274,14 @@ function bdd_getUser($bdd, $user_id){
     return $getUser->fetch(PDO::FETCH_OBJ);
 }
 
+function bdd_getOtherUsersIds($bdd, $user_id){
+    $getUser = $bdd->prepare("SELECT users.id FROM users
+                WHERE users.id <> :user_id");
+    $getUser->bindParam(':user_id', $user_id);
+    $getUser->execute();
+    return $getUser->fetchAll(PDO::FETCH_OBJ);
+}
+
 function bdd_getCategory($bdd, $category_id)
 {
     $getCategory = $bdd->prepare("SELECT DISTINCT id, category as name FROM categories WHERE categories.id = :category_id");

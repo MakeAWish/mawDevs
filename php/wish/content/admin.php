@@ -1,4 +1,6 @@
 <?php
+$colors = maw_colors();
+
 // S'il y a une action à faire (ediction, suppression, ajout, on la fait)
 if (isset($_POST['action'])) {
     include 'process/' . $_POST['action'] . '.php';
@@ -24,7 +26,6 @@ if (isset($_POST['action'])) {
             <select name="color" id="color" enctype="multipart/form-data">
                 <?php
                 $count = true;
-                $colors = bdd_getColors($bdd);
                 foreach($colors as &$color) {
                     $selected = "";
                     $additionalInfo = "";

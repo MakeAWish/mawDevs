@@ -1,8 +1,8 @@
 <?php
 // Connect to DB
-include 'init.php';
+include 'lib/init.php';
 // Control User Rights and Status
-include 'control_login.php';
+include 'lib/control_login.php';
 
 if (isset($_POST['data']) AND $_POST['data']) {
     $wishesIds = $_POST['data'];

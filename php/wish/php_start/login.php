@@ -1,6 +1,6 @@
 <?php
 // Connect to DB
-include 'init.php';
+include 'lib/init.php';
 
 if (isset($_POST['username'], $_POST['p'])) {
 
