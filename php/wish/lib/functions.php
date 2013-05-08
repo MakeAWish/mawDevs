@@ -300,7 +300,8 @@ function bdd_getCategories($bdd)
 function bdd_getWish($bdd, $wish_id)
 {
 
-    $getWish = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory FROM wishes
+    $getWish = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory, (gifts.id IS NOT null) as reserved, (gifts.offered = 1) as offered FROM wishes
+        LEFT JOIN gifts ON gifts.idwish = wishes.id
         WHERE wishes.id = :wish_id");
     $getWish->bindParam(':wish_id', $wish_id);
     $getWish->execute();
@@ -320,8 +321,9 @@ function bdd_getWishlists($bdd, $user_id)
 function bdd_getWishes($bdd, $wishlist_id)
 {
 
-    $getWishes = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory FROM wishes
+    $getWishes = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory, (gifts.id IS NOT null) as reserved, (gifts.offered = 1) as offered FROM wishes
         INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
+        LEFT JOIN gifts ON gifts.idwish = wishes.id
         WHERE wishlists.id = :wishlist_id AND wishes.deleted = 0");
     $getWishes->bindParam(':wishlist_id', $wishlist_id);
     $getWishes->execute();
@@ -345,19 +347,6 @@ function bdd_getWishes($bdd, $wishlist_id)
 
 
 
-
-function bdd_getOtherUsersThatHaveWishes($bdd, $excluded_user_id)
-{
-        $getUsersThatHaveWishes = $bdd->prepare("SELECT DISTINCT users.id, users.surname, colors.name AS color  FROM users
-                                    INNER JOIN colors ON users.idcolor=colors.id
-                                    INNER JOIN wishlists ON wishlists.iduser=users.id
-                                    INNER JOIN wishes ON wishes.idwishlist=wishlists.id
-                                    WHERE users.id <> :thisUser AND wishes.deleted = 0
-                                    ORDER BY users.surname");
-        $getUsersThatHaveWishes->bindParam(':thisUser', $excluded_user_id); // Bind "$email" to parameter.
-        $getUsersThatHaveWishes->execute();
-    return $getUsersThatHaveWishes->fetchAll(PDO::FETCH_OBJ);
-}
 
 function bdd_getGiftsReceivers($bdd, $buyer_id)
 {

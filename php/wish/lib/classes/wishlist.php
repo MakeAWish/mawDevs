@@ -12,13 +12,13 @@ class Wishlist {
         global $bdd;
         $this->id = $id;
 
-        $wishes = array();
+        $this->wishes = array();
         $bdd_wishes = bdd_getWishes($bdd, $id);
 
         foreach($bdd_wishes as &$bdd_wish) {
             $wish = new Wish();
-            $wish::initialize($bdd_wish);
-            array_push($wishes, $wish);
+            $wish->initialize($bdd_wish);
+            array_push($this->wishes, $wish);
         }
     }
 }

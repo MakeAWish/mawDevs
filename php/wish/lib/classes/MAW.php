@@ -6,7 +6,7 @@ class MAW {
   private $_colors, $_categories, $_otherUsers, $_currentUser;
 
   private function __construct() {
-    if(isset($_SESSION['maw_context'])) {
+    if(false && isset($_SESSION['maw_context'])) {
         debug('Restore MAW context');
         $context = unserialize($_SESSION['maw_context']);
         $this->_colors = $context->_colors;

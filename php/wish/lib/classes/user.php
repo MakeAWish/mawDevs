@@ -25,12 +25,12 @@ class User {
         $idcolor = $baseUser->idcolor;
         $this->color= new Color($idcolor);
 
-        $wishlists = array();
+        $this->wishlists = array();
         $bdd_wishlists = bdd_getWishlists($bdd, $id);
         foreach($bdd_wishlists as &$bdd_wishlist) {
             $wishlist = new Wishlist($bdd_wishlist->id);
             if(count($wishlist->wishes) > 0) {
-                array_push($wishlists,$wishlist);
+                array_push($this->wishlists, $wishlist);
             }
         }
     }
