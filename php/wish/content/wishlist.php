@@ -11,20 +11,28 @@ if (isset($_POST['action'])) {
 <section class="content">
     <?php
 
-    $my_id = $_SESSION['user_id'];
+    // Valeurs par défaut, si page Wishlist
+    // de l'utilisateur courant
+    $user = maw_currentUser();
     $showEdit = true;
     $helpMessage = "Si vous en avez saisi, vous verrez ici la liste de vos voeux";
-    $useridforfilter = $my_id;
 
-    if (isset($_GET['user']) and ($_GET['user'] != $my_id)) {
-        $useridforfilter = $_GET['user'];
+    // Valeurs si les voeux affichés ne sont pas
+    // ceux de l'utilisateur courant
+    if (isset($_GET['user']) and ($_GET['user'] != $currentUser->id)) {
+        $user = new User($_GET['user']);
         $showEdit = false;
-        $receiver = new User($useridforfilter);
         $helpMessage = "Voici la liste des cadeaux que vous pouvez faire à $receiver->surname";
     }
 
-    try {
-        $categoriesOfWishes = bdd_getCategoriesOfWishes($bdd, $useridforfilter);?>
+    // Récupération des catégories
+    $categories = array();
+    foreach($user->wishlists as &$wishlist){
+        foreach($wishlist->wishes as &$wish){
+            array_push($categories, $wish->category->name);
+        }
+    }
+    $categoriesOfWishes = bdd_getCategoriesOfWishes($bdd, $user->id);?>
 
     <form class="clic" method="post" data-step="3" data-position="top" data-intro="<?php echo $helpMessage ?>">
         <?php
@@ -33,7 +41,7 @@ if (isset($_POST['action'])) {
             <?php echo $category->name ?>
         </p>
         <?php
-        $getWishesOfUserForCategory  = bdd_getWishesOfUserForCategory($bdd, $useridforfilter, $category->id);
+        $getWishesOfUserForCategory  = bdd_getWishesOfUserForCategory($bdd, $user->id, $category->id);
         foreach($getWishesOfUserForCategory as &$wish) {
             $classGift = "gift";
             $isBought = false;
@@ -88,9 +96,5 @@ if (isset($_POST['action'])) {
         <input class="validate offer" type="submit" value="" title="Offrir !"/>
     </section>
 <?php
-}
-}
-catch (PDOException $e) {
-    echo 'Erreur : ' . $e->getMessage();
 }
 ?>

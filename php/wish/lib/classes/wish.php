@@ -8,7 +8,9 @@ class Wish {
         $link,
         $description,
         $category,
-        $offered;
+        $reserved,
+        $offered,
+        $buyer_id;
 
     function __construct()
     {
@@ -36,6 +38,9 @@ class Wish {
         $this->description = $bdd_wish->description;
         $this->reserved = ($bdd_wish->reserved == 1);
         $this->offered = ($bdd_wish->offered == 1);
+        if($this->offered OR $this->reserved) {
+            $this->buyer_id = $bdd_wish->buyer_id;
+        }
 
         $idcategory = $bdd_wish->idcategory;
         $this->category= new Category($idcategory);

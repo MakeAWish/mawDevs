@@ -300,7 +300,8 @@ function bdd_getCategories($bdd)
 function bdd_getWish($bdd, $wish_id)
 {
 
-    $getWish = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory, (gifts.id IS NOT null) as reserved, (gifts.offered = 1) as offered FROM wishes
+    $getWish = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory
+        , (gifts.id IS NOT null) as reserved, (gifts.offered = 1) as offered, gifts.iduser as buyer_id FROM wishes
         LEFT JOIN gifts ON gifts.idwish = wishes.id
         WHERE wishes.id = :wish_id");
     $getWish->bindParam(':wish_id', $wish_id);
@@ -321,7 +322,8 @@ function bdd_getWishlists($bdd, $user_id)
 function bdd_getWishes($bdd, $wishlist_id)
 {
 
-    $getWishes = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory, (gifts.id IS NOT null) as reserved, (gifts.offered = 1) as offered FROM wishes
+    $getWishes = $bdd->prepare("SELECT wishes.id, wishes.title, wishes.link, wishes.description, wishes.idcategory
+        , (gifts.id IS NOT null) as reserved, (gifts.offered = 1) as offered, gifts.iduser as buyer_id FROM wishes
         INNER JOIN wishlists ON wishes.idwishlist = wishlists.id
         LEFT JOIN gifts ON gifts.idwish = wishes.id
         WHERE wishlists.id = :wishlist_id AND wishes.deleted = 0");
