@@ -22,7 +22,7 @@ if (isset($_POST['data']) AND $_POST['data']) {
             <p class="typein"><label for="link">Lien (facultatif) :</label>
                 <input id="link" name="link" type="text" placeholder=" Lien" value="<?php echo $wish->link ?>"/></p>
 
-            <p class="typein"><label for="description">Description :</label>
+            <p class="typein desc"><label for="description">Description :</label>
                 <textarea id="description" name="description"
                           placeholder=" Description"><?php echo $wish->description ?></textarea></p>
 
@@ -47,6 +47,16 @@ if (isset($_POST['data']) AND $_POST['data']) {
             <span title="Annuler" class="cancel popin-close"><!-- --></span>
         </section>
     </form>
-
+    <script>
+        tinymce.init({
+            plugins: "link",
+            selector:'textarea',
+            menubar : false,
+            toolbar: "bold italic bullist | link unlink | removeformat",
+            language : 'fr_FR',
+            statusbar : false,
+            height : 150
+        });
+</script>
 <?php
 }?>

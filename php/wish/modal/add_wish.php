@@ -14,7 +14,7 @@ include 'lib/control_login.php';
         <p class="typein"><label for="link">Lien (facultatif) :</label>
             <input id="link" name="link" type="text" placeholder=" Lien" enctype="multipart/form-data"/></p>
 
-        <p class="typein"><label for="description">Description :</label>
+        <p class="typein desc"><label for="description">Description :</label>
             <textarea id="description" name="description" placeholder=" Description"
                       enctype="multipart/form-data"></textarea></p>
 
@@ -41,4 +41,14 @@ include 'lib/control_login.php';
     <p class="asterisque">* Mais les yeux ouverts, c'est quand-même plus pratique !</p>
 </form>
 
-
+<script>
+        tinymce.init({
+            plugins: "link",
+            selector:'textarea',
+            menubar : false,
+            toolbar: "bold italic bullist | link unlink | removeformat",
+            language : 'fr_FR',
+            statusbar : false,
+            height : 150
+        });
+</script>

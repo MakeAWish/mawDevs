@@ -1,16 +1,12 @@
 <?php
 
+require_once('params.php');
 require_once('functions.php');
 require_once('classes/user.php');
 
 /*****************************/
 /***** Connect to DB *********/
 /*****************************/
-
-define("HOST", "localhost"); // The host you want to connect to.
-define("USER", "maw_user"); // The database username.
-define("PASSWORD", "7R34OMg4RT3836Y"); // The database password.
-define("DATABASE", "makeawish"); // The database name.
 
 try {
     $bdd = new PDO('mysql:host=' . HOST . ';dbname=' . DATABASE, USER, PASSWORD,

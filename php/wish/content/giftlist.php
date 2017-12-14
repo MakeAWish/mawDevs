@@ -13,8 +13,8 @@ if (isset($_POST['action'])) {
     foreach($otherUsers as &$otherUser){
         foreach($otherUser->wishlists as &$wishlist){
             foreach($wishlist->wishes as &$wish){
-                if(($wish->reserved OR $wish->offered)
-                    AND $wish->buyer_id = $currentUser->id) {
+                if(($wish->reserved AND !$wish->offered)
+                    AND $wish->buyer_id == $currentUser->id) {
                     array_push($giftReceivers, $otherUser);
                     break;
                 }
@@ -28,16 +28,16 @@ if (isset($_POST['action'])) {
         <?php
 
         foreach($giftReceivers as &$receiver){
-            $getGiftsForReceiver = bdd_getGiftsForReceiver($bdd, $my_id, $receiver->surname);
+            $getGiftsForReceiver = bdd_getGiftsForReceiver($bdd, $currentUser->id, $receiver->id);
             ?>
             <p class="gift_receiver">
                 <?php echo $receiver->surname; ?>
             </p>
             <?php
-            foreach($otherUser->wishlists as &$wishlist){
+            foreach($receiver->wishlists as &$wishlist){
                 foreach($wishlist->wishes as &$wish){
-                    if(($wish->reserved OR $wish->offered)
-                        AND $wish->buyer_id = $currentUser->id) {
+                    if(($wish->reserved AND !$wish->offered)
+                        AND $wish->buyer_id == $currentUser->id) {
                 ?>
                 <div class="gift non_exclusive">
                     <input type="checkbox" name="gift" value="<?php echo $wish->id ?>"/>

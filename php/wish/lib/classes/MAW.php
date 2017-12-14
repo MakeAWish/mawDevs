@@ -62,7 +62,7 @@ class MAW {
     global $bdd;
 
     if(empty($this->_otherUsers)){
-      debug('Fetch MAW users, except current');
+      debug('Fetch MAW users that current user can see, except current');
       $this->_otherUsers = array();
       $bdd_otherUsers = bdd_getOtherUsersIds($bdd, $_SESSION['user_id']);
       foreach($bdd_otherUsers as &$bdd_otherUser) {

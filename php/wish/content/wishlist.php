@@ -13,7 +13,7 @@ if (isset($_POST['action'])) {
 
     // Valeurs par défaut, si page Wishlist
     // de l'utilisateur courant
-    $user = maw_currentUser();
+    $user = $current_user;
     $showEdit = true;
     $helpMessage = "Si vous en avez saisi, vous verrez ici la liste de vos voeux";
 
@@ -62,7 +62,9 @@ if (isset($_POST['action'])) {
                 <?php } ?>
                 <?php } ?>
 
-                <span class="icon <?php echo $wish->colorname ?>"><!-- --></span>
+                
+
+                <span class="icon cat<?php echo $wish->idcategory ?>"><!-- --></span>
 
                 <div class="gift_descr">
                     <span class="gift_title"><?php echo $wish->title ?></span>

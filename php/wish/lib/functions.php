@@ -146,9 +146,9 @@ function send_reset_mail($surname, $email, $linkId, $bdd)
     $body = str_replace("{reset-link}", $_SERVER['SERVER_NAME'] . "/?page=password-new&linkid=" . $linkId, $body);
 
     // SMTP
-    $transport = Swift_SmtpTransport::newInstance('smtp.alwaysdata.com', 587)
-        ->setUsername('makeawish@borisschapira.com')
-        ->setPassword('!Liayf13*');
+    $transport = Swift_SmtpTransport::newInstance(SMTP_HOST, SMTP_PORT)
+    ->setUsername(SMTP_USER)
+    ->setPassword(SMTP_PASSWORD);
 
     $mailer = Swift_Mailer::newInstance($transport);
 
@@ -197,38 +197,9 @@ function issueLinkId($userid, $username, $bdd)
     }
 }
 
-
-
-
-
-
-
-
-
-
-/************************************/
-/******* BDD Requests ***************/
-/************************************/
-
-
-
-
-
-
-
-
-
-
 /************************************/
 /******* Very Simple Requests *******/
 /************************************/
-
-
-
-
-
-
-
 
 function bdd_getColor($bdd, $color_id)
 {
@@ -276,7 +247,8 @@ function bdd_getUser($bdd, $user_id){
 
 function bdd_getOtherUsersIds($bdd, $user_id){
     $getUser = $bdd->prepare("SELECT users.id FROM users
-                WHERE users.id <> :user_id");
+                INNER JOIN users_can_see ON users_can_see.other_user_id=users.id
+                WHERE users_can_see.id = :user_id AND users.id <> :user_id");
     $getUser->bindParam(':user_id', $user_id);
     $getUser->execute();
     return $getUser->fetchAll(PDO::FETCH_OBJ);
@@ -364,15 +336,15 @@ function bdd_getGiftsReceivers($bdd, $buyer_id)
     return $getGiftsReceivers->fetchAll(PDO::FETCH_OBJ);
 }
 
-function bdd_getGiftsForReceiver($bdd, $buyer_id, $receiver_surname)
+function bdd_getGiftsForReceiver($bdd, $buyer_id, $receiver_id)
 {
     $getGiftsForReceiver = $bdd->prepare("SELECT title, link, description, gifts.id AS id, offered FROM gifts
                         INNER JOIN wishes ON gifts.idwish = wishes.id
                         INNER JOIN wishlists ON wishlists.id = wishes.idwishlist
                         INNER JOIN users ON users.id = wishlists.iduser
-                        WHERE gifts.iduser = :gift_userid AND surname = :gift_receiver AND (gifts.offered = 0 OR gifts.offered IS NULL)");
+                        WHERE gifts.iduser = :gift_userid AND users.id = :gift_receiverid AND (gifts.offered = 0 OR gifts.offered IS NULL)");
     $getGiftsForReceiver->bindParam(':gift_userid', $buyer_id);
-    $getGiftsForReceiver->bindParam(':gift_receiver', $receiver_surname);
+    $getGiftsForReceiver->bindParam(':gift_receiverid', $receiver_id);
     $getGiftsForReceiver->execute();
     return $getGiftsForReceiver->fetchAll(PDO::FETCH_OBJ);
 }

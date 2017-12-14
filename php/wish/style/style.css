@@ -39,7 +39,7 @@ body {
 }
 
 .submit_3 {
-    width: 164px;
+    width: 200px;
     height: 40px;
     margin: 40px auto 0px auto;
 }
@@ -66,67 +66,107 @@ input[type="submit"], .cancel {
 }
 
 /*********************************************************************************************************************/
-/********** Les icônes de petit cadeau venant du Sprite : pour la page "Faire un cadeau, en fonction des gens ********/
+/********** Les icônes de petit cadeau venant du Sprite : pour la page "Faire un cadeau" en fonction des gens ********/
 /*********************************************************************************************************************/
 
-.gift_img.black,
-.gift .icon.black,
-.bought .icon.black {
+.gift_img.black {
     background: url(../images/sprite.png) no-repeat -64px 0;
 }
 
-.gift_img.blue,
-.gift .icon.blue,
-.bought .icon.blue {
+.gift_img.blue {
     background: url(../images/sprite.png) no-repeat -64px -82px;
 }
 
-.gift_img.brown,
-.gift .icon.brown,
-.bought .icon.brown {
+.gift_img.brown {
     background: url(../images/sprite.png) no-repeat -64px -164px;
 }
 
-.gift_img.green,
-.gift .icon.green,
-.bought .icon.green {
+.gift_img.green {
     background: url(../images/sprite.png) no-repeat -64px -246px;
 }
 
-.gift_img.lightblue,
-.gift .icon.lightblue,
-.bought .icon.lightblue {
+.gift_img.lightblue {
     background: url(../images/sprite.png) no-repeat -64px -328px;
 }
 
-.gift_img.lightgreen,
-.gift .icon.lightgreen,
-.bought .icon.lightgreen {
+.gift_img.lightgreen {
     background: url(../images/sprite.png) no-repeat -64px -410px;
 }
 
-.gift_img.lightpink,
-.gift .icon.lightpink,
-.bought .icon.lightpink {
+.gift_img.lightpink {
     background: url(../images/sprite.png) no-repeat -64px -492px;
 }
 
-.gift_img.pink,
-.gift .icon.pink,
-.bought .icon.pink {
+.gift_img.pink {
     background: url(../images/sprite.png) no-repeat -64px -574px;
 }
 
-.gift_img.purple,
-.gift .icon.purple,
-.bought .icon.purple {
+.gift_img.purple {
     background: url(../images/sprite.png) no-repeat -64px -656px;
 }
 
-.gift_img.red,
-.gift .icon.red,
-.bought .icon.red {
+.gift_img.red {
     background: url(../images/sprite.png) no-repeat -64px -738px;
+}
+
+/*********************************************************************************************************************/
+/************************************ Les icônes de catégories des voeux *********************************************/
+/*********************************************************************************************************************/
+
+.gift .icon, .bought .icon,
+.gift .icon.cat1,
+.bought .icon.cat1 {
+    background: url(../images/sprite.png) no-repeat -64px 0;
+}
+
+.gift .icon.cat2,
+.bought .icon.cat2 {
+    background: url(../images/icones/2_culture.png) no-repeat;
+}
+
+.gift .icon.cat3,
+.bought .icon.cat3 {
+    background: url(../images/icones/3_jeux.png) no-repeat;
+}
+
+.gift .icon.cat4,
+.bought .icon.cat4 {
+    background: url(../images/icones/4_multimedia.png) no-repeat;
+}
+
+.gift .icon.cat5,
+.bought .icon.cat5 {
+    background: url(../images/icones/5_cuisine.png) no-repeat;
+}
+
+.gift .icon.cat6,
+.bought .icon.cat6 {
+    background: url(../images/icones/6_bricolage.png) no-repeat;
+}
+
+.gift .icon.cat7,
+.bought .icon.cat7 {
+    background: url(../images/icones/7_mode.png) no-repeat;
+}
+
+.gift .icon.cat8,
+.bought .icon.cat8 {
+    background: url(../images/icones/8_voyages.png) no-repeat;
+}
+
+.gift .icon.cat9,
+.bought .icon.cat9 {
+    background: url(../images/icones/9_maison.png) no-repeat;
+}
+
+.gift .icon.cat10,
+.bought .icon.cat10 {
+    background: url(../images/icones/10_sport.png) no-repeat;
+}
+
+.gift .icon.cat11,
+.bought .icon.cat11 {
+    background: url(../images/icones/11_enfants.png) no-repeat;
 }
 
 /*********************************************************************************************************************/
@@ -182,9 +222,17 @@ p.typein, p.question {
     clear: both;
 }
 
+p.typein.desc {
+    text-align: left;
+}
+
 p.typein label {
     float: left;
     padding-top: 5px;
+}
+
+p.typein.desc label {
+    float: none;
 }
 
 .typein textarea, .typein input {
@@ -310,6 +358,7 @@ section.content, form.clic {
     clear: both;
     margin-bottom: 15px;
     padding: 15px;
+    min-height: 60px;
 }
 
 .gift {

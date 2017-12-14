@@ -1,16 +1,16 @@
 <?php
 if (isset($_POST['p']) AND $_POST['p'] AND $_POST['p'] != ""
     AND isset($_POST['new_p']) AND $_POST['new_p'] AND $_POST['new_p'] != ""
-        AND isset($_POST['userid']) AND $_POST['userid'] AND $_POST['userid'] != ""
-            AND isset($_GET['linkid']) AND $_GET['linkid']
+    AND isset($_POST['userid']) AND $_POST['userid'] AND $_POST['userid'] != ""
+    AND isset($_GET['linkid']) AND $_GET['linkid']
 ) {
     // Verify that the passwords are the same (control has be done in JS, but better makes sure)
     $userId = $_POST['userid'];
     $linkid = $_GET['linkid'];
+
     $getUser = $bdd->prepare("SELECT users.username FROM users
-        INNER JOIN public_links ON users.id = public_links.user_id
-        INNER JOIN public_links_type ON public_links_type.id = public_links.type_id
-        WHERE linkid = :linkId AND users.id = :thisUser AND public_links_type.type='reset'");
+                                    INNER JOIN public_links ON users.id = public_links.user_id
+                                    WHERE linkid = :linkId AND users.id = :thisUser ");
     $getUser->bindParam(':thisUser', $userId);
     $getUser->bindParam(':linkId', $linkid);
     $getUser->execute();
